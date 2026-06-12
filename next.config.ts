@@ -9,7 +9,8 @@ const nextConfig: NextConfig = {
   basePath: basePath || undefined,
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    loader: "custom",
+    loaderFile: "./src/lib/imageLoader.ts",
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
   },
