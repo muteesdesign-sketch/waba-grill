@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette (from Figma variables) */
+  --color-brand: #ed1c23;
+  --color-brand-button: #ea0028;
+  --color-ink: #222323;
+  --color-bone: #f8f8f8;
+  --color-gold: #ffc200;
+
+  /* Type families wired to next/font css variables */
+  --font-display: var(--font-display), "Arial Narrow", sans-serif;
+  --font-fat: var(--font-fat), system-ui, sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-script: var(--font-script), cursive;
+
+  /* Section max width for the mobile-first canvas */
+  --spacing-screen: 390px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide scrollbars on horizontal scroll rails while keeping scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
