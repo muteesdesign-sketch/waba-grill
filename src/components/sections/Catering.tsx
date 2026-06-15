@@ -50,8 +50,8 @@ export function Catering() {
           </div>
         </div>
 
-        {/* Oversized cut-off word — Janeiro */}
-        <p className="-mb-4 mt-6 select-none overflow-hidden font-fat text-[64px] uppercase leading-none tracking-tight text-white/15 lg:-mb-8 lg:mt-10 lg:text-[200px]">
+        {/* Oversized cut-off word — Janeiro, solid white, full-width, clipped at the bottom */}
+        <p className="-mb-4 mt-8 block w-full select-none overflow-x-clip overflow-y-visible whitespace-nowrap text-center font-fat text-[76px] uppercase leading-[0.8] tracking-[-0.02em] text-white lg:-mb-12 lg:mt-14 lg:text-[210px]">
           Catering
         </p>
       </div>
