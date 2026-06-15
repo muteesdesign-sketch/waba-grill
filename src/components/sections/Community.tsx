@@ -61,7 +61,7 @@ export function Community() {
           fill
           className="object-cover"
         />
-        <div className="absolute left-5 top-5">
+        <div className="absolute left-1/2 top-5 -translate-x-1/2">
           <WabaCaresBadge />
         </div>
       </div>
