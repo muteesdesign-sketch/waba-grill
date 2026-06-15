@@ -29,8 +29,11 @@ const COMBO_GROUP: MenuOptionGroup = {
 };
 
 function buildGroups(item: MenuItem): MenuOptionGroup[] {
-  const base = item.optionGroups ?? [];
-  return base.length ? [COMBO_GROUP, ...base] : base;
+  const all = item.optionGroups ?? [];
+  // Drop the data's own combo/meal group — we show our single "Choose your meal"
+  // group (matching the Figma PDP) so it isn't duplicated.
+  const base = all.filter((g) => !/combo|meal/i.test(g.title));
+  return all.length ? [COMBO_GROUP, ...base] : all;
 }
 
 function ComboIcon() {
