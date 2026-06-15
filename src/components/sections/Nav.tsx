@@ -61,11 +61,42 @@ export function Nav() {
           </ul>
         </div>
 
-        <Link
-          href="#"
-          aria-label="Your order"
-          className="flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button"
-        >
+        <div className="flex items-center gap-3">
+          {/* Pickup conveyance (desktop) */}
+          <span className="hidden h-[38px] items-center gap-2 rounded-full border border-brand-button px-4 text-sm font-semibold text-ink lg:flex">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path
+                d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"
+                stroke="#ea0028"
+                strokeWidth="1.8"
+              />
+              <circle cx="12" cy="10" r="2.4" stroke="#ea0028" strokeWidth="1.8" />
+            </svg>
+            Pickup · Today · 12:00pm
+          </span>
+
+          {/* Sign-in (desktop) */}
+          <Link
+            href="#"
+            className="hidden h-[38px] items-center gap-2 rounded-full border border-brand-button px-4 text-sm font-semibold text-ink lg:flex"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <circle cx="12" cy="8" r="3.4" stroke="#ea0028" strokeWidth="1.8" />
+              <path
+                d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
+                stroke="#ea0028"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+            Sign-in
+          </Link>
+
+          <Link
+            href="#"
+            aria-label="Your order"
+            className="flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button"
+          >
           {/* Shopping bag — solid/filled */}
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path
@@ -77,7 +108,8 @@ export function Nav() {
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-button font-display text-[13px] leading-none text-white">
             1
           </span>
-        </Link>
+          </Link>
+        </div>
       </nav>
 
       {open && (

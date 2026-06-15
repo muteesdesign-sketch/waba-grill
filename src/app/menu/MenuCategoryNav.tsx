@@ -27,13 +27,13 @@ export function MenuCategoryNav({
   }, [categories]);
 
   return (
-    <nav className="sticky top-[88px] z-40 bg-white shadow-[0_8px_8px_rgba(0,0,0,0.1),0_4px_3px_rgba(0,0,0,0.06)]">
-      <div className="no-scrollbar mx-auto flex max-w-[1280px] gap-7 overflow-x-auto px-5 py-4 lg:justify-between lg:gap-3 lg:overflow-x-visible lg:px-8">
+    <nav className="sticky top-[96px] z-40 -mt-9 px-4 lg:px-8">
+      <div className="no-scrollbar mx-auto flex max-w-[1240px] gap-7 overflow-x-auto rounded-2xl bg-white px-6 py-4 shadow-[0_10px_20px_-4px_rgba(0,0,0,0.15)] lg:justify-between lg:gap-3 lg:overflow-x-visible lg:px-8">
         {categories.map((c) => (
           <a
             key={c.id}
             href={`#${c.id}`}
-            className={`shrink-0 whitespace-nowrap text-base font-bold uppercase transition-colors lg:text-[15px] ${
+            className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[15px] ${
               active === c.id ? "text-brand" : "text-ink"
             }`}
           >
