@@ -41,7 +41,7 @@ export function Catering() {
               Order Catering
             </Button>
             <Button
-              href="#menu"
+              href="/menu"
               variant="outline"
               className="w-full py-4 lg:w-auto lg:px-10"
             >

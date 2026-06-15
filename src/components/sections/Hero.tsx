@@ -39,14 +39,14 @@ export function Hero() {
 
         <div className="mt-7 flex flex-col gap-3 lg:mt-9 lg:flex-row lg:gap-4">
           <Button
-            href="#menu"
+            href="/menu"
             variant="primary"
             className="w-full py-4 lg:w-auto lg:px-10"
           >
             Start an Order
           </Button>
           <Button
-            href="#menu"
+            href="/menu"
             variant="light"
             className="w-full py-4 lg:w-auto lg:px-10"
           >

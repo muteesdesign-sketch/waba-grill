@@ -20,7 +20,7 @@ function Logo() {
 }
 
 const links = [
-  { label: "Menu", href: "#menu" },
+  { label: "Menu", href: "/menu" },
   { label: "Locations", href: "#" },
   { label: "Catering", href: "#catering" },
   { label: "Franchising", href: "#" },

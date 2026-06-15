@@ -107,7 +107,7 @@ export function Menu() {
       </div>
 
       <div className="mt-8 flex justify-center px-5">
-        <Button href="#" className="px-10 py-4">
+        <Button href="/menu" className="px-10 py-4">
           View Full Menu
         </Button>
       </div>
