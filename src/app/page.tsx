@@ -12,7 +12,7 @@ import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <div className="mx-auto min-h-screen w-full max-w-[440px] bg-white shadow-xl">
+    <div className="min-h-screen w-full bg-white">
       <Banner />
       <Nav />
       <main>

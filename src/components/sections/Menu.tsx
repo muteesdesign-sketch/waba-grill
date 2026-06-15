@@ -11,7 +11,7 @@ function BowlCard({ bowl }: { bowl: Bowl }) {
   return (
     <article
       data-card
-      className="flex w-[165px] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white"
+      className="flex w-[165px] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white lg:w-[290px]"
     >
       {/* Full-bleed image: no padding, expands to the card edges */}
       <div className="relative aspect-[4/3] w-full">
@@ -48,9 +48,9 @@ export function Menu() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="menu" className="bg-white pt-12">
+    <section id="menu" className="bg-white pt-12 lg:pt-20">
       {/* Heading */}
-      <div className="px-5 text-center">
+      <div className="mx-auto max-w-[1280px] px-5 text-center">
         <p className="font-script text-[32px] leading-none text-brand">
           Explore our
         </p>
@@ -72,7 +72,7 @@ export function Menu() {
 
       {/* Category rail — white bar with shadow; active = red, no underline */}
       <div className="mt-8 shadow-[0_8px_8px_rgba(0,0,0,0.1),0_4px_3px_rgba(0,0,0,0.06)]">
-        <div className="no-scrollbar flex gap-8 overflow-x-auto bg-white px-6 py-5">
+        <div className="no-scrollbar mx-auto flex max-w-[1280px] gap-8 overflow-x-auto bg-white px-6 py-5 lg:justify-center lg:gap-12">
           {categories.map((cat, i) => (
             <button
               key={cat}
@@ -98,7 +98,7 @@ export function Menu() {
         </h3>
       </div>
 
-      <div className="mt-6 px-5">
+      <div className="mx-auto mt-6 max-w-[1280px] px-5 lg:px-10">
         <Carousel count={bowls.length}>
           {bowls.map((bowl) => (
             <BowlCard key={bowl.name} bowl={bowl} />

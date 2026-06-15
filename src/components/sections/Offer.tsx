@@ -55,16 +55,16 @@ export function Offer() {
         className="pointer-events-none object-cover opacity-50"
       />
 
-      <div className="relative">
+      <div className="relative mx-auto max-w-[1200px] lg:px-10 lg:py-10">
         <Carousel count={offers.length} controlsTone="onDark" padControls>
           {offers.map((offer) => (
             <article
               key={offer.title}
               data-card
-              className="w-full shrink-0 basis-full snap-center"
+              className="w-full shrink-0 basis-full snap-center lg:flex lg:items-center lg:gap-12"
             >
               {/* Full-bleed promo image */}
-              <div className="relative aspect-[1450/1304] w-full bg-bone">
+              <div className="relative aspect-[1450/1304] w-full bg-bone lg:w-1/2 lg:rounded-3xl lg:overflow-hidden">
                 <Image
                   src={offer.image}
                   alt={offer.title}
@@ -74,7 +74,7 @@ export function Offer() {
               </div>
 
               {/* Text directly on the dark section */}
-              <div className="px-5 pt-5 text-white">
+              <div className="px-5 pt-5 text-white lg:w-1/2 lg:px-0 lg:pt-0">
                 <p className="font-script text-[32px] leading-none text-brand">
                   {offer.eyebrow}
                 </p>

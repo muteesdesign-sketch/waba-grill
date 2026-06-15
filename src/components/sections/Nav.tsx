@@ -21,9 +21,10 @@ function Logo() {
 
 const links = [
   { label: "Menu", href: "#menu" },
-  { label: "Rewards", href: "#rewards" },
+  { label: "Locations", href: "#" },
   { label: "Catering", href: "#catering" },
-  { label: "News", href: "#news" },
+  { label: "Franchising", href: "#" },
+  { label: "Rewards", href: "#rewards" },
 ];
 
 export function Nav() {
@@ -31,12 +32,12 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
-      <nav className="flex h-[88px] items-center justify-between px-5">
-        <div className="flex items-center gap-3">
+      <nav className="mx-auto flex h-[88px] max-w-[1280px] items-center justify-between px-5 lg:px-10">
+        <div className="flex items-center gap-3 lg:gap-10">
           <button
             aria-label="Open menu"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-8 flex-col items-center justify-center gap-[6px]"
+            className="flex h-10 w-8 flex-col items-center justify-center gap-[6px] lg:hidden"
           >
             <span className="h-[3px] w-7 rounded-full bg-black" />
             <span className="h-[3px] w-7 rounded-full bg-black" />
@@ -44,6 +45,20 @@ export function Nav() {
           </button>
 
           <Logo />
+
+          {/* Desktop inline links */}
+          <ul className="hidden items-center gap-7 lg:flex">
+            {links.map((l) => (
+              <li key={l.label}>
+                <Link
+                  href={l.href}
+                  className="text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-brand"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <Link

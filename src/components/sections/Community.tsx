@@ -61,9 +61,9 @@ export function Community() {
       {/* Halftone dot texture across the whole section */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,#e2e2e2_1.3px,transparent_1.3px)] opacity-70 [background-size:16px_16px]" />
 
-      <div className="relative px-7 pb-12 pt-6">
+      <div className="relative mx-auto max-w-[1200px] px-7 pb-12 pt-6 lg:flex lg:items-center lg:gap-16 lg:px-10 lg:py-16">
         {/* Rounded photo card with the badge sticking out top-right */}
-        <div className="relative mb-9">
+        <div className="relative mb-9 lg:mb-0 lg:w-1/2 lg:shrink-0">
           <div className="relative aspect-[3/4] overflow-hidden rounded-[28px]">
             <Image
               src="/images/community.png"
@@ -77,6 +77,7 @@ export function Community() {
           </div>
         </div>
 
+        <div className="lg:w-1/2">
         <p className="font-script text-[32px] leading-none text-brand">
           Giving back to
         </p>
@@ -108,9 +109,10 @@ export function Community() {
           ))}
         </ul>
 
-        <Button href="#" variant="primary" className="mt-8 w-full py-4">
+        <Button href="#" variant="primary" className="mt-8 w-full py-4 lg:w-auto lg:px-10">
           Learn more about WaBa Cares
         </Button>
+        </div>
       </div>
     </section>
   );
