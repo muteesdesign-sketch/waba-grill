@@ -40,7 +40,7 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
             {item.badge}
           </span>
         )}
-        <h3 className="text-base font-semibold uppercase text-black">
+        <h3 className="line-clamp-2 text-base font-semibold uppercase text-black">
           {item.name}
         </h3>
         <p className="mt-1 line-clamp-3 flex-1 text-xs leading-tight text-[#4b5563]">
