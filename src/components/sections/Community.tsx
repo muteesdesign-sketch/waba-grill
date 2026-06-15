@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { distressStyle } from "@/lib/distress";
 
 const commitments = [
   "Supporting local food banks and shelters",
@@ -74,7 +75,7 @@ export function Community() {
             Giving back to
           </p>
           <h2 className="relative inline-block font-display text-[50px] uppercase leading-[0.9] text-ink">
-            Our Community
+            <span style={distressStyle}>Our Community</span>
             <Image
               src="/images/brush.png"
               alt=""

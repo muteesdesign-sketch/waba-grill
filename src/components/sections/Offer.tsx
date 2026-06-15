@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Carousel } from "@/components/ui/Carousel";
+import { distressStyle } from "@/lib/distress";
 
 type Offer = {
   image: string;
@@ -77,7 +78,10 @@ export function Offer() {
                 <p className="font-script text-[32px] leading-none text-brand">
                   {offer.eyebrow}
                 </p>
-                <h2 className="mt-1 font-display text-[38px] uppercase leading-none">
+                <h2
+                  className="mt-1 font-display text-[38px] uppercase leading-none"
+                  style={distressStyle}
+                >
                   {offer.title}
                 </h2>
                 <p className="mt-4 text-base leading-snug text-bone/85">

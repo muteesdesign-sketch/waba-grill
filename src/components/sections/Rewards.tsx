@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { distressStyle } from "@/lib/distress";
 
 export function Rewards() {
   return (
@@ -34,7 +35,7 @@ export function Rewards() {
               Earn free food
             </p>
             <h2 className="relative inline-block font-display text-[50px] uppercase leading-[0.9] text-ink">
-              It&apos;s that simple.
+              <span style={distressStyle}>It&apos;s that simple.</span>
               <Image
                 src="/images/brush.png"
                 alt=""

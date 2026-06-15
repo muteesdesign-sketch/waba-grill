@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Carousel } from "@/components/ui/Carousel";
+import { distressStyle } from "@/lib/distress";
 import { bowls, categories, type Bowl } from "./menu-data";
 
 function BowlCard({ bowl }: { bowl: Bowl }) {
@@ -54,7 +55,7 @@ export function Menu() {
           Explore our
         </p>
         <h2 className="relative inline-block font-display text-[88px] uppercase leading-[0.85] text-ink">
-          Menu
+          <span style={distressStyle}>Menu</span>
           <Image
             src="/images/brush.png"
             alt=""
@@ -89,7 +90,10 @@ export function Menu() {
       {/* Fresh Bowls */}
       <div className="mt-9 px-5 text-center">
         <p className="font-script text-[32px] leading-none text-brand">Fresh</p>
-        <h3 className="font-display text-[64px] uppercase leading-[0.9] text-ink">
+        <h3
+          className="font-display text-[64px] uppercase leading-[0.9] text-ink"
+          style={distressStyle}
+        >
           Bowls
         </h3>
       </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { distressStyle } from "@/lib/distress";
 
 export function News() {
   return (
@@ -10,7 +11,7 @@ export function News() {
             Latest
           </p>
           <h2 className="relative inline-block font-display text-[64px] uppercase leading-[0.9] text-ink">
-            News
+            <span style={distressStyle}>News</span>
             <Image
               src="/images/brush.png"
               alt=""

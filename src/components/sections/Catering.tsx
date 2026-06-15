@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { distressStyle } from "@/lib/distress";
 
 export function Catering() {
   return (
@@ -19,7 +20,10 @@ export function Catering() {
         <p className="font-script text-[32px] leading-none text-brand">
           WaBa catering
         </p>
-        <h2 className="mt-1 font-display text-[38px] uppercase leading-[1.05]">
+        <h2
+          className="mt-1 font-display text-[38px] uppercase leading-[1.05]"
+          style={distressStyle}
+        >
           Bring the grill to your gatherings
         </h2>
         <p className="mt-4 max-w-[320px] text-sm leading-relaxed text-white/85">

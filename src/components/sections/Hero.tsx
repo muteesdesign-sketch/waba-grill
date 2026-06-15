@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { asset } from "@/lib/asset";
+import { distressStyle } from "@/lib/distress";
 
 export function Hero() {
   return (
@@ -21,7 +22,10 @@ export function Hero() {
         <p className="mb-1 font-script text-[32px] leading-none text-brand">
           We serve
         </p>
-        <h1 className="font-display text-[64px] uppercase leading-[0.92]">
+        <h1
+          className="font-display text-[64px] uppercase leading-[0.92]"
+          style={distressStyle}
+        >
           Fresh.
           <br />
           <span className="text-brand">Grilled.</span>
