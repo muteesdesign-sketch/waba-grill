@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { CartItem } from "./CartProvider";
+import { useCart } from "./CartProvider";
 
 const TIMES = ["ASAP (25-30 min)", "12:00pm", "12:30pm", "1:00pm", "1:30pm"];
 const TIPS = [
@@ -17,19 +18,24 @@ const money = (n: number) => `$${n.toFixed(2)}`;
 export function CartDrawer({
   open,
   onClose,
-  items,
-  setItems,
 }: {
   open: boolean;
   onClose: () => void;
-  items: CartItem[];
-  setItems: (fn: (prev: CartItem[]) => CartItem[]) => void;
 }) {
+  const {
+    items,
+    setItems,
+    time,
+    setTime,
+    tipPct,
+    setTipPct,
+    utensils,
+    setUtensils,
+    freeDrink,
+    setFreeDrink,
+    totals,
+  } = useCart();
   const [show, setShow] = useState(false);
-  const [time, setTime] = useState("12:00pm");
-  const [tip, setTip] = useState(0.1);
-  const [utensils, setUtensils] = useState(true);
-  const [freeDrink, setFreeDrink] = useState(true);
 
   useEffect(() => {
     if (open) {
@@ -42,12 +48,6 @@ export function CartDrawer({
   }, [open]);
 
   if (!open) return null;
-
-  const subtotal = items.reduce((s, i) => s + i.price, 0);
-  const reward = freeDrink ? -REWARD : 0;
-  const taxes = subtotal * 0.137;
-  const tipAmount = subtotal * tip;
-  const total = subtotal + reward + taxes + tipAmount;
 
   return (
     <div className="fixed inset-0 z-[80]" role="dialog" aria-modal="true">
@@ -85,7 +85,6 @@ export function CartDrawer({
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto px-6 py-5">
-          {/* Pickup details */}
           <div className="flex items-start justify-between">
             <h3 className="text-sm font-bold uppercase tracking-wide text-ink">
               Pickup details
@@ -157,12 +156,13 @@ export function CartDrawer({
                 </button>
               </div>
             ))}
-            <button
+            <Link
+              href="/menu"
               onClick={onClose}
               className="mt-4 self-start rounded-full border border-ink px-8 py-2.5 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
             >
               Add
-            </button>
+            </Link>
           </div>
 
           {/* Rewards */}
@@ -175,7 +175,7 @@ export function CartDrawer({
             <RewardCard
               label="Free drink"
               added={freeDrink}
-              onToggle={() => setFreeDrink((v) => !v)}
+              onToggle={() => setFreeDrink(!freeDrink)}
               highlight
             />
             <RewardCard label="Free cookie" />
@@ -187,7 +187,7 @@ export function CartDrawer({
             <button
               role="switch"
               aria-checked={utensils}
-              onClick={() => setUtensils((v) => !v)}
+              onClick={() => setUtensils(!utensils)}
               className={`relative h-6 w-11 rounded-full transition-colors ${
                 utensils ? "bg-green-600" : "bg-black/20"
               }`}
@@ -202,25 +202,25 @@ export function CartDrawer({
 
           {/* Totals */}
           <div className="mt-4 space-y-2 text-sm">
-            <Row label="Order subtotal" value={money(subtotal)} bold />
+            <Row label="Order subtotal" value={money(totals.subtotal)} bold />
             {freeDrink && (
               <Row label="Reward (Free drink)" value={`-${money(REWARD)}`} />
             )}
-            <Row label="Taxes & Fees" value={money(taxes)} />
+            <Row label="Taxes & Fees" value={money(totals.taxes)} />
           </div>
 
           {/* Tip */}
           <div className="mt-5 flex items-center justify-between">
             <span className="font-bold text-ink">Tip</span>
-            <span className="font-bold text-ink">{money(tipAmount)}</span>
+            <span className="font-bold text-ink">{money(totals.tip)}</span>
           </div>
           <div className="mt-3 flex gap-2">
             {TIPS.map((t) => (
               <button
                 key={t.label}
-                onClick={() => setTip(t.pct)}
+                onClick={() => setTipPct(t.pct)}
                 className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
-                  tip === t.pct
+                  tipPct === t.pct
                     ? "border-brand bg-brand text-white"
                     : "border-[#e5e7eb] text-ink"
                 }`}
@@ -238,11 +238,17 @@ export function CartDrawer({
         <div className="border-t border-black/10 px-6 py-4">
           <div className="mb-3 flex items-center justify-between">
             <span className="font-bold text-ink">Total</span>
-            <span className="text-lg font-bold text-ink">{money(total)}</span>
+            <span className="text-lg font-bold text-ink">
+              {money(totals.total)}
+            </span>
           </div>
-          <button className="w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand">
-            Checkout - {money(total)}
-          </button>
+          <Link
+            href="/checkout"
+            onClick={onClose}
+            className="block w-full rounded-full bg-brand-button py-4 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+          >
+            Checkout - {money(totals.total)}
+          </Link>
         </div>
       </div>
     </div>
