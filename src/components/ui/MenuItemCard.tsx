@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { Button } from "./Button";
+import { useProductModal } from "@/components/pdp/ProductModalProvider";
 
 export type MenuItem = {
   name: string;
@@ -11,8 +13,13 @@ export type MenuItem = {
 };
 
 export function MenuItemCard({ item }: { item: MenuItem }) {
+  const open = useProductModal();
+
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white">
+    <article
+      onClick={() => open(item)}
+      className="flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition-shadow hover:shadow-lg"
+    >
       {/* Full-bleed image */}
       <div className="relative aspect-[4/3] w-full">
         <Image src={item.image} alt={item.name} fill className="object-cover" />
@@ -38,9 +45,15 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
           )}
           <span className="text-xs text-[#4b5563]">{item.calories}</span>
         </div>
-        <Button href="#" className="mt-3 h-11 w-full py-0">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            open(item);
+          }}
+          className="mt-3 h-11 w-full rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+        >
           Add
-        </Button>
+        </button>
       </div>
     </article>
   );
