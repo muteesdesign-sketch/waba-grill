@@ -32,17 +32,22 @@ function GreenCheck() {
 
 function WabaCaresBadge() {
   return (
-    <span className="flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-md">
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <path d="M12 21s-7-4.35-9.5-8.5C.8 9.6 2.2 6 5.5 6 7.4 6 8.8 7 12 9.5 15.2 7 16.6 6 18.5 6c3.3 0 4.7 3.6 3 6.5C19 16.65 12 21 12 21z" />
+    <span className="flex items-center gap-2.5 rounded-2xl bg-white px-3.5 py-2.5 shadow-xl">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path
+            d="M12 20.5s-6.5-4-8.8-7.9C1.5 9.5 2.9 6.2 6 6.2c1.8 0 3.1 1 4.5 3 1.4-2 2.7-3 4.5-3 3.1 0 4.5 3.3 2.8 6.4C18.5 16.5 12 20.5 12 20.5z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
         </svg>
       </span>
-      <span className="text-left leading-tight">
-        <span className="block text-[11px] font-bold uppercase tracking-wide text-ink">
+      <span className="leading-tight">
+        <span className="block text-sm font-bold uppercase tracking-wide text-ink">
           WaBa Cares
         </span>
-        <span className="block text-[11px] text-ink/55">
+        <span className="block whitespace-nowrap text-xs text-ink/55">
           Community health commitment
         </span>
       </span>
@@ -52,60 +57,60 @@ function WabaCaresBadge() {
 
 export function Community() {
   return (
-    <section className="bg-white">
-      {/* Full-bleed photo with the floating badge */}
-      <div className="relative h-[320px] w-full">
-        <Image
-          src="/images/community.png"
-          alt="WaBa Grill team volunteering in the community"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute left-1/2 top-5 -translate-x-1/2">
-          <WabaCaresBadge />
-        </div>
-      </div>
+    <section className="relative overflow-hidden bg-bone">
+      {/* Halftone dot texture across the whole section */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,#e2e2e2_1.3px,transparent_1.3px)] opacity-70 [background-size:16px_16px]" />
 
-      {/* White content area with subtle halftone */}
-      <div className="relative px-5 pb-12 pt-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,#ededed_1.3px,transparent_1.3px)] opacity-60 [background-size:14px_14px]" />
-
-        <div className="relative">
-          <p className="font-script text-[32px] leading-none text-brand">
-            Giving back to
-          </p>
-          <h2 className="relative inline-block font-display text-[50px] uppercase leading-[0.9] text-ink">
-            <span style={distressStyle}>Our Community</span>
+      <div className="relative px-7 pb-12 pt-6">
+        {/* Rounded photo card with the badge sticking out top-right */}
+        <div className="relative mb-9">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-[28px]">
             <Image
-              src="/images/brush.png"
-              alt=""
-              width={230}
-              height={9}
-              aria-hidden
-              className="absolute -bottom-2 left-0 h-auto w-full"
+              src="/images/community.png"
+              alt="WaBa Grill team volunteering in the community"
+              fill
+              className="object-cover"
             />
-          </h2>
-
-          <p className="mt-5 text-[15px] leading-relaxed text-[#4b5563]">
-            At WaBa Grill, we believe that eating better goes hand-in-hand with
-            living better. Through our WaBa Cares initiative, we partner with
-            local charities, schools, and organizations to nourish the
-            communities we serve.
-          </p>
-
-          <ul className="mt-6 flex flex-col gap-3">
-            {commitments.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[15px]">
-                <GreenCheck />
-                <span className="text-ink">{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <Button href="#" variant="primary" className="mt-8 w-full py-4">
-            Learn more about WaBa Cares
-          </Button>
+          </div>
+          <div className="absolute -right-3 top-8">
+            <WabaCaresBadge />
+          </div>
         </div>
+
+        <p className="font-script text-[32px] leading-none text-brand">
+          Giving back to
+        </p>
+        <h2 className="relative inline-block font-display text-[50px] uppercase leading-[0.9] text-ink">
+          <span style={distressStyle}>Our Community</span>
+          <Image
+            src="/images/brush.png"
+            alt=""
+            width={230}
+            height={9}
+            aria-hidden
+            className="absolute -bottom-2 left-0 h-auto w-full"
+          />
+        </h2>
+
+        <p className="mt-5 text-[15px] leading-relaxed text-[#4b5563]">
+          At WaBa Grill, we believe that eating better goes hand-in-hand with
+          living better. Through our WaBa Cares initiative, we partner with
+          local charities, schools, and organizations to nourish the
+          communities we serve.
+        </p>
+
+        <ul className="mt-6 flex flex-col gap-3">
+          {commitments.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-[15px]">
+              <GreenCheck />
+              <span className="text-ink">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <Button href="#" variant="primary" className="mt-8 w-full py-4">
+          Learn more about WaBa Cares
+        </Button>
       </div>
     </section>
   );
