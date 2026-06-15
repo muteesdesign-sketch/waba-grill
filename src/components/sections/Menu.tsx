@@ -14,16 +14,18 @@ function BowlCard({ bowl }: { bowl: Bowl }) {
     >
       {/* Full-bleed image: no padding, expands to the card edges */}
       <div className="relative aspect-[4/3] w-full">
-        {bowl.popular && (
-          <span className="absolute left-3 top-3 z-10 rounded-full bg-ink px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white">
-            Popular Item
-          </span>
-        )}
         <Image src={bowl.image} alt={bowl.name} fill className="object-cover" />
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h3 className="text-base font-semibold text-black">{bowl.name}</h3>
+        {bowl.popular && (
+          <span className="mb-2 w-fit rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+            Popular Item
+          </span>
+        )}
+        <h3 className="text-base font-semibold uppercase text-black">
+          {bowl.name}
+        </h3>
         <p className="mt-1 flex-1 text-xs leading-tight text-[#4b5563]">
           {bowl.description}
         </p>
