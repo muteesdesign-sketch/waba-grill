@@ -20,6 +20,12 @@ export const menuCategories: MenuCategory[] = [
         price: "$9.99",
         calories: "",
         badge: "Limited Time",
+        optionGroups: [
+          { title: "Choose a Protein", required: true, multi: false, options: [{ name: "Sweet & Spicy Chicken" }, { name: "Chicken" }, { name: "Tofu" }] },
+          { title: "Choose a Side", required: true, multi: false, options: [{ name: "Chili Crisp Dumplings (3)" }, { name: "Dumplings (3)" }] },
+          { title: "Choose a Penalty Punch", required: true, multi: false, options: [{ name: "Small Dragon Fruit Mango Lemonade w/ Mango Boba" }, { name: "Small Strawberry Watermelon Lemonade Energy Refresher w/ Mango Boba" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Dragon Fruit Mango Lemonade w/ Mango Boba",
@@ -27,6 +33,10 @@ export const menuCategories: MenuCategory[] = [
         description: "A winning blend of tangy lemonade, sweet dragon fruit, and juicy mango—made with real fruit and finished with a fresh lemon wedge. Topped with mango popping boba that burst with every sip for a flavor-packed “goal.”",
         calories: "",
         badge: "Limited Time",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 4.24 }, { name: "Regular", price: 5.64 }, { name: "Large", price: 7.04 }] },
+          { title: "Beverage Options", required: false, multi: true, options: [{ name: "Light Ice" }] },
+        ],
       },
       {
         name: "Strawberry Watermelon Lemonade Energy Refresher w/ Mango Boba",
@@ -34,6 +44,10 @@ export const menuCategories: MenuCategory[] = [
         description: "A refreshing mix of real strawberry and watermelon with crisp lemonade and a boost of natural caffeine. Light, fruity, and energizing—finished with mango popping boba that deliver a juicy burst every time you score a sip.",
         calories: "",
         badge: "Limited Time",
+        optionGroups: [
+          { title: "Choose a Size", required: true, multi: false, options: [{ name: "Small", price: 4.24 }, { name: "Medium", price: 5.64 }, { name: "Large", price: 7.04 }] },
+          { title: "Beverage Options", required: false, multi: true, options: [{ name: "Light Ice" }] },
+        ],
       },
     ],
   },
@@ -49,6 +63,12 @@ export const menuCategories: MenuCategory[] = [
         price: "$10.69",
         calories: "590 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.8 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "WaBa Chicken & Steak Veggie Bowl",
@@ -57,6 +77,12 @@ export const menuCategories: MenuCategory[] = [
         price: "$11.79",
         calories: "660 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.35 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken Plate",
@@ -65,6 +91,15 @@ export const menuCategories: MenuCategory[] = [
         price: "$12.69",
         calories: "820 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 1.0 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "5 Dumplings",
@@ -73,6 +108,9 @@ export const menuCategories: MenuCategory[] = [
         price: "$3.89",
         calories: "210 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "Thai Tea",
@@ -80,6 +118,9 @@ export const menuCategories: MenuCategory[] = [
         description: "Premium black tea with cinnamon, cardamom, star anise, and lactose-free milk for a lightly sweet, refreshing treat.",
         calories: "240 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 3.49 }, { name: "Regular", price: 4.89 }, { name: "Large", price: 6.29 }] },
+        ],
       },
       {
         name: "Chicken & Shrimp Bowl",
@@ -88,6 +129,13 @@ export const menuCategories: MenuCategory[] = [
         price: "$10.79",
         calories: "600 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.35 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }, { name: "Extra Sauce" }, { name: "Sauce on the Side" }, { name: "Well Done Protein" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken & Shrimp Veggie Bowl",
@@ -95,6 +143,9 @@ export const menuCategories: MenuCategory[] = [
         description: "A fresh dual-protein pairing of tender shrimp and grilled all-natural chicken, served the Signature WaBa Way with steamed veggies & WaBa Sauce. For a limited time only.",
         calories: "530-670 Cals",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way", price: 11.79 }, { name: "Boom Boom Way", price: 11.79 }] },
+        ],
       },
       {
         name: "5 Chili Crisp Dumplings",
@@ -103,6 +154,9 @@ export const menuCategories: MenuCategory[] = [
         price: "$4.19",
         calories: "",
         badge: "Popular Item",
+        optionGroups: [
+          { title: "Options", required: false, multi: true, options: [{ name: "Chili Oil on the Side" }] },
+        ],
       },
     ],
   },
@@ -116,18 +170,29 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_3462dfef-fb72-43f3-b678-9fd3e82db09c.png&width=420&quality=80&format=auto",
         description: "Pick your trio: chicken, marinated steak, or shrimp, nestled in a corn and flour blend tortilla with Shredded Cabbage Blend, green onions, and spicy Boom Boom sauce.",
         calories: "510-720 Cals",
+        optionGroups: [
+          { title: "Choose 3 Tacos", required: true, multi: true, options: [{ name: "Chicken Taco", price: 2.69 }, { name: "Steak Taco", price: 2.99 }, { name: "Shrimp Taco", price: 3.89 }, { name: "Tofu Taco", price: 2.69 }] },
+          { title: "Sauce Options", required: false, multi: false, options: [{ name: "SUB Garlic Serrano" }, { name: "SUB Sweet Chili" }, { name: "NO Boom Boom Sauce" }] },
+          { title: "Taco Options", required: false, multi: true, options: [{ name: "NO Slaw" }, { name: "NO Green Onion" }, { name: "SUB Lettuce" }, { name: "SUB White Meat Chicken", price: 0.75 }] },
+        ],
       },
       {
         name: "Taco Trio",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_29498c37-3835-409b-9831-7ed92748bd04.png&width=420&quality=80&format=auto",
         description: "Choose 3x grilled chicken, marinated steak, or shrimp tacos in a corn-flour blend tortilla with Shredded Cabbage Blend, green onions, and spicy Boom Boom sauce; plant-based options available.",
         calories: "510-720 Cals",
+        optionGroups: [
+          { title: "Choose Taco Trio", required: true, multi: false, options: [{ name: "Chicken Taco Trio", price: 7.79 }, { name: "Steak Taco Trio", price: 8.79 }, { name: "Shrimp Taco Trio", price: 10.99 }, { name: "Tofu Taco Trio", price: 7.79 }, { name: "Plantspired Taco Trio", price: 8.79 }] },
+        ],
       },
       {
         name: "Tacos",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_b0cb1e13-b754-4387-aced-fcd48700d5cc.png&width=420&quality=80&format=auto",
         description: "Choose a grilled chicken, marinated steak, or shrimp taco in a corn-flour blend tortilla with Shredded Cabbage Blend, green onions, and spicy Boom Boom sauce.",
         calories: "170-240 Cals",
+        optionGroups: [
+          { title: "Choose a Taco", required: true, multi: false, options: [{ name: "Chicken Taco", price: 2.69 }, { name: "Steak Taco", price: 2.99 }, { name: "Shrimp Taco", price: 3.89 }, { name: "Tofu Taco", price: 2.69 }] },
+        ],
       },
     ],
   },
@@ -142,6 +207,13 @@ export const menuCategories: MenuCategory[] = [
         description: "A popular pairing of our in-house marinated steak and our grilled all-natural chicken basted with our signature WaBa Sauce.",
         price: "$10.79",
         calories: "710 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.35 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Steak Bowl",
@@ -149,6 +221,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Juicy steak marinated in house with our WaBa marinade and grilled to perfection.",
         price: "$10.79",
         calories: "720 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken Bowl",
@@ -156,6 +235,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with our signature WaBa sauce.",
         price: "$9.69",
         calories: "640-760 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.8 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Sweet & Spicy Chicken Bowl",
@@ -163,6 +249,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with WaBa's sweet chili sauce.",
         price: "$9.69",
         calories: "680 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.8 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Salmon Bowl",
@@ -170,6 +262,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled wild-caught Pacific salmon basted with our signature WaBa sauce.",
         price: "$12.39",
         calories: "540 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Salmon", price: 7.79 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Shrimp Bowl",
@@ -177,6 +276,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled to perfection, tailless, fully peeled shrimp hand-basted with our signature WaBa sauce.",
         price: "$12.39",
         calories: "470 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Shrimp (4pc)", price: 3.99 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Plantspired Steak Bowl ",
@@ -184,6 +290,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Marinated plant-based steak slices fire-grilled-to-order.",
         price: "$10.79",
         calories: "660 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Plantspired Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Tofu Bowl",
@@ -191,6 +304,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled organic tofu hand-basted in our flavorful signature WaBa sauce.",
         price: "$9.69",
         calories: "590 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Tofu", price: 5.39 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken & Shrimp Bowl",
@@ -198,6 +318,13 @@ export const menuCategories: MenuCategory[] = [
         description: "A flavorful duo of tender shrimp and grilled all-natural chicken, lightly basted with our signature WaBa Sauce.",
         price: "$10.79",
         calories: "600 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Rice, Half Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.35 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }, { name: "Extra Sauce" }, { name: "Sauce on the Side" }, { name: "Well Done Protein" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
     ],
   },
@@ -211,12 +338,20 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_17e99624-ff88-4ea3-b50b-56d4ec270b29.jpg&width=420&quality=80&format=auto",
         description: "Your choice of individual rice bowls with protein. Minimum 10 bowls required.",
         calories: "",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Bowls", required: false, multi: true, options: [{ name: "Chicken Bowl", price: 9.69 }, { name: "WaBa Chicken & Steak Bowl", price: 10.79 }, { name: "Steak Bowl", price: 10.79 }, { name: "Sweet & Spicy Chicken Bowl", price: 9.69 }, { name: "Salmon Bowl", price: 12.39 }, { name: "Shrimp Bowl", price: 12.39 }, { name: "Tofu Bowl", price: 9.69 }, { name: "Plantspired Bowl", price: 10.79 }] },
+        ],
       },
       {
         name: "Veggie Bowl Pack",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_a02e307c-14a2-47d0-9b57-02dd12713844.jpg&width=420&quality=80&format=auto",
         description: "Your choice of individual rice veggie bowls with protein. Minimum 10 bowls required.",
         calories: "",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Veggie Bowls", required: false, multi: true, options: [{ name: "Chicken Veggie Bowl", price: 10.69 }, { name: "WaBa Chicken & Steak Veggie Bowl", price: 11.79 }, { name: "Steak Veggie Bowl", price: 11.79 }, { name: "Sweet & Spicy Chicken Veggie Bowl", price: 10.69 }, { name: "Salmon Veggie Bowl", price: 13.39 }, { name: "Shrimp Veggie Bowl", price: 13.39 }, { name: "Tofu Veggie Bowl", price: 10.69 }, { name: "Plantspired Veggie Bowl", price: 11.79 }] },
+        ],
       },
     ],
   },
@@ -231,6 +366,12 @@ export const menuCategories: MenuCategory[] = [
         description: "A popular pairing of our in-house marinated steak and our grilled all-natural chicken basted with our signature WaBa Sauce.",
         price: "$11.79",
         calories: "660 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.35 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Steak Veggie Bowl",
@@ -238,6 +379,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Juicy steak marinated in-house with our WaBa marinade and grilled to perfection.",
         price: "$11.79",
         calories: "620 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Extra Meat", required: false, multi: true, options: [{ name: "Extra Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken Veggie Bowl",
@@ -245,6 +392,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with our signature WaBa sauce.",
         price: "$10.69",
         calories: "590 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.8 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Sweet & Spicy Chicken Veggie Bowl",
@@ -252,6 +405,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with WaBa's sweet chili sauce.",
         price: "$10.69",
         calories: "640 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.8 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Salmon Veggie Bowl",
@@ -259,6 +418,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled wild-caught Pacific salmon basted with our signature WaBa sauce.",
         price: "$13.39",
         calories: "500 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Salmon", price: 7.79 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Shrimp Veggie Bowl",
@@ -266,6 +431,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled to perfection, tailless, fully peeled shrimp hand-basted with our signature WaBa sauce.",
         price: "$13.39",
         calories: "420 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Shrimp (4pc)", price: 3.99 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Plantspired Veggie Bowl",
@@ -273,6 +444,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Marinated plant-based steak slices fire-grilled-to-order.",
         price: "$11.79",
         calories: "620 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Plantspired Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Tofu Veggie Bowl",
@@ -280,6 +457,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled organic tofu hand-basted in our flavorful signature WaBa sauce.",
         price: "$10.69",
         calories: "520 Cals",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way" }, { name: "Boom Boom Way" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Tofu", price: 5.39 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Veggie Bowl",
@@ -287,12 +470,20 @@ export const menuCategories: MenuCategory[] = [
         description: "A combination of fresh carrots, broccoli, and cabbage steamed to the perfect crispness.",
         price: "$7.69",
         calories: "356 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "WaBlaze Sauce Packet (Try it, if you dare.)" }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken & Shrimp Veggie Bowl",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_8e632ff1-7e84-4178-9ac4-b9d5881d132f.png&width=420&quality=80&format=auto",
         description: "A fresh dual-protein pairing of tender shrimp and grilled all-natural chicken, served the Signature WaBa Way with steamed veggies & WaBa Sauce. For a limited time only.",
         calories: "",
+        optionGroups: [
+          { title: "Choose Veggie Bowl Style", required: true, multi: false, options: [{ name: "Signature WaBa Way", price: 11.79 }, { name: "Boom Boom Way", price: 11.79 }] },
+        ],
       },
     ],
   },
@@ -307,6 +498,12 @@ export const menuCategories: MenuCategory[] = [
         description: "Choose one Mini Bowl, one value side & a small fountain drink.",
         price: "$9.49",
         calories: "362-398 Cals",
+        optionGroups: [
+          { title: "Choice of Mini Bowl", required: true, multi: false, options: [{ name: "Mini Chicken Bowl" }, { name: "Mini Sweet & Spicy Chicken Bowl" }, { name: "Mini Tofu Bowl" }] },
+          { title: "Choice of Side", required: true, multi: false, options: [{ name: "5 Dumplings" }, { name: "Boom Boom Taco" }, { name: "Loaded Miso Soup with Grilled Chicken" }, { name: "Loaded Miso Soup with White Meat Chicken" }, { name: "Loaded Miso Soup with Tofu" }, { name: "Value Veggies" }, { name: "Side Salad" }] },
+          { title: "Choice of Beverage", required: true, multi: false, options: [{ name: "Value Fountain Drink" }, { name: "Regular Fountain Drink", price: 0.6 }, { name: "Large Fountain Drink", price: 0.8 }, { name: "Bottled Beverages (+$1)" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "5 Dumplings",
@@ -314,6 +511,9 @@ export const menuCategories: MenuCategory[] = [
         description: "A savory veggie and pork filling encased in a soft, yet crisp wheat dough. Served with Sweet Chili Dipping Sauce.",
         price: "$3.89",
         calories: "175 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "5 Chili Crisp Dumplings",
@@ -321,18 +521,27 @@ export const menuCategories: MenuCategory[] = [
         description: "Discover our NEW Chili Crisp Dumplings, a bold new take on a WaBa classic! Our signature Pork and Veggie Dumplings are tossed in a fiery blend of chilies, sesame oil, crispy green onions, sesame seeds, and garlic.",
         price: "$4.19",
         calories: "",
+        optionGroups: [
+          { title: "Options", required: false, multi: true, options: [{ name: "Chili Oil on the Side" }] },
+        ],
       },
       {
         name: "Mini Bowls",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_04395fe1-1aa6-4f36-9d18-45385f507e21.jpg&width=420&quality=80&format=auto",
         description: "",
         calories: "290-320 Cals",
+        optionGroups: [
+          { title: "Mini Bowls", required: true, multi: false, options: [{ name: "Mini Chicken Bowl", price: 5.49 }, { name: "Mini Sweet & Spicy Chicken Bowl", price: 5.49 }, { name: "Mini Steak Bowl", price: 6.49 }, { name: "Mini Tofu Bowl", price: 5.49 }, { name: "Mini Plantspired Bowl", price: 6.49 }, { name: "Mini WaBa Chicken & Steak Bowl", price: 6.49 }] },
+        ],
       },
       {
         name: "Loaded Miso Soups",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_91a6a7f7-490a-422d-baba-1653a1c3bb2b.jpg&width=420&quality=80&format=auto",
         description: "Our savory Miso Soup loaded with your choice of WaBa Grill’s signature grilled protein and rice.",
         calories: "150-160 Cals",
+        optionGroups: [
+          { title: "Choice of Loaded Miso Soup", required: true, multi: false, options: [{ name: "Loaded Miso Soup with Grilled Chicken", price: 3.99 }, { name: "Loaded Miso Soup with Tofu", price: 3.99 }] },
+        ],
       },
       {
         name: "Side Salad",
@@ -361,6 +570,15 @@ export const menuCategories: MenuCategory[] = [
         description: "A popular pairing of our in-house marinated steak and our grilled all-natural chicken basted with our signature WaBa Sauce.",
         price: "$13.79",
         calories: "890 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 0.75 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Steak Plate",
@@ -368,6 +586,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Juicy steak marinated in house with our WaBa marinade and grilled to perfection.",
         price: "$13.79",
         calories: "980 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Extra Meat", required: false, multi: true, options: [{ name: "Extra Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken Plate",
@@ -375,6 +602,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with our signature WaBa sauce.",
         price: "$12.69",
         calories: "820 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 1.0 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Sweet & Spicy Chicken Plate",
@@ -382,6 +618,14 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with WaBa's sweet chili sauce.",
         price: "$12.69",
         calories: "860 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Regular or White Meat Chicken?", required: true, multi: false, options: [{ name: "Regular Chicken" }, { name: "White Meat Chicken", price: 1.0 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Salmon Plate",
@@ -389,6 +633,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled wild-caught Pacific salmon basted with our signature WaBa sauce.",
         price: "$15.39",
         calories: "700 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Salmon", price: 7.79 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Shrimp Plate",
@@ -396,6 +649,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled to perfection, tailless, fully peeled shrimp hand-basted with our signature WaBa sauce.",
         price: "$15.39",
         calories: "570 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Shrimp (4pc)", price: 3.99 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Plantspired Plate",
@@ -403,6 +665,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Marinated plant-based steak slices fire-grilled-to-order.",
         price: "$13.79",
         calories: "870 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Plantspired Steak", price: 6.29 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Tofu Plate",
@@ -410,6 +681,15 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled organic tofu hand-basted in our flavorful signature WaBa sauce.",
         price: "$12.69",
         calories: "740 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "White Rice" }, { name: "Brown Rice" }, { name: "Half White Half Brown Rice" }, { name: "Half Veggie Half Rice", price: 0.59 }, { name: "No Rice, Sub Mixed Veggies", price: 1.0 }] },
+          { title: "Choose First Side", required: true, multi: false, options: [{ name: "3 Pork & Veggie Dumplings" }, { name: "Salad" }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choose Second Side", required: true, multi: false, options: [{ name: "Salad" }, { name: "3 Pork & Veggie Dumplings", price: 1.0 }, { name: "Mixed Veggies" }, { name: "Edamame Kimchi" }, { name: "White Rice" }, { name: "Brown Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "WaBa Sauce" }, { name: "Garlic Serrano Sauce" }, { name: "Sweet Chili Sauce" }, { name: "Boom Boom Sauce" }, { name: "No Sauce" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra Tofu", price: 5.39 }] },
+          { title: "Add-ons and Options", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Side of Green Onion" }, { name: "Side of Jalapeno & Carrots Mix" }, { name: "Side of Wonton Strips", price: 0.79 }, { name: "Easy Sauce" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
     ],
   },
@@ -424,6 +704,13 @@ export const menuCategories: MenuCategory[] = [
         description: "A popular pairing of our in-house marinated steak and our grilled all-natural chicken basted with our signature WaBa Sauce.",
         price: "$40.99",
         calories: "2350 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Marinated Steak Family Meal",
@@ -431,6 +718,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Juicy steak marinated in house with our WaBa marinade and grilled to perfection.",
         price: "$40.99",
         calories: "2400 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Chicken Family Meal",
@@ -438,6 +732,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with our signature WaBa sauce.",
         price: "$32.99",
         calories: "2120 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Sweet & Spicy Chicken Family Meal",
@@ -445,6 +746,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with WaBa's sweet chili sauce.",
         price: "$32.99",
         calories: "1990 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "White Meat Chicken Family Meal",
@@ -452,6 +760,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled all-natural, never frozen chicken caramelized with our signature WaBa sauce.",
         price: "$35.99",
         calories: "1990 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "White Meat Chicken & Marinated Steak Family Meal",
@@ -459,6 +774,13 @@ export const menuCategories: MenuCategory[] = [
         description: "A popular pairing of grilled-all natural, never frozen chicken breast hand-basted with our signature WaBa sauce and our marinated steak.",
         price: "$41.99",
         calories: "2030 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Plantspired Steak Family Meal",
@@ -466,6 +788,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Marinated plant-based steak slices fire-grilled-to-order.",
         price: "$40.99",
         calories: "2400 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }, { name: "No Veggies Family White Rice" }, { name: "No Veggies Family Brown Rice" }, { name: "No Veggies Family Half & Half Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Organic Tofu Family Meal",
@@ -473,6 +802,13 @@ export const menuCategories: MenuCategory[] = [
         description: "Grilled organic tofu hand-basted in our flavorful signature WaBa sauce.",
         price: "$32.99",
         calories: "1790 Cals",
+        optionGroups: [
+          { title: "Rice - Choose Two", required: true, multi: true, options: [{ name: "Family White Rice" }, { name: "Family Brown Rice" }, { name: "Family Half and Half Rice" }, { name: "Family Mixed Veggies", price: 2.0 }, { name: "No Rice, Family Broccoli", price: 4.0 }, { name: "No Rice, Family Broccoli & Carrots", price: 4.0 }] },
+          { title: "Choice of Veggies", required: true, multi: false, options: [{ name: "Mixed Veggies" }, { name: "Family Broccoli", price: 2.0 }, { name: "Family Carrots and Broccoli", price: 2.0 }, { name: "No Veggies, Two Family Salads", price: 2.99 }, { name: "No Veggies Family White Rice" }, { name: "No Veggies Family Brown Rice" }, { name: "No Veggies Family Half & Half Rice" }] },
+          { title: "Choice of Sauce", required: true, multi: false, options: [{ name: "Select Your Sauce" }, { name: "WaBa Sauce (8 packets)" }, { name: "No Sauce" }] },
+          { title: "Condiments", required: false, multi: true, options: [{ name: "Green Onions" }, { name: "Jalapeno Carrot Mix" }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "20 Dumplings",
@@ -480,6 +816,9 @@ export const menuCategories: MenuCategory[] = [
         description: "20 savory pork and veggie-filled dumplings that are soft and crisp in all the right places.",
         price: "$14.99",
         calories: "840 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "20 Chili Crisp Dumplings",
@@ -494,24 +833,36 @@ export const menuCategories: MenuCategory[] = [
         description: "A fresh leafy salad with carrots, and cucumber, served with a side of sweet & tangy WaBa Sesame dressing, serves 2.",
         price: "$6.69",
         calories: "360 Cals",
+        optionGroups: [
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "Family Sized Proteins",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_11e18e12-9a1f-4370-a094-fc1da39704d8.jpg&width=420&quality=80&format=auto",
         description: "Family-size sharable portions of your WaBa favorites.",
         calories: "720-1570 Cals",
+        optionGroups: [
+          { title: "Family Sized Proteins", required: true, multi: false, options: [{ name: "Family Sized Plantspired Steak", price: 28.79 }, { name: "Family Sized Grilled Chicken", price: 19.59 }, { name: "Family Sized Sweet & Spicy Chicken", price: 19.59 }, { name: "Family Sized Organic Tofu", price: 19.59 }, { name: "Family Sized White Meat Chicken", price: 22.59 }, { name: "Family Sized Chicken & Marinated Steak", price: 28.79 }, { name: "Family Sized White Meat Chicken & Marinated Steak", price: 29.79 }, { name: "Family Sized Marinated Steak", price: 28.79 }] },
+        ],
       },
       {
         name: "Family Sized Veggies",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_f30b32c2-1c3f-4dd6-ae88-0d404226c27d.jpg&width=420&quality=80&format=auto",
         description: "A selection of our Family Meal Veggies. Serves 4.",
         calories: "50-130 Cals",
+        optionGroups: [
+          { title: "Family Sized Veggies", required: true, multi: false, options: [{ name: "Family Sized Mixed Veggies", price: 10.19 }, { name: "Family Sized Broccoli", price: 9.59 }, { name: "Family Sized Broccoli & Carrots", price: 9.19 }] },
+        ],
       },
       {
         name: "Family Sized Rice",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_d2904699-cf29-4b22-967a-66469fd82b60.jpg&width=420&quality=80&format=auto",
         description: "A selection of our Family Meal Rices. Serves 4.",
         calories: "640-740 Cals",
+        optionGroups: [
+          { title: "Family Sized Rice", required: true, multi: false, options: [{ name: "Family Sized White Rice", price: 6.69 }, { name: "Family Sized Brown Rice", price: 6.69 }, { name: "Family Sized Half & Half", price: 6.69 }] },
+        ],
       },
     ],
   },
@@ -526,6 +877,9 @@ export const menuCategories: MenuCategory[] = [
         description: "A savory veggie and pork filling encased in a soft, yet crisp wheat dough. Served with Sweet Chili Dipping Sauce.",
         price: "$3.89",
         calories: "210 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "10 Dumplings",
@@ -533,6 +887,9 @@ export const menuCategories: MenuCategory[] = [
         description: "A savory veggie and pork filling encased in a soft, yet crisp wheat dough. Served with Sweet Chili Dipping Sauce.",
         price: "$7.69",
         calories: "420 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "20 Dumplings",
@@ -540,6 +897,10 @@ export const menuCategories: MenuCategory[] = [
         description: "A savory veggie and pork filling encased in a soft, yet crisp wheat dough. Served with Sweet Chili Dipping Sauce.",
         price: "$14.99",
         calories: "840 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+        ],
       },
       {
         name: "5 Chili Crisp Dumplings",
@@ -547,6 +908,9 @@ export const menuCategories: MenuCategory[] = [
         description: "Discover our NEW Chili Crisp Dumplings, a bold new take on a WaBa classic! Our signature Pork and Veggie Dumplings are tossed in a fiery blend of chilies, sesame oil, crispy green onions, sesame seeds, and garlic.",
         price: "$4.19",
         calories: "",
+        optionGroups: [
+          { title: "Options", required: false, multi: true, options: [{ name: "Chili Oil on the Side" }] },
+        ],
       },
       {
         name: "10 Chili Crisp Dumplings",
@@ -554,6 +918,9 @@ export const menuCategories: MenuCategory[] = [
         description: "Discover our NEW Chili Crisp Dumplings, a bold new take on a WaBa classic! Our signature Pork and Veggie Dumplings are tossed in a fiery blend of chilies, sesame oil, crispy green onions, sesame seeds, and garlic.",
         price: "$8.29",
         calories: "",
+        optionGroups: [
+          { title: "Options", required: false, multi: true, options: [{ name: "Chili Oil on the Side" }] },
+        ],
       },
       {
         name: "20 Chili Crisp Dumplings",
@@ -561,6 +928,9 @@ export const menuCategories: MenuCategory[] = [
         description: "Discover our NEW Chili Crisp Dumplings, a bold new take on a WaBa classic! Our signature Pork and Veggie Dumplings are tossed in a fiery blend of chilies, sesame oil, crispy green onions, sesame seeds, and garlic.",
         price: "$15.89",
         calories: "",
+        optionGroups: [
+          { title: "Options", required: false, multi: true, options: [{ name: "Chili Oil on the Side" }] },
+        ],
       },
     ],
   },
@@ -574,12 +944,24 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_930c7f5b-5ddc-4deb-bdbd-6c73dfdce4bb.jpg&width=420&quality=80&format=auto",
         description: "Arcadian blend salad topped with Cucumber & Edamame Kimchi, carrots, cilantro, and grilled White Meat chicken. Served with Spicy Sesame Dressing and wonton strips on the side.",
         calories: "420-700 Cals",
+        optionGroups: [
+          { title: "Choice of Protein", required: true, multi: false, options: [{ name: "Asian White Meat Chicken Salad", price: 9.29 }, { name: "Asian Steak Salad", price: 11.59 }, { name: "Asian Chicken & Steak Salad", price: 11.59 }, { name: "Asian Salmon Salad", price: 12.59 }, { name: "Asian Shrimp Salad", price: 12.59 }, { name: "Asian Plantspired Steak Salad", price: 11.59 }, { name: "Asian Tofu Salad", price: 9.29 }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+          { title: "Add-on", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Substitute Leg Meat Chicken" }, { name: "No Carrots" }, { name: "No Edamame Kimchi" }, { name: "No Cucumbers" }, { name: "No Tomatoes" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra White Meat Chicken", price: 6.09 }, { name: "Extra White Meat Chicken & Steak", price: 6.29 }, { name: "Extra Steak", price: 6.29 }, { name: "Extra Salmon", price: 7.79 }, { name: "Extra Shrimp (4 pieces)", price: 2.69 }, { name: "Extra Tofu", price: 5.39 }, { name: "Extra Sesame Dressing" }, { name: "Extra Spicy Sesame Dressing" }] },
+        ],
       },
       {
         name: "Signature House",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_a4ad5adf-bce0-433d-8d98-3cda969d0079.jpg&width=420&quality=80&format=auto",
         description: "Arcadian blend salad topped with cucumber, carrots, and grilled white meat chicken. Served with WaBa’s Sesame Dressing and wonton strips on the side.",
         calories: "320-700 Cals",
+        optionGroups: [
+          { title: "Choice of Protein", required: true, multi: false, options: [{ name: "White Meat Chicken Salad", price: 9.29 }, { name: "Steak Salad", price: 11.59 }, { name: "Chicken & Steak Salad", price: 11.59 }, { name: "Salmon Salad", price: 12.59 }, { name: "Shrimp Salad", price: 12.59 }, { name: "Tofu Salad", price: 9.29 }, { name: "Plantspired Steak Salad", price: 11.59 }] },
+          { title: "Utensils", required: true, multi: false, options: [{ name: "Utensils" }, { name: "No Utensils" }] },
+          { title: "Add-on", required: false, multi: true, options: [{ name: "Avocado", price: 2.69 }, { name: "Substitute Leg Meat Chicken" }, { name: "No Carrots" }, { name: "No Cucumbers" }, { name: "No Tomatoes" }] },
+          { title: "Want More?", required: false, multi: true, options: [{ name: "Extra White Meat Chicken", price: 6.09 }, { name: "Extra White Meat Chicken & Steak", price: 6.29 }, { name: "Extra Steak", price: 6.29 }, { name: "Extra Salmon", price: 7.79 }, { name: "Extra Shrimp (4 pieces)", price: 2.69 }, { name: "Extra Tofu", price: 5.39 }, { name: "Extra Sesame Dressing" }, { name: "Extra Spicy Sesame Dressing" }] },
+        ],
       },
     ],
   },
@@ -593,6 +975,9 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_22585633-bc85-4fe0-af1b-ffb8cb4369f2.png&width=420&quality=80&format=auto",
         description: "",
         calories: "50-290 Cals",
+        optionGroups: [
+          { title: "Proteins", required: true, multi: false, options: [{ name: "Side of Grilled Chicken", price: 5.39 }, { name: "Side of Sweet & Spicy Chicken", price: 5.39 }, { name: "Side of White Meat Chicken", price: 6.09 }, { name: "Side of Marinated Steak", price: 6.29 }, { name: "Side of WaBa Chicken & Steak", price: 6.29 }, { name: "Side of Waba White Meat Chicken & Steak", price: 6.29 }, { name: "Side of Wild Caught Salmon", price: 7.79 }, { name: "Side of Shrimp (4pc)", price: 3.99 }, { name: "Side of Organic Tofu", price: 5.39 }, { name: "Side of Plantspired Steak", price: 6.29 }] },
+        ],
       },
       {
         name: "Veggies",
@@ -614,6 +999,9 @@ export const menuCategories: MenuCategory[] = [
         description: "A savory veggie and pork filling encased in a soft, yet crisp wheat dough. Served with Sweet Chili Dipping Sauce.",
         price: "$3.89",
         calories: "210 Cals",
+        optionGroups: [
+          { title: "Extra Sweet Dipping Sauce", required: false, multi: true, options: [{ name: "Extra Sweet Chili Dipping Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "Miso Soup",
@@ -627,6 +1015,9 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_6bfd579b-5087-448c-9660-dd47af4d563f.png&width=420&quality=80&format=auto",
         description: "Choose a grilled chicken, marinated steak, or shrimp taco in a corn-flour blend tortilla with Shredded Cabbage Blend, green onions, and spicy Boom Boom sauce; plant-based options available.",
         calories: "170-240 Cals",
+        optionGroups: [
+          { title: "Choose a Taco", required: true, multi: false, options: [{ name: "Chicken Taco", price: 2.69 }, { name: "Steak Taco", price: 2.99 }, { name: "Shrimp Taco", price: 3.89 }, { name: "Tofu Taco", price: 2.69 }] },
+        ],
       },
       {
         name: "Side Salad",
@@ -647,12 +1038,18 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_11e228a6-5930-4e72-90da-2b9a7c778924.jpg&width=420&quality=80&format=auto",
         description: "White, brown or half-half.",
         calories: "320-370 Cals",
+        optionGroups: [
+          { title: "Choice of Rice", required: true, multi: false, options: [{ name: "Side of White Rice", price: 3.99 }, { name: "Side of Brown Rice", price: 3.99 }, { name: "Side of Half & Half Rice", price: 3.99 }] },
+        ],
       },
       {
         name: "Sauces",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_8643319a-c151-462c-9990-3fac2d281a73.jpg&width=420&quality=80&format=auto",
         description: "Forget secret sauces, we think our WaBa sauces deserve total recognition! Special blends of fruits and spices that make it sweet, savory, or spicy. These sauces offer a perfect balance or extra flavor to any WaBa dish.",
         calories: "50-60 Cals",
+        optionGroups: [
+          { title: "Sides of Sauce", required: true, multi: false, options: [{ name: "Side of WaBa Sauce", price: 0.3 }, { name: "Side of Garlic Serrano Sauce", price: 0.3 }, { name: "Side of Sweet Chili Sauce", price: 0.3 }, { name: "Side of Boom Boom Sauce", price: 0.3 }] },
+        ],
       },
       {
         name: "Side Wonton Strips",
@@ -694,24 +1091,40 @@ export const menuCategories: MenuCategory[] = [
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_4d487be6-4c55-432a-90b6-b40a71fd22a6.jpg&width=420&quality=80&format=auto",
         description: "A perfect balance of tangy lemonade, sweet dragon fruit and juicy mango. Made with real fruits and topped with a fresh lemon wedge.",
         calories: "160-360 Cals",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 3.49 }, { name: "Regular", price: 4.89 }, { name: "Large", price: 6.29 }] },
+        ],
       },
       {
         name: "Strawberry Watermelon Lemonade Energy Refresher",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_fc4a3dd9-6952-4a9a-aba0-a9ffccfdd265.jpg&width=420&quality=80&format=auto",
         description: "A refreshing mix of real strawberry and watermelon with crisp lemonade and natural caffeine. Fruity, light, and energizing—this flavorful refresher powers up any meal. Contains 56mg (Value), 88mg (Regular), 126mg (Large) caffeine.",
         calories: "160-350 Cals",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 3.49 }, { name: "Regular", price: 4.89 }, { name: "Large", price: 6.29 }] },
+          { title: "Beverage Options", required: false, multi: true, options: [{ name: "Light Ice" }] },
+        ],
       },
       {
         name: "Thai Tea",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_6a0a55db-d919-4068-9883-f031ca6b9711.jpg&width=420&quality=80&format=auto",
         description: "Premium black tea with cinnamon, cardamom, star anise, and lactose-free milk for a lightly sweet, refreshing treat.",
         calories: "240 Cals",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 3.49 }, { name: "Regular", price: 4.89 }, { name: "Large", price: 6.29 }] },
+          { title: "Would you like to add mango boba?", required: true, multi: false, options: [{ name: "No, Thank You" }, { name: "Yes, Please!", price: 0.75 }] },
+        ],
       },
       {
         name: "Fountain Drink",
         image: "https://media.koala.io/resize?source=https://koala-api-production.s3.amazonaws.com/global-products/1x1_b99d803a-90b4-40cb-8211-bf4e9b39210b.jpg&width=420&quality=80&format=auto",
         description: "",
         calories: "",
+        optionGroups: [
+          { title: "Size", required: true, multi: false, options: [{ name: "Value", price: 2.49 }, { name: "Regular", price: 2.99 }, { name: "Large", price: 3.49 }] },
+          { title: "Choice of Beverage", required: true, multi: false, options: [{ name: "Pepsi" }, { name: "Diet Pepsi" }, { name: "Starry" }] },
+          { title: "Would you like to add mango boba?", required: true, multi: false, options: [{ name: "No, Thank You" }, { name: "Yes, Please!", price: 0.75 }] },
+        ],
       },
       {
         name: "Aquafina - 20oz Bottle",

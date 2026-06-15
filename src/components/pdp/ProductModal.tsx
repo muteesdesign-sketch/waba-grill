@@ -2,73 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import type { MenuItem } from "@/components/ui/MenuItemCard";
-
-type Option = { name: string; note?: string; price?: number };
-type Group = {
-  title: string;
-  required?: boolean;
-  multi?: boolean;
-  hint: string;
-  options: Option[];
-};
-
-// Representative option groups (mirrors the WaBa Grill PDP design).
-const GROUPS: Group[] = [
-  {
-    title: "Choose your meal",
-    hint: "Select 1 option",
-    options: [{ name: "Make it a combo", note: "Bowl + drink", price: 6.99 }],
-  },
-  {
-    title: "Choice of rice",
-    required: true,
-    hint: "Select 1 option",
-    options: [
-      { name: "White rice" },
-      { name: "Brown rice" },
-      { name: "Half white rice, half brown rice" },
-    ],
-  },
-  {
-    title: "Choice of sauce",
-    required: true,
-    hint: "Select 1 option",
-    options: [
-      { name: "Waba sauce" },
-      { name: "Garlic serrano sauce" },
-      { name: "Sweet chili sauce" },
-      { name: "Boom boom sauce" },
-      { name: "No sauce" },
-    ],
-  },
-  {
-    title: "Want more?",
-    multi: true,
-    hint: "Optional",
-    options: [{ name: "Extra Shrimp", note: "New", price: 3.99 }],
-  },
-  {
-    title: "Add-ons and options",
-    multi: true,
-    hint: "Optional",
-    options: [
-      { name: "Avocado", price: 2.61 },
-      { name: "Side of green onion" },
-      { name: "Side of jalapeño & carrots mix" },
-      { name: "Side of wonton strips", price: 0.79 },
-      { name: "Easy Sauce" },
-    ],
-  },
-  {
-    title: "Utensils",
-    required: true,
-    hint: "Select 1 option",
-    options: [{ name: "Utensils" }, { name: "No utensils" }],
-  },
-];
+import type { MenuItem, MenuOptionGroup } from "@/components/ui/MenuItemCard";
 
 const TAGS = ["Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free"];
+
+const groupHint = (g: MenuOptionGroup) =>
+  g.multi
+    ? g.required
+      ? "Select at least 1"
+      : "Optional · select any"
+    : "Select 1 option";
 
 function parsePrice(p?: string) {
   if (!p) return 0;
@@ -109,12 +52,14 @@ export function ProductModal({
 
   if (!item) return null;
 
+  const groups = item.optionGroups ?? [];
+
   const handleClose = () => {
     setShow(false);
     setTimeout(onClose, 250);
   };
 
-  const toggle = (gi: number, group: Group, name: string) => {
+  const toggle = (gi: number, group: MenuOptionGroup, name: string) => {
     setSelected((prev) => {
       const cur = prev[gi] ?? [];
       if (group.multi) {
@@ -129,7 +74,7 @@ export function ProductModal({
     });
   };
 
-  const optionsTotal = GROUPS.reduce((sum, g, gi) => {
+  const optionsTotal = groups.reduce((sum, g, gi) => {
     const chosen = selected[gi] ?? [];
     return (
       sum +
@@ -225,7 +170,7 @@ export function ProductModal({
 
             {/* Right: options */}
             <div className="border-t border-black/5 px-5 py-5 lg:flex-1 lg:overflow-y-auto lg:border-l lg:border-t-0">
-              {GROUPS.map((group, gi) => (
+              {groups.map((group, gi) => (
                 <div key={group.title} className="mb-7">
                   <h3 className="text-base font-bold text-ink">
                     {group.title}{" "}
@@ -235,7 +180,7 @@ export function ProductModal({
                       </span>
                     )}
                   </h3>
-                  <p className="mb-3 text-xs text-ink/50">{group.hint}</p>
+                  <p className="mb-3 text-xs text-ink/50">{groupHint(group)}</p>
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     {group.options.map((o) => {
                       const isSel = (selected[gi] ?? []).includes(o.name);
@@ -252,11 +197,6 @@ export function ProductModal({
                           <span className="text-sm font-semibold text-ink">
                             {o.name}
                           </span>
-                          {o.note && (
-                            <span className="text-[11px] uppercase tracking-wide text-brand">
-                              {o.note}
-                            </span>
-                          )}
                           {o.price ? (
                             <span className="mt-1 text-xs text-ink/60">
                               +${o.price.toFixed(2)}

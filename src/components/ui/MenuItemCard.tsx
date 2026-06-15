@@ -3,6 +3,14 @@
 import Image from "next/image";
 import { useProductModal } from "@/components/pdp/ProductModalProvider";
 
+export type MenuOption = { name: string; price?: number };
+export type MenuOptionGroup = {
+  title: string;
+  required: boolean;
+  multi: boolean;
+  options: MenuOption[];
+};
+
 export type MenuItem = {
   name: string;
   image: string;
@@ -10,6 +18,7 @@ export type MenuItem = {
   price?: string;
   calories: string;
   badge?: string;
+  optionGroups?: MenuOptionGroup[];
 };
 
 export function MenuItemCard({ item }: { item: MenuItem }) {
