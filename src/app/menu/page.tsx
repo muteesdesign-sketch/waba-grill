@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { asset } from "@/lib/asset";
 import { Banner } from "@/components/sections/Banner";
 import { Nav } from "@/components/sections/Nav";
 import { PreFooter } from "@/components/sections/PreFooter";
@@ -23,25 +24,39 @@ export default function MenuPage() {
       <Banner />
       <Nav />
 
-      {/* Dark hero */}
-      <section className="bg-ink px-5 py-10 text-center text-white lg:py-14">
-        <p className="font-script text-[32px] leading-none text-brand lg:text-[40px]">
-          Explore our
-        </p>
-        <h1 className="relative mt-1 inline-block font-display text-[72px] uppercase leading-[0.85] lg:text-[96px]">
-          <span style={distressStyle}>Menu</span>
-          <Image
-            src="/images/brush.png"
-            alt=""
-            width={230}
-            height={9}
-            aria-hidden
-            className="absolute -bottom-3 left-1/2 h-auto w-[120%] -translate-x-1/2"
-          />
-        </h1>
-        <p className="mx-auto mt-6 max-w-[360px] text-[18px] font-medium leading-snug text-white/80">
-          Fresh ingredients, bold flavors, grilled to perfection.
-        </p>
+      {/* Hero with looping video background + 80% black overlay */}
+      <section className="relative overflow-hidden px-5 py-10 text-center text-white lg:py-14">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={asset("/images/hero-bg.jpg")}
+        >
+          <source src={asset("/hero.mp4")} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/80" />
+
+        <div className="relative">
+          <p className="font-script text-[32px] leading-none text-brand lg:text-[40px]">
+            Explore our
+          </p>
+          <h1 className="relative mt-1 inline-block font-display text-[72px] uppercase leading-[0.85] lg:text-[96px]">
+            <span style={distressStyle}>Menu</span>
+            <Image
+              src="/images/brush.png"
+              alt=""
+              width={230}
+              height={9}
+              aria-hidden
+              className="absolute -bottom-3 left-1/2 h-auto w-[120%] -translate-x-1/2"
+            />
+          </h1>
+          <p className="mx-auto mt-6 max-w-[360px] text-[18px] font-medium leading-snug text-white/80">
+            Fresh ingredients, bold flavors, grilled to perfection.
+          </p>
+        </div>
       </section>
 
       {/* Sticky category nav */}
