@@ -27,7 +27,7 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
         <h3 className="text-base font-semibold uppercase text-black">
           {item.name}
         </h3>
-        <p className="mt-1 flex-1 text-xs leading-tight text-[#4b5563]">
+        <p className="mt-1 line-clamp-3 flex-1 text-xs leading-tight text-[#4b5563]">
           {item.description}
         </p>
         <div className="mt-3 flex flex-col leading-tight">
