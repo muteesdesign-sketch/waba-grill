@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { MenuItem, MenuOptionGroup } from "@/components/ui/MenuItemCard";
+import { useCart } from "@/components/cart/CartProvider";
 
 const TAGS = ["Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free"];
 
@@ -60,6 +61,7 @@ export function ProductModal({
   item: MenuItem | null;
   onClose: () => void;
 }) {
+  const cart = useCart();
   const [show, setShow] = useState(false);
   const [qty, setQty] = useState(1);
   const [selected, setSelected] = useState<Record<number, string[]>>({});
@@ -304,7 +306,14 @@ export function ProductModal({
                 </button>
               </div>
               <button
-                onClick={handleClose}
+                onClick={() => {
+                  cart.add({
+                    name: item.name,
+                    price: total,
+                    image: item.image,
+                  });
+                  handleClose();
+                }}
                 className="flex-1 whitespace-nowrap rounded-full bg-brand-button px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
               >
                 Add to Cart - ${total.toFixed(2)}

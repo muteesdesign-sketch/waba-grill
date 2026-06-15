@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/components/cart/CartProvider";
 
 function Logo() {
   return (
@@ -29,6 +30,7 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const cart = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
@@ -92,8 +94,8 @@ export function Nav() {
             Sign-in
           </Link>
 
-          <Link
-            href="#"
+          <button
+            onClick={() => cart.open()}
             aria-label="Your order"
             className="flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button"
           >
@@ -106,9 +108,9 @@ export function Nav() {
             />
           </svg>
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-button font-display text-[13px] leading-none text-white">
-            1
+            {cart.count}
           </span>
-          </Link>
+          </button>
         </div>
       </nav>
 
