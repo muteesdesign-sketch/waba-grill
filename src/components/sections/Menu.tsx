@@ -72,12 +72,12 @@ export function Menu() {
 
       {/* Category rail — white bar with shadow; active = red, no underline */}
       <div className="mt-8 shadow-[0_8px_8px_rgba(0,0,0,0.1),0_4px_3px_rgba(0,0,0,0.06)]">
-        <div className="no-scrollbar mx-auto flex max-w-[1280px] gap-8 overflow-x-auto bg-white px-6 py-5 lg:justify-center lg:gap-12">
+        <div className="no-scrollbar mx-auto flex max-w-[1280px] gap-8 overflow-x-auto bg-white px-6 py-5 lg:justify-between lg:gap-3 lg:overflow-x-visible lg:px-8">
           {categories.map((cat, i) => (
             <button
               key={cat}
               onClick={() => setActive(i)}
-              className={`shrink-0 whitespace-nowrap text-xl font-bold transition-colors ${
+              className={`shrink-0 whitespace-nowrap text-xl font-bold transition-colors lg:text-lg ${
                 i === active ? "text-brand" : "text-ink"
               }`}
             >
@@ -113,7 +113,7 @@ export function Menu() {
       </div>
 
       {/* Oversized brand word — Janeiro, full-width, flush to the red section below */}
-      <p className="-mb-4 mt-10 block w-full overflow-x-clip overflow-y-visible whitespace-nowrap text-center font-fat text-[73px] uppercase leading-[0.9] tracking-[-0.02em] text-brand">
+      <p className="mt-10 block w-full overflow-x-clip overflow-y-visible whitespace-nowrap text-center font-fat text-[19vw] uppercase leading-[0.9] tracking-[-0.02em] text-brand [margin-bottom:-4vw]">
         Delicioso
       </p>
     </section>
