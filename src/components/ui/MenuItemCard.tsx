@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { useProductModal } from "@/components/pdp/ProductModalProvider";
 
-export type MenuOption = { name: string; price?: number };
+export type MenuOption = {
+  name: string;
+  price?: number;
+  image?: string;
+  note?: string;
+};
 export type MenuOptionGroup = {
   title: string;
   required: boolean;
