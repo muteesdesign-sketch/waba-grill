@@ -46,9 +46,9 @@ export function Menu() {
         </p>
       </div>
 
-      {/* Category rail — contained rounded pill; active = red */}
-      <div className="mt-8 px-4 lg:px-8">
-        <div className="no-scrollbar mx-auto flex max-w-[1180px] gap-7 overflow-x-auto rounded-2xl bg-white px-6 py-4 shadow-[0_10px_24px_-6px_rgba(0,0,0,0.18)] lg:justify-between lg:gap-3 lg:overflow-x-visible lg:px-8">
+      {/* Category rail — flat edge-to-edge on mobile, contained rounded pill on desktop; active = red */}
+      <div className="mt-8 px-0 lg:px-8">
+        <div className="no-scrollbar mx-auto flex max-w-[1180px] gap-7 overflow-x-auto rounded-none bg-white px-5 py-4 shadow-[0_10px_24px_-6px_rgba(0,0,0,0.18)] lg:justify-between lg:gap-3 lg:overflow-x-visible lg:rounded-2xl lg:px-8">
           {homeCategories.map((cat, i) => (
             <button
               key={cat.id}

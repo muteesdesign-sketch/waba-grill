@@ -27,7 +27,7 @@ export function MenuCategoryNav({
   }, [categories]);
 
   return (
-    <nav className="sticky top-[96px] z-40 -mt-9 px-0 lg:px-8">
+    <nav className="sticky top-[96px] z-40 -mt-4 px-0 lg:-mt-8 lg:px-8">
       <div className="no-scrollbar mx-auto flex max-w-[1240px] gap-7 overflow-x-auto rounded-none bg-white px-5 py-4 shadow-[0_10px_20px_-4px_rgba(0,0,0,0.15)] lg:gap-9 lg:rounded-2xl lg:px-8">
         {categories.map((c) => (
           <a
