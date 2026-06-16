@@ -53,7 +53,7 @@ export default function MenuPage() {
               className="absolute -bottom-3 left-1/2 h-auto w-[120%] -translate-x-1/2"
             />
           </h1>
-          <p className="mx-auto mt-6 max-w-[360px] text-[18px] font-medium leading-snug text-white/80">
+          <p className="mt-6 whitespace-nowrap text-center text-[clamp(0.62rem,2.9vw,1.125rem)] font-medium leading-snug text-white/80">
             Fresh ingredients, bold flavors, grilled to perfection.
           </p>
         </div>

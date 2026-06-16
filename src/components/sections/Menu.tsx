@@ -41,7 +41,7 @@ export function Menu() {
             className="absolute -bottom-3 left-1/2 h-auto w-[125%] -translate-x-1/2"
           />
         </h2>
-        <p className="mx-auto mt-6 max-w-[340px] text-center text-[21px] font-semibold leading-snug text-[#4a4a4a]">
+        <p className="mt-6 whitespace-nowrap text-center text-[clamp(0.6rem,2.75vw,1.3125rem)] font-semibold leading-snug text-[#4a4a4a]">
           Fresh ingredients, bold flavors, grilled to perfection.
         </p>
       </div>
