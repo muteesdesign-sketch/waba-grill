@@ -9,23 +9,26 @@ import { Catering } from "@/components/sections/Catering";
 import { News } from "@/components/sections/News";
 import { PreFooter } from "@/components/sections/PreFooter";
 import { Footer } from "@/components/sections/Footer";
+import { ProductModalProvider } from "@/components/pdp/ProductModalProvider";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-white">
-      <Banner />
-      <Nav />
-      <main>
-        <Hero />
-        <Offer />
-        <Menu />
-        <Rewards />
-        <Community />
-        <Catering />
-        <News />
-      </main>
-      <PreFooter />
-      <Footer />
-    </div>
+    <ProductModalProvider>
+      <div className="min-h-screen w-full bg-white">
+        <Banner />
+        <Nav />
+        <main>
+          <Hero />
+          <Offer />
+          <Menu />
+          <Rewards />
+          <Community />
+          <Catering />
+          <News />
+        </main>
+        <PreFooter />
+        <Footer />
+      </div>
+    </ProductModalProvider>
   );
 }
