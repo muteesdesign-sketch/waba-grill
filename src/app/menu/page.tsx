@@ -6,7 +6,6 @@ import { Nav } from "@/components/sections/Nav";
 import { PreFooter } from "@/components/sections/PreFooter";
 import { Footer } from "@/components/sections/Footer";
 import { MenuItemCard } from "@/components/ui/MenuItemCard";
-import { ProductModalProvider } from "@/components/pdp/ProductModalProvider";
 import { distressStyle } from "@/lib/distress";
 import { MenuCategoryNav } from "./MenuCategoryNav";
 import { menuCategories } from "./menu-data";
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 
 export default function MenuPage() {
   return (
-    <ProductModalProvider>
     <div className="min-h-screen w-full bg-white">
       <Banner />
       <Nav />
@@ -95,6 +93,5 @@ export default function MenuPage() {
       <PreFooter />
       <Footer />
     </div>
-    </ProductModalProvider>
   );
 }
