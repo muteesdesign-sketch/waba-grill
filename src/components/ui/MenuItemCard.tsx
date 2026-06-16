@@ -32,11 +32,16 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <article
       onClick={() => open(item)}
-      className="flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition-shadow hover:shadow-lg"
+      className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl"
     >
-      {/* Full-bleed image */}
-      <div className="relative aspect-[4/3] w-full">
-        <Image src={item.image} alt={item.name} fill className="object-cover" />
+      {/* Full-bleed image — gently zooms on hover */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
       </div>
 
       <div className="flex flex-1 flex-col p-3">
@@ -64,9 +69,25 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
             e.stopPropagation();
             open(item);
           }}
-          className="mt-3 h-11 w-full rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+          className="group/add mt-3 flex h-11 w-full items-center justify-center gap-1.5 rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
         >
           Add
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden
+            className="-ml-1 w-0 -translate-x-1 opacity-0 transition-all duration-300 group-hover/add:ml-0 group-hover/add:w-4 group-hover/add:translate-x-0 group-hover/add:opacity-100"
+          >
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </div>
     </article>

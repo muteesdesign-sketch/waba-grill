@@ -61,14 +61,18 @@ export function Nav() {
                   <Link
                     href={l.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative text-sm font-bold uppercase tracking-wide transition-colors ${
+                    className={`group relative text-sm font-bold uppercase tracking-wide transition-colors ${
                       active ? "text-ink" : "text-ink hover:text-brand"
                     }`}
                   >
                     {l.label}
-                    {active && (
-                      <span className="absolute -bottom-1.5 left-0 right-0 h-[3px] rounded-full bg-brand" />
-                    )}
+                    <span
+                      className={`absolute -bottom-1.5 left-0 right-0 h-[3px] origin-center rounded-full bg-brand transition-transform duration-300 ease-out ${
+                        active
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100"
+                      }`}
+                    />
                   </Link>
                 </li>
               );
@@ -110,7 +114,7 @@ export function Nav() {
           <button
             onClick={() => cart.open()}
             aria-label="Your order"
-            className="flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button"
+            className="group flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button transition-colors hover:bg-brand-button hover:text-white"
           >
           {/* Shopping bag — solid/filled */}
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -120,7 +124,11 @@ export function Nav() {
               d="M8.5 7V6a3.5 3.5 0 117 0v1h2.2a1 1 0 011 .9l.9 11A2 2 0 0118.6 21H5.4a2 2 0 01-2-2.1l.9-11a1 1 0 011-.9H8.5zm2 0h3V6a1.5 1.5 0 00-3 0v1z"
             />
           </svg>
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-button font-display text-[13px] leading-none text-white">
+          {/* Keyed remount replays the pop animation on every count change */}
+          <span
+            key={cart.count}
+            className="badge-pop flex h-5 w-5 items-center justify-center rounded-full bg-brand-button font-display text-[13px] leading-none text-white group-hover:bg-white group-hover:text-brand-button"
+          >
             {cart.count}
           </span>
           </button>

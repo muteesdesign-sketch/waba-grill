@@ -24,7 +24,7 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide shadow-lg transition active:scale-[0.97] ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide shadow-lg transition duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

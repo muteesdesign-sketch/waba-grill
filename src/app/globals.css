@@ -103,6 +103,22 @@ body {
       transform: none;
     }
   }
+
+  /* Cart badge pop — replays whenever the count changes (keyed remount) */
+  .badge-pop {
+    animation: badge-pop 0.42s cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  @keyframes badge-pop {
+    0% {
+      transform: scale(1);
+    }
+    35% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }
 
 /* Hide scrollbars on horizontal scroll rails while keeping scroll */
