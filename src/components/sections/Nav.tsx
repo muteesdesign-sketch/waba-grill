@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
 
@@ -31,6 +32,9 @@ const links = [
 export function Nav() {
   const [open, setOpen] = useState(false);
   const cart = useCart();
+  const pathname = usePathname();
+  const isActive = (href: string) =>
+    href.startsWith("/") && pathname.startsWith(href);
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
@@ -50,16 +54,25 @@ export function Nav() {
 
           {/* Desktop inline links */}
           <ul className="hidden items-center gap-7 lg:flex">
-            {links.map((l) => (
-              <li key={l.label}>
-                <Link
-                  href={l.href}
-                  className="text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:text-brand"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+            {links.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative text-sm font-bold uppercase tracking-wide transition-colors ${
+                      active ? "text-ink" : "text-ink hover:text-brand"
+                    }`}
+                  >
+                    {l.label}
+                    {active && (
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-[3px] rounded-full bg-brand" />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
