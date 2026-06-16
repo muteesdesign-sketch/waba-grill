@@ -8,14 +8,19 @@ import { MenuItemCard } from "@/components/ui/MenuItemCard";
 import { distressStyle } from "@/lib/distress";
 import { menuCategories } from "@/app/menu/menu-data";
 
+// The homepage submenu mirrors the food categories from the design
+// (excludes Limited Time Offers, beverages and drinks).
+const homeCategories = menuCategories.filter(
+  (c) => !["limited-time-offers", "wabeverages", "drinks"].includes(c.id),
+);
 const DEFAULT_INDEX = Math.max(
   0,
-  menuCategories.findIndex((c) => c.name === "Bowls"),
+  homeCategories.findIndex((c) => c.name === "Bowls"),
 );
 
 export function Menu() {
   const [active, setActive] = useState(DEFAULT_INDEX);
-  const category = menuCategories[active];
+  const category = homeCategories[active];
   const items = category.items.slice(0, 4);
 
   return (
@@ -41,14 +46,14 @@ export function Menu() {
         </p>
       </div>
 
-      {/* Category rail — white bar with shadow; active = red */}
-      <div className="mt-8 shadow-[0_8px_8px_rgba(0,0,0,0.1),0_4px_3px_rgba(0,0,0,0.06)]">
-        <div className="no-scrollbar mx-auto flex max-w-[1280px] gap-8 overflow-x-auto bg-white px-6 py-5 lg:justify-center lg:gap-9 lg:px-8">
-          {menuCategories.map((cat, i) => (
+      {/* Category rail — contained rounded pill; active = red */}
+      <div className="mt-8 px-4 lg:px-8">
+        <div className="no-scrollbar mx-auto flex max-w-[1180px] gap-7 overflow-x-auto rounded-2xl bg-white px-6 py-4 shadow-[0_10px_24px_-6px_rgba(0,0,0,0.18)] lg:justify-between lg:gap-3 lg:overflow-x-visible lg:px-8">
+          {homeCategories.map((cat, i) => (
             <button
               key={cat.id}
               onClick={() => setActive(i)}
-              className={`shrink-0 whitespace-nowrap text-xl font-bold transition-colors lg:text-lg ${
+              className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[15px] ${
                 i === active ? "text-brand" : "text-ink hover:text-brand"
               }`}
             >
