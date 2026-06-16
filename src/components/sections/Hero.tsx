@@ -55,13 +55,6 @@ export function Hero() {
           >
             Start an Order
           </Button>
-          <Button
-            href="/menu"
-            variant="light"
-            className="w-full py-4 lg:w-auto lg:px-10"
-          >
-            View Menu
-          </Button>
         </div>
       </div>
     </section>
