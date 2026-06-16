@@ -78,7 +78,7 @@ export function Menu() {
               key={cat}
               onClick={() => setActive(i)}
               className={`shrink-0 whitespace-nowrap text-xl font-bold transition-colors lg:text-lg ${
-                i === active ? "text-brand" : "text-ink"
+                i === active ? "text-brand" : "text-ink hover:text-brand"
               }`}
             >
               {cat}

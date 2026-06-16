@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 type Variant = "primary" | "light" | "outline";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand-button text-white hover:bg-brand",
-  light: "bg-white text-ink hover:bg-bone",
-  outline: "border-2 border-white text-white hover:bg-white hover:text-ink",
+  primary: "bg-brand-button text-white hover:bg-brand hover:shadow-xl",
+  light: "bg-white text-ink hover:bg-bone hover:shadow-xl",
+  outline:
+    "border-2 border-white text-white hover:bg-white hover:text-ink active:bg-white/90",
 };
 
 export function Button({
@@ -23,7 +24,7 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide shadow-lg transition-colors ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide shadow-lg transition active:scale-[0.97] ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

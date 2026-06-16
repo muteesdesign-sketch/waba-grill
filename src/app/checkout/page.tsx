@@ -180,7 +180,7 @@ export default function CheckoutPage() {
             </h3>
             <div className="mt-3 flex gap-3">
               <input className={inputCls} placeholder="Add promo code" />
-              <button className="rounded-lg border border-brand px-6 text-sm font-bold uppercase text-brand">
+              <button className="rounded-lg border border-brand px-6 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
                 Apply
               </button>
             </div>
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
             <h3 className="mt-6 font-display text-xl uppercase text-ink">
               Gift card
             </h3>
-            <button className="mt-3 flex items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand">
+            <button className="mt-3 flex items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
               🎁 Add a gift card
             </button>
 
@@ -196,10 +196,10 @@ export default function CheckoutPage() {
               Payment method
             </h3>
             <div className="mt-3 space-y-3">
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand">
+              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
                  Pay · Apple Pay
               </button>
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand">
+              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
                 💳 Credit Card
               </button>
             </div>
@@ -286,7 +286,7 @@ export default function CheckoutPage() {
                     className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
                       tipPct === t.pct
                         ? "border-brand bg-brand text-white"
-                        : "border-[#e5e7eb] text-ink"
+                        : "border-[#e5e7eb] text-ink hover:border-ink/40"
                     }`}
                   >
                     {t.label}
@@ -310,7 +310,7 @@ export default function CheckoutPage() {
                   setPlaced(true);
                   window.scrollTo({ top: 0 });
                 }}
-                className="mt-4 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+                className="mt-4 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand hover:shadow-xl active:scale-[0.98]"
               >
                 Place your order
               </button>

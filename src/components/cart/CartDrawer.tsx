@@ -110,7 +110,7 @@ export function CartDrawer({
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                   time === t
                     ? "border-brand bg-brand text-white"
-                    : "border-[#e5e7eb] text-ink"
+                    : "border-[#e5e7eb] text-ink hover:border-ink/40"
                 }`}
               >
                 {t}
@@ -159,7 +159,7 @@ export function CartDrawer({
             <Link
               href="/menu"
               onClick={onClose}
-              className="mt-4 self-start rounded-full border border-ink px-8 py-2.5 text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+              className="mt-4 self-start rounded-full border border-ink px-8 py-2.5 text-sm font-bold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-white active:scale-[0.97]"
             >
               Add
             </Link>
@@ -222,7 +222,7 @@ export function CartDrawer({
                 className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
                   tipPct === t.pct
                     ? "border-brand bg-brand text-white"
-                    : "border-[#e5e7eb] text-ink"
+                    : "border-[#e5e7eb] text-ink hover:border-ink/40"
                 }`}
               >
                 {t.label}
@@ -245,7 +245,7 @@ export function CartDrawer({
           <Link
             href="/checkout"
             onClick={onClose}
-            className="block w-full rounded-full bg-brand-button py-4 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+            className="block w-full rounded-full bg-brand-button py-4 text-center text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand hover:shadow-xl active:scale-[0.98]"
           >
             Checkout - {money(totals.total)}
           </Link>
@@ -304,8 +304,8 @@ function RewardCard({
         onClick={onToggle}
         className={`mt-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase ${
           added
-            ? "bg-brand-button text-white"
-            : "border border-[#e5e7eb] text-ink"
+            ? "bg-brand-button text-white hover:bg-brand"
+            : "border border-[#e5e7eb] text-ink hover:border-ink/40"
         }`}
       >
         {added ? "Added" : "Redeem"}
