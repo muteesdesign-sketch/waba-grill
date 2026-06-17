@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
+import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
 
 function Logo() {
   return (
@@ -26,12 +27,13 @@ const links = [
   { label: "Locations", href: "#" },
   { label: "Catering", href: "#catering" },
   { label: "Franchising", href: "#" },
-  { label: "Rewards", href: "#rewards" },
+  { label: "Rewards", href: "/rewards" },
 ];
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const cart = useCart();
+  const loyalty = useLoyalty();
   const pathname = usePathname();
   const isActive = (href: string) =>
     href.startsWith("/") && pathname.startsWith(href);
@@ -94,21 +96,55 @@ export function Nav() {
             Pickup · Today · 12:00pm
           </span>
 
-          {/* Sign-in (desktop) */}
+          {/* Rewards / points (desktop) — always shows the balance when a
+              member is signed in, otherwise a sign-in entry point. */}
           <Link
-            href="#"
-            className="hidden h-[38px] items-center gap-2 rounded-full border border-brand-button px-4 text-sm font-semibold text-ink lg:flex"
+            href="/rewards"
+            aria-label={
+              loyalty.enrolled
+                ? `WaBa Rewards — ${loyalty.points} points`
+                : "Sign in to WaBa Rewards"
+            }
+            className={`hidden h-[38px] items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
+              loyalty.enrolled
+                ? "border-brand-accent bg-brand-accent text-white hover:bg-brand"
+                : "border-brand-button text-ink hover:bg-bone"
+            }`}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <circle cx="12" cy="8" r="3.4" stroke="#ea0028" strokeWidth="1.8" />
-              <path
-                d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
-                stroke="#ea0028"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-              />
-            </svg>
-            Sign-in
+            {loyalty.enrolled ? (
+              <>
+                <span aria-hidden>★</span>
+                <span className="font-display text-[15px] leading-none">
+                  {loyalty.points.toLocaleString()}
+                </span>
+                pts
+              </>
+            ) : (
+              <>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                >
+                  <circle
+                    cx="12"
+                    cy="8"
+                    r="3.4"
+                    stroke="#ea0028"
+                    strokeWidth="1.8"
+                  />
+                  <path
+                    d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
+                    stroke="#ea0028"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                Sign-in
+              </>
+            )}
           </Link>
 
           <button
@@ -137,6 +173,29 @@ export function Nav() {
 
       {open && (
         <div className="border-t border-black/5 px-5 py-3">
+          {/* Points / rewards entry (mobile) */}
+          <Link
+            href="/rewards"
+            onClick={() => setOpen(false)}
+            className="mb-2 flex items-center justify-between rounded-xl bg-bone px-4 py-3"
+          >
+            <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-ink">
+              <span className="text-brand-accent" aria-hidden>
+                ★
+              </span>
+              {loyalty.enrolled ? "WaBa Rewards" : "Join WaBa Rewards"}
+            </span>
+            {loyalty.enrolled ? (
+              <span className="font-display text-lg leading-none text-ink">
+                {loyalty.points.toLocaleString()}{" "}
+                <span className="text-sm text-ink/50">pts</span>
+              </span>
+            ) : (
+              <span className="text-sm font-semibold text-brand-accent">
+                Sign in
+              </span>
+            )}
+          </Link>
           <ul className="flex flex-col">
             {links.map((l) => (
               <li key={l.label}>

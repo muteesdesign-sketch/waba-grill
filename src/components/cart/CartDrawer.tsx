@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "./CartProvider";
+import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
 
 const TIMES = ["ASAP (25-30 min)", "12:00pm", "12:30pm", "1:00pm", "1:30pm"];
 const TIPS = [
@@ -35,6 +36,7 @@ export function CartDrawer({
     setFreeDrink,
     totals,
   } = useCart();
+  const { selectedReward } = useLoyalty();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -170,6 +172,17 @@ export function CartDrawer({
             <span className="text-brand-accent">⚙</span>
             <h3 className="font-bold text-ink">Your rewards and offers</h3>
           </div>
+          {selectedReward && (
+            <div className="mt-3 flex items-center justify-between gap-2 rounded-xl border border-brand-accent bg-brand/5 px-4 py-3">
+              <span className="text-sm font-semibold text-ink">
+                <span className="text-brand-accent">★</span>{" "}
+                {selectedReward.name}
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-wide text-brand-accent">
+                Applied
+              </span>
+            </div>
+          )}
           <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto pb-1">
             <RewardCard label="5% off" sub="Used by 10/26" />
             <RewardCard

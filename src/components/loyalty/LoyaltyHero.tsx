@@ -1,0 +1,153 @@
+"use client";
+
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+import { distressStyle } from "@/lib/distress";
+import { useLoyalty } from "./LoyaltyProvider";
+import { POINTS_PER_DOLLAR } from "./loyalty-data";
+
+/** Demo-only control to preview the page as a guest or a signed-in member. */
+function PreviewToggle() {
+  const { enrolled, setEnrolled } = useLoyalty();
+  return (
+    <div className="inline-flex items-center gap-1 rounded-full bg-black/20 p-1 text-xs font-bold uppercase tracking-wide backdrop-blur">
+      <button
+        type="button"
+        onClick={() => setEnrolled(false)}
+        aria-pressed={!enrolled}
+        className={`rounded-full px-3 py-1.5 transition-colors ${
+          !enrolled ? "bg-white text-ink" : "text-white/80 hover:text-white"
+        }`}
+      >
+        Guest
+      </button>
+      <button
+        type="button"
+        onClick={() => setEnrolled(true)}
+        aria-pressed={enrolled}
+        className={`rounded-full px-3 py-1.5 transition-colors ${
+          enrolled ? "bg-white text-ink" : "text-white/80 hover:text-white"
+        }`}
+      >
+        Member
+      </button>
+    </div>
+  );
+}
+
+export function LoyaltyHero() {
+  const { enrolled, memberName, points } = useLoyalty();
+
+  return (
+    <section className="relative overflow-hidden bg-ink text-white">
+      <Image
+        src="/images/offer-bg.png"
+        alt=""
+        fill
+        aria-hidden
+        className="pointer-events-none object-cover opacity-40"
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand/85 via-black/70 to-black/85" />
+
+      <div className="relative mx-auto max-w-[1280px] px-6 py-12 lg:px-10 lg:py-20">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wide">
+            <span aria-hidden>★</span> WaBa Rewards
+          </span>
+          {/* Preview state switch (stands in for sign-in) */}
+          <PreviewToggle />
+        </div>
+
+        <div className="lg:flex lg:items-center lg:gap-12">
+          <div className="lg:w-1/2">
+            <p className="font-script text-[34px] leading-none text-white lg:text-[44px]">
+              {enrolled ? `Welcome back, ${memberName}` : "Eat well, earn more"}
+            </p>
+            <h1
+              className="mt-1 font-display text-[52px] uppercase leading-[0.9] lg:text-[80px]"
+              style={distressStyle}
+            >
+              Free food, just
+              <br />
+              for eating good.
+            </h1>
+            <p className="mt-5 max-w-[460px] text-base leading-relaxed text-white/85 lg:text-lg">
+              Earn {POINTS_PER_DOLLAR} points for every $1 you spend, unlock free
+              bowls, drinks and sides, and climb tiers for bigger perks. No card
+              to carry — it&apos;s all in your account.
+            </p>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              {enrolled ? (
+                <>
+                  <Button href="#rewards-display" className="py-4 sm:px-9">
+                    View my rewards
+                  </Button>
+                  <Button
+                    href="#offers"
+                    variant="outline"
+                    className="py-4 sm:px-9"
+                  >
+                    Browse offers
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button href="#link-account" className="py-4 sm:px-9">
+                    Join now — it&apos;s free
+                  </Button>
+                  <Button
+                    href="#link-account"
+                    variant="outline"
+                    className="py-4 sm:px-9"
+                  >
+                    Log in
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Snapshot card */}
+          <div className="mt-10 lg:mt-0 lg:w-1/2">
+            <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
+                  {enrolled ? "Your balance" : "Sample balance"}
+                </span>
+                <span className="rounded-full bg-brand/10 px-2.5 py-1 text-xs font-bold text-brand-accent">
+                  ★ Rewards
+                </span>
+              </div>
+              <p className="mt-2 font-display text-[56px] leading-none text-ink">
+                {enrolled ? points.toLocaleString() : "1,840"}
+                <span className="ml-2 text-[20px] text-ink/50">pts</span>
+              </p>
+              <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+                {[
+                  { k: "Free drink", v: "1,250" },
+                  { k: "Free side", v: "1,800" },
+                  { k: "Free bowl", v: "2,500" },
+                ].map((r) => (
+                  <div key={r.k} className="rounded-xl bg-bone px-2 py-3">
+                    <p className="font-display text-[20px] leading-none text-ink">
+                      {r.v}
+                    </p>
+                    <p className="mt-1 text-[11px] font-medium text-ink/60">
+                      {r.k}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 text-center text-xs text-ink/60">
+                {enrolled
+                  ? "Keep ordering to unlock your next reward."
+                  : "Join to start earning on your very first order."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

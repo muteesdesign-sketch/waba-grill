@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ProductModalProvider } from "@/components/pdp/ProductModalProvider";
+import { LoyaltyProvider } from "@/components/loyalty/LoyaltyProvider";
 import "./globals.css";
 
 // Display headlines — the real brand font "Citrus Gothic" (condensed caps).
@@ -53,9 +54,11 @@ export default function RootLayout({
       className={`${display.variable} ${fat.variable} ${body.variable} ${script.variable} antialiased`}
     >
       <body className="bg-white text-ink font-body">
-        <CartProvider>
-          <ProductModalProvider>{children}</ProductModalProvider>
-        </CartProvider>
+        <LoyaltyProvider>
+          <CartProvider>
+            <ProductModalProvider>{children}</ProductModalProvider>
+          </CartProvider>
+        </LoyaltyProvider>
       </body>
     </html>
   );
