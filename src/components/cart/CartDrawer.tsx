@@ -12,8 +12,6 @@ const TIPS = [
   { label: "15%", pct: 0.15 },
   { label: "20%", pct: 0.2 },
 ];
-const REWARD = 3.29;
-
 const money = (n: number) => `$${n.toFixed(2)}`;
 
 export function CartDrawer({
@@ -216,8 +214,11 @@ export function CartDrawer({
           {/* Totals */}
           <div className="mt-4 space-y-2 text-sm">
             <Row label="Order subtotal" value={money(totals.subtotal)} bold />
-            {freeDrink && (
-              <Row label="Reward (Free drink)" value={`-${money(REWARD)}`} />
+            {totals.reward < 0 && (
+              <Row
+                label={totals.rewardLabel}
+                value={`-${money(Math.abs(totals.reward))}`}
+              />
             )}
             <Row label="Taxes & Fees" value={money(totals.taxes)} />
           </div>

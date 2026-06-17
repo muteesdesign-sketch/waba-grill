@@ -13,6 +13,7 @@ export type Reward = {
   id: string;
   name: string;
   points: number; // 0 = earned offer (not point-redeemed)
+  value: number; // dollar discount applied to the order when redeemed
   desc: string;
   image?: string;
   expires?: string; // absolute date string
@@ -72,6 +73,7 @@ export const rewardCatalog: Reward[] = [
     id: "free-drink",
     name: "Free Drink",
     points: 1250,
+    value: 3.29,
     desc: "Any fountain drink or bottled beverage, on us.",
     image: "/images/bowl-grilled.png",
   },
@@ -79,6 +81,7 @@ export const rewardCatalog: Reward[] = [
     id: "free-side",
     name: "Free Side",
     points: 1800,
+    value: 3.99,
     desc: "Add a side of your choice at no charge.",
     image: "/images/offer-protein.png",
   },
@@ -86,6 +89,7 @@ export const rewardCatalog: Reward[] = [
     id: "free-bowl",
     name: "Free Bowl",
     points: 2500,
+    value: 10.19,
     desc: "Any signature bowl — chicken, steak, tofu or veggie.",
     image: "/images/bowl-chicken.png",
   },
@@ -93,6 +97,7 @@ export const rewardCatalog: Reward[] = [
     id: "free-plate",
     name: "Free Plate",
     points: 3000,
+    value: 12.19,
     desc: "Go big with a loaded plate, completely free.",
     image: "/images/bowl-chicken-steak.png",
   },
@@ -104,6 +109,7 @@ export const memberRewards: Reward[] = [
     id: "welcome-drink",
     name: "Welcome Reward · Free Drink",
     points: 0,
+    value: 3.29,
     desc: "Thanks for joining! Redeem on any order.",
     image: "/images/bowl-grilled.png",
     expires: "Jul 15, 2026",
@@ -112,6 +118,7 @@ export const memberRewards: Reward[] = [
     id: "birthday-bowl",
     name: "Birthday Bowl",
     points: 0,
+    value: 10.19,
     desc: "A free signature bowl during your birthday month.",
     image: "/images/bowl-chicken.png",
     expires: "Jun 30, 2026",
@@ -121,6 +128,7 @@ export const memberRewards: Reward[] = [
     id: "free-side-earned",
     name: "Free Side",
     points: 0,
+    value: 3.99,
     desc: "Redeemed from your points — ready to use.",
     image: "/images/offer-protein.png",
     expires: "Aug 1, 2026",

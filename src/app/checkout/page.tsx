@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Banner } from "@/components/sections/Banner";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
-import { useCart, REWARD_AMOUNT } from "@/components/cart/CartProvider";
+import { useCart } from "@/components/cart/CartProvider";
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 const TIPS = [
@@ -36,7 +36,7 @@ const inputCls =
 
 export default function CheckoutPage() {
   const cart = useCart();
-  const { items, totals, utensils, setUtensils, tipPct, setTipPct, freeDrink, time } = cart;
+  const { items, totals, utensils, setUtensils, tipPct, setTipPct, time } = cart;
   const [placed, setPlaced] = useState(false);
   const [showItems, setShowItems] = useState(false);
 
@@ -262,10 +262,12 @@ export default function CheckoutPage() {
                     {money(totals.subtotal)}
                   </span>
                 </div>
-                {freeDrink && (
+                {totals.reward < 0 && (
                   <div className="flex justify-between">
-                    <span className="text-ink/70">Reward (Free drink)</span>
-                    <span className="text-ink/70">-{money(REWARD_AMOUNT)}</span>
+                    <span className="text-ink/70">{totals.rewardLabel}</span>
+                    <span className="text-ink/70">
+                      -{money(Math.abs(totals.reward))}
+                    </span>
                   </div>
                 )}
                 <div className="flex justify-between">

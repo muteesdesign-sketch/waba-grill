@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -61,6 +62,40 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
   const [linkStatus, setLinkStatus] = useState<
     Record<LinkProvider, LinkStatus>
   >({ punchh: "idle", thanx: "idle" });
+
+  // Persist enrollment + selected reward so they survive page reloads and follow
+  // the customer through the ordering and checkout flow (static export = full
+  // page loads between routes). Read after mount to avoid hydration mismatch.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("waba_enrolled") === "1") setEnrolled(true);
+      const r = localStorage.getItem("waba_selectedReward");
+      if (r) setSelectedReward(JSON.parse(r) as Reward);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("waba_enrolled", enrolled ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }, [enrolled]);
+
+  useEffect(() => {
+    try {
+      if (selectedReward)
+        localStorage.setItem(
+          "waba_selectedReward",
+          JSON.stringify(selectedReward),
+        );
+      else localStorage.removeItem("waba_selectedReward");
+    } catch {
+      /* ignore */
+    }
+  }, [selectedReward]);
 
   const { current: tier, next: nextTier } = useMemo(
     () => tierFor(points),

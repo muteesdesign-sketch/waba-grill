@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { CartDrawer } from "./CartDrawer";
+import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
 
 export type CartItem = { name: string; price: number; image?: string };
 
@@ -17,6 +18,7 @@ export const TAX_RATE = 0.137;
 export type Totals = {
   subtotal: number;
   reward: number;
+  rewardLabel: string;
   taxes: number;
   tip: number;
   total: number;
@@ -63,6 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [tipPct, setTipPct] = useState(0.1);
   const [utensils, setUtensils] = useState(true);
   const [freeDrink, setFreeDrink] = useState(true);
+  const { selectedReward } = useLoyalty();
 
   const add = (item: CartItem) => {
     setItems((prev) => [...prev, item]);
@@ -71,17 +74,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const totals = useMemo<Totals>(() => {
     const subtotal = items.reduce((s, i) => s + i.price, 0);
-    const reward = freeDrink ? -REWARD_AMOUNT : 0;
+    // A redeemed loyalty reward takes precedence and discounts the order by its
+    // value (never below $0). Otherwise fall back to the in-cart free drink.
+    let reward = 0;
+    let rewardLabel = "";
+    if (selectedReward) {
+      reward = -Math.min(selectedReward.value, subtotal);
+      rewardLabel = `Reward (${selectedReward.name})`;
+    } else if (freeDrink) {
+      reward = -Math.min(REWARD_AMOUNT, subtotal);
+      rewardLabel = "Reward (Free drink)";
+    }
     const taxes = subtotal * TAX_RATE;
     const tip = subtotal * tipPct;
     return {
       subtotal,
       reward,
+      rewardLabel,
       taxes,
       tip,
       total: subtotal + reward + taxes + tip,
     };
-  }, [items, freeDrink, tipPct]);
+  }, [items, freeDrink, tipPct, selectedReward]);
 
   return (
     <CartContext.Provider

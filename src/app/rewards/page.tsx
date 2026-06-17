@@ -10,6 +10,7 @@ import { PointsDashboard } from "@/components/loyalty/PointsDashboard";
 import { EarnRedeem } from "@/components/loyalty/EarnRedeem";
 import { OffersGrid } from "@/components/loyalty/OffersGrid";
 import { AccountLinking } from "@/components/loyalty/AccountLinking";
+import { DownloadApp } from "@/components/loyalty/DownloadApp";
 
 export const metadata: Metadata = {
   title: "Rewards — WaBa Grill",
@@ -41,6 +42,10 @@ export default function RewardsPage() {
         {/* 4. Punchh / Thanx login + linking */}
         <Reveal>
           <AccountLinking />
+        </Reveal>
+        {/* Get the app */}
+        <Reveal>
+          <DownloadApp />
         </Reveal>
       </main>
       <PreFooter />
