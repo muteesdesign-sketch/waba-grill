@@ -108,7 +108,7 @@ export function Nav() {
             }
             className={`hidden h-[38px] items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
               loyalty.enrolled
-                ? "border-brand-accent bg-brand-accent text-white hover:bg-brand"
+                ? "border-brand-button bg-brand-button text-white hover:bg-brand"
                 : "border-brand-button text-ink hover:bg-bone"
             }`}
           >

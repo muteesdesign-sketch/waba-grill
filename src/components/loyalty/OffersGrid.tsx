@@ -66,7 +66,7 @@ export function OffersGrid() {
                     onClick={() =>
                       setApplied((s) => ({ ...s, [o.id]: true }))
                     }
-                    className="mt-4 h-11 w-full rounded-full text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed enabled:bg-brand-accent enabled:text-white enabled:hover:bg-brand disabled:bg-bone disabled:text-ink/45"
+                    className="mt-4 h-11 w-full rounded-full text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed enabled:bg-brand-button enabled:text-white enabled:hover:bg-brand disabled:bg-bone disabled:text-ink/45"
                   >
                     {locked
                       ? "Members only"

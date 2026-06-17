@@ -40,7 +40,7 @@ export function PointsDashboard() {
           <div className="relative mt-10 overflow-hidden rounded-3xl border border-black/10 bg-white p-8 text-center shadow-sm lg:p-14">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,#e7e7e7_1.4px,transparent_1.4px)] opacity-60 [background-size:14px_14px]" />
             <div className="relative">
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-2xl text-white">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-button text-2xl text-white">
                 ★
               </span>
               <h3 className="mt-4 font-display text-3xl uppercase text-ink lg:text-4xl">
@@ -68,7 +68,7 @@ export function PointsDashboard() {
           // ---- Member: full dashboard ----
           <div className="mt-10 space-y-8">
             {selectedReward && (
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-accent bg-brand/5 px-5 py-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-button bg-brand/5 px-5 py-4">
                 <p className="text-sm font-semibold text-ink">
                   <span className="text-brand-accent">★ Selected reward:</span>{" "}
                   {selectedReward.name} — applied at checkout
@@ -111,7 +111,7 @@ export function PointsDashboard() {
                     </div>
                     <div className="mt-3 h-3 w-full overflow-hidden rounded-full bg-bone">
                       <div
-                        className="h-full rounded-full bg-brand-accent transition-all"
+                        className="h-full rounded-full bg-brand-button transition-all"
                         style={{ width: `${Math.round(tierProgress * 100)}%` }}
                       />
                     </div>
@@ -143,7 +143,7 @@ export function PointsDashboard() {
                     <div
                       key={r.id}
                       className={`flex flex-col rounded-2xl border bg-white p-4 shadow-sm transition-colors ${
-                        isSel ? "border-brand-accent" : "border-black/10"
+                        isSel ? "border-brand-button" : "border-black/10"
                       }`}
                     >
                       <div className="flex gap-3">
@@ -175,7 +175,7 @@ export function PointsDashboard() {
                         className={`mt-4 h-10 w-full rounded-full text-sm font-bold uppercase tracking-wide transition-colors ${
                           isSel
                             ? "bg-ink text-white"
-                            : "bg-brand-accent text-white hover:bg-brand"
+                            : "bg-brand-button text-white hover:bg-brand"
                         }`}
                       >
                         {isSel ? "Selected ✓" : "Use reward"}
@@ -222,7 +222,7 @@ export function PointsDashboard() {
                           type="button"
                           disabled={!affordable}
                           onClick={() => selectReward(r)}
-                          className="mt-3 h-10 w-full rounded-full text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:bg-bone disabled:text-ink/40 enabled:bg-brand-accent enabled:text-white enabled:hover:bg-brand"
+                          className="mt-3 h-10 w-full rounded-full text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:bg-bone disabled:text-ink/40 enabled:bg-brand-button enabled:text-white enabled:hover:bg-brand"
                         >
                           {affordable
                             ? "Redeem"

@@ -37,7 +37,7 @@ export function EarnRedeem() {
             <ol className="mt-5 space-y-4">
               {applySteps.map((s, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-accent font-display text-sm text-white">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-button font-display text-sm text-white">
                     {i + 1}
                   </span>
                   <span className="text-sm leading-relaxed text-ink">{s}</span>
@@ -82,7 +82,7 @@ export function EarnRedeem() {
                   <span
                     aria-hidden
                     className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white ${
-                      r.ok ? "bg-brand-accent" : "bg-ink/30"
+                      r.ok ? "bg-brand-button" : "bg-ink/30"
                     }`}
                   >
                     {r.ok ? "✓" : "✕"}

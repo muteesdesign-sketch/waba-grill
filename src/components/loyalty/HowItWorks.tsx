@@ -35,7 +35,7 @@ export function HowItWorks() {
               key={s.n}
               className="rounded-2xl border border-black/5 bg-bone p-6 text-center shadow-sm"
             >
-              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-accent font-display text-2xl text-white">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-button font-display text-2xl text-white">
                 {s.n}
               </span>
               <h3 className="mt-4 font-display text-2xl uppercase text-ink">
@@ -57,7 +57,7 @@ export function HowItWorks() {
                 key={t.name}
                 className={`relative flex flex-col rounded-2xl border p-6 ${
                   i === 1
-                    ? "border-brand-accent bg-white shadow-xl lg:-translate-y-2"
+                    ? "border-brand-button bg-white shadow-xl lg:-translate-y-2"
                     : "border-black/10 bg-white shadow-sm"
                 }`}
               >
@@ -80,7 +80,7 @@ export function HowItWorks() {
                     >
                       <span
                         aria-hidden
-                        className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-accent text-[10px] font-bold text-white"
+                        className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-button text-[10px] font-bold text-white"
                       >
                         ✓
                       </span>

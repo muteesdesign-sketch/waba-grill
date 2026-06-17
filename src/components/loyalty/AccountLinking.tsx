@@ -39,7 +39,7 @@ function ProviderCard({ id, name, blurb }: (typeof PROVIDERS)[number]) {
       <p className="mt-2 text-sm text-ink/70">{blurb}</p>
 
       {status === "linked" ? (
-        <div className="mt-5 rounded-2xl border border-brand-accent bg-brand/5 p-4">
+        <div className="mt-5 rounded-2xl border border-brand-button bg-brand/5 p-4">
           <p className="text-sm font-semibold text-ink">
             <span className="text-brand-accent">★</span> Your {name} account is
             connected.
@@ -78,7 +78,7 @@ function ProviderCard({ id, name, blurb }: (typeof PROVIDERS)[number]) {
             aria-invalid={status === "error"}
             className={`mt-1 w-full rounded-lg border px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:outline-none ${
               status === "error"
-                ? "border-brand-accent focus:border-brand-accent"
+                ? "border-brand-button focus:border-brand-button"
                 : "border-[#e5e7eb] focus:border-brand"
             }`}
           />
@@ -94,7 +94,7 @@ function ProviderCard({ id, name, blurb }: (typeof PROVIDERS)[number]) {
           <button
             type="submit"
             disabled={status === "linking"}
-            className="mt-4 h-11 w-full rounded-full bg-brand-accent text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand disabled:cursor-wait disabled:opacity-70"
+            className="mt-4 h-11 w-full rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand disabled:cursor-wait disabled:opacity-70"
           >
             {status === "linking" ? "Linking…" : `Link ${name} account`}
           </button>
