@@ -127,7 +127,7 @@ export default function CheckoutPage() {
             <h3 className="font-display text-xl uppercase text-ink">
               Your information
             </h3>
-            <p className="mt-1 text-sm text-ink/60">
+            <p className="mt-1 text-sm text-ink/70">
               We&apos;ll use this to find your account (or set one up) and send
               you order updates.
             </p>
@@ -314,7 +314,7 @@ export default function CheckoutPage() {
               >
                 Place your order
               </button>
-              <p className="mt-3 text-center text-xs text-ink/60">
+              <p className="mt-3 text-center text-xs text-ink/70">
                 ⚙ You&apos;re earning{" "}
                 <span className="font-bold text-brand">17</span> points on this
                 order

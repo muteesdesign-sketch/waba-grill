@@ -81,7 +81,7 @@ export function Menu() {
             <div
               key={item.name}
               data-card
-              className="w-[165px] shrink-0 snap-start lg:w-[290px]"
+              className="w-[165px] shrink-0 snap-start lg:w-auto lg:min-w-0 lg:max-w-[320px] lg:flex-1"
             >
               <MenuItemCard item={item} />
             </div>

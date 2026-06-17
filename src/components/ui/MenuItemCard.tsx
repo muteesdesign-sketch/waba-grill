@@ -32,7 +32,7 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <article
       onClick={() => open(item)}
-      className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl"
+      className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border border-[#e5e7eb] bg-white transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl"
     >
       {/* Full-bleed image — gently zooms on hover */}
       <div className="relative aspect-[4/3] w-full overflow-hidden">

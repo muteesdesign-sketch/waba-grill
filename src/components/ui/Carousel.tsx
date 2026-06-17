@@ -61,7 +61,7 @@ export function Carousel({
     <div>
       <div
         ref={railRef}
-        className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+        className="no-scrollbar flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto scroll-smooth py-3"
       >
         {children}
       </div>

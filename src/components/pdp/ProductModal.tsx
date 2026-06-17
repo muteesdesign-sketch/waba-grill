@@ -215,7 +215,7 @@ export function ProductModal({
                       <span className="text-brand">(Required)</span>
                     )}
                   </h3>
-                  <p className="mb-3 mt-1 text-xs text-ink/50">
+                  <p className="mb-3 mt-1 text-xs text-ink/70">
                     {groupHint(group)}
                   </p>
                   <div className="grid grid-cols-[repeat(auto-fill,minmax(108px,1fr))] gap-3">
@@ -247,7 +247,7 @@ export function ProductModal({
                             {o.name}
                           </span>
                           {o.note && (
-                            <span className="text-[11px] text-ink/50">
+                            <span className="text-[11px] text-ink/70">
                               {o.note}
                             </span>
                           )}

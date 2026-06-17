@@ -16,7 +16,7 @@ export function Catering() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/90" />
 
-      <div className="relative mx-auto max-w-[1280px] px-6 pb-2 pt-12 lg:px-10 lg:pb-0 lg:pt-24">
+      <div className="relative mx-auto max-w-[1280px] px-6 pt-12 lg:px-10 lg:pt-24">
         <div className="lg:max-w-[640px]">
           <p className="font-script text-[32px] leading-none text-brand lg:text-[40px]">
             WaBa catering
@@ -49,12 +49,13 @@ export function Catering() {
             </Button>
           </div>
         </div>
-
-        {/* Oversized cut-off word — Janeiro, solid white, full-width, clipped at the bottom */}
-        <p className="-mb-4 mt-8 block w-full select-none overflow-x-clip overflow-y-visible whitespace-nowrap text-center font-fat text-[76px] uppercase leading-[0.8] tracking-[-0.02em] text-white lg:-mb-12 lg:mt-14 lg:text-[210px]">
-          Catering
-        </p>
       </div>
+
+      {/* Oversized brand word — Janeiro, full-bleed across the viewport and
+          flush to the section bottom, mirroring the "Delicioso" treatment. */}
+      <p className="relative mt-8 block w-full select-none overflow-x-clip overflow-y-visible whitespace-nowrap text-center font-fat text-[19.7vw] uppercase leading-[0.8] tracking-[-0.02em] text-white [margin-bottom:-2vw] lg:mt-12">
+        Catering
+      </p>
     </section>
   );
 }

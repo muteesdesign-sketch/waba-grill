@@ -28,12 +28,12 @@ export function MenuCategoryNav({
 
   return (
     <nav className="sticky top-[96px] z-40 -mt-4 px-0 lg:-mt-8 lg:px-8">
-      <div className="no-scrollbar mx-auto flex max-w-[1240px] gap-7 overflow-x-auto rounded-none bg-white px-5 py-4 shadow-[0_10px_20px_-4px_rgba(0,0,0,0.15)] lg:gap-9 lg:rounded-2xl lg:px-8">
+      <div className="no-scrollbar mx-auto flex max-w-[1240px] gap-7 overflow-x-auto rounded-none bg-white px-5 py-4 shadow-[0_10px_20px_-4px_rgba(0,0,0,0.15)] lg:justify-between lg:gap-4 lg:overflow-x-visible lg:rounded-2xl lg:px-6">
         {categories.map((c) => (
           <a
             key={c.id}
             href={`#${c.id}`}
-            className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[15px] ${
+            className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[13.5px] ${
               active === c.id ? "text-brand" : "text-ink"
             }`}
           >

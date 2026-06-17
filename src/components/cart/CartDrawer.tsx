@@ -299,7 +299,7 @@ function RewardCard({
         W
       </div>
       <span className="mt-2 text-xs font-bold text-ink">{label}</span>
-      {sub && <span className="text-[10px] text-ink/50">{sub}</span>}
+      {sub && <span className="text-[10px] text-ink/70">{sub}</span>}
       <button
         onClick={onToggle}
         className={`mt-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase ${
