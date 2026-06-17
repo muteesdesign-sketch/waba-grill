@@ -108,6 +108,26 @@ function ProviderCard({ id, name, blurb }: (typeof PROVIDERS)[number]) {
   );
 }
 
+/** The provider cards + create-account note, reusable inside the header. */
+export function LinkPanel() {
+  return (
+    <div>
+      <div className="grid gap-5 lg:grid-cols-2">
+        {PROVIDERS.map((p) => (
+          <ProviderCard key={p.id} {...p} />
+        ))}
+      </div>
+      <div className="mx-auto mt-6 max-w-[560px] rounded-2xl border border-dashed border-black/15 bg-bone p-5 text-center">
+        <p className="text-sm text-ink/70">
+          Don&apos;t have an account with either?{" "}
+          <span className="font-bold text-ink">Create a free account</span> and
+          start earning on your next order.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function AccountLinking() {
   return (
     <section
@@ -116,24 +136,11 @@ export function AccountLinking() {
     >
       <div className="mx-auto max-w-[1180px]">
         <SectionHeading eyebrow="Sign in" title="Connect your account" />
-        <p className="mx-auto mt-4 max-w-[540px] text-center text-sm text-ink/70">
+        <p className="mx-auto mt-4 mb-10 max-w-[540px] text-center text-sm text-ink/70">
           New to WaBa Rewards? Linking takes a second. Already have points with a
           partner program? Bring them along.
         </p>
-
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {PROVIDERS.map((p) => (
-            <ProviderCard key={p.id} {...p} />
-          ))}
-        </div>
-
-        <div className="mx-auto mt-6 max-w-[560px] rounded-2xl border border-dashed border-black/15 bg-bone p-5 text-center">
-          <p className="text-sm text-ink/70">
-            Don&apos;t have an account with either?{" "}
-            <span className="font-bold text-ink">Create a free account</span> and
-            start earning on your next order.
-          </p>
-        </div>
+        <LinkPanel />
       </div>
     </section>
   );

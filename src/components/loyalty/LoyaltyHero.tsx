@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { distressStyle } from "@/lib/distress";
 import { useLoyalty } from "./LoyaltyProvider";
 import { POINTS_PER_DOLLAR } from "./loyalty-data";
+import { LinkPanel } from "./AccountLinking";
 
 /** Demo-only control to preview the page as a guest or a signed-in member. */
 function PreviewToggle() {
@@ -35,11 +37,24 @@ function PreviewToggle() {
   );
 }
 
+/** Small "Powered by Punchh" badge shown next to Register Now. */
+function PunchhBadge() {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white px-2.5 py-1.5 shadow-sm">
+      <span className="flex h-5 w-5 items-center justify-center rounded bg-[#2b2350] font-display text-[11px] leading-none text-white">
+        P
+      </span>
+      <span className="text-sm font-bold text-[#2b2350]">Punchh</span>
+    </span>
+  );
+}
+
 export function LoyaltyHero() {
   const { enrolled, memberName, points } = useLoyalty();
+  const [showRegister, setShowRegister] = useState(false);
 
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
+    <section id="header" className="relative overflow-hidden bg-ink text-white">
       <Image
         src="/images/offer-bg.png"
         alt=""
@@ -54,7 +69,6 @@ export function LoyaltyHero() {
           <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wide">
             <span aria-hidden>★</span> WaBa Rewards
           </span>
-          {/* Preview state switch (stands in for sign-in) */}
           <PreviewToggle />
         </div>
 
@@ -77,35 +91,37 @@ export function LoyaltyHero() {
               to carry — it&apos;s all in your account.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              {enrolled ? (
-                <>
-                  <Button href="#rewards-display" className="py-4 sm:px-9">
-                    View my rewards
-                  </Button>
-                  <Button
-                    href="#offers"
-                    variant="outline"
-                    className="py-4 sm:px-9"
-                  >
-                    Browse offers
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button href="#link-account" className="py-4 sm:px-9">
-                    Join now — it&apos;s free
-                  </Button>
-                  <Button
-                    href="#link-account"
-                    variant="outline"
-                    className="py-4 sm:px-9"
-                  >
-                    Log in
-                  </Button>
-                </>
-              )}
-            </div>
+            {enrolled ? (
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <Button href="#rewards-display" className="py-4 sm:px-9">
+                  View my rewards
+                </Button>
+                <Button href="#offers" variant="outline" className="py-4 sm:px-9">
+                  Browse offers
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                {/* Register Now (dark CTA) + Punchh badge, per the page structure */}
+                <button
+                  type="button"
+                  onClick={() => setShowRegister((v) => !v)}
+                  aria-expanded={showRegister}
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 active:scale-[0.98]"
+                >
+                  Register Now
+                  <span aria-hidden>↗</span>
+                </button>
+                <PunchhBadge />
+                <button
+                  type="button"
+                  onClick={() => setShowRegister((v) => !v)}
+                  className="text-sm font-bold uppercase tracking-wide text-white underline-offset-4 hover:underline"
+                >
+                  Log in
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Snapshot card */}
@@ -142,11 +158,37 @@ export function LoyaltyHero() {
               <p className="mt-4 text-center text-xs text-ink/60">
                 {enrolled
                   ? "Keep ordering to unlock your next reward."
-                  : "Join to start earning on your very first order."}
+                  : "Register to start earning on your very first order."}
               </p>
             </div>
           </div>
         </div>
+
+        {/* Inline register / link panel (Punchh + Thanx) */}
+        {!enrolled && showRegister && (
+          <div className="relative mt-10 rounded-3xl bg-white p-6 text-ink shadow-2xl lg:p-8">
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <h2 className="font-display text-2xl uppercase text-ink">
+                  Register or log in
+                </h2>
+                <p className="mt-1 text-sm text-ink/70">
+                  Powered by Punchh — link an existing account or create a new
+                  one.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowRegister(false)}
+                aria-label="Close"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-bone text-ink hover:bg-black/10"
+              >
+                ✕
+              </button>
+            </div>
+            <LinkPanel />
+          </div>
+        )}
       </div>
     </section>
   );

@@ -6,10 +6,7 @@ import { Footer } from "@/components/sections/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { LoyaltyHero } from "@/components/loyalty/LoyaltyHero";
 import { HowItWorks } from "@/components/loyalty/HowItWorks";
-import { PointsDashboard } from "@/components/loyalty/PointsDashboard";
-import { EarnRedeem } from "@/components/loyalty/EarnRedeem";
-import { OffersGrid } from "@/components/loyalty/OffersGrid";
-import { AccountLinking } from "@/components/loyalty/AccountLinking";
+import { MemberSections } from "@/components/loyalty/MemberSections";
 import { DownloadApp } from "@/components/loyalty/DownloadApp";
 
 export const metadata: Metadata = {
@@ -24,26 +21,13 @@ export default function RewardsPage() {
       <Banner />
       <Nav />
       <main>
-        {/* 1. Loyalty overview */}
+        {/* Header — overview + Register Now (Punchh) */}
         <LoyaltyHero />
+        {/* How it works */}
         <HowItWorks />
-        {/* 2. Rewards display (points, tiers, expirations) */}
-        <Reveal>
-          <PointsDashboard />
-        </Reveal>
-        {/* 3. Earn / redeem at checkout */}
-        <Reveal>
-          <EarnRedeem />
-        </Reveal>
-        {/* 5. Offers / rewards cards */}
-        <Reveal>
-          <OffersGrid />
-        </Reveal>
-        {/* 4. Punchh / Thanx login + linking */}
-        <Reveal>
-          <AccountLinking />
-        </Reveal>
-        {/* Get the app */}
+        {/* Member-only: points, redeem & offers (hidden for guests) */}
+        <MemberSections />
+        {/* Download App */}
         <Reveal>
           <DownloadApp />
         </Reveal>

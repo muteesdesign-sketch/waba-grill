@@ -28,6 +28,7 @@ const links = [
   { label: "Catering", href: "#catering" },
   { label: "Franchising", href: "#" },
   { label: "Rewards", href: "/rewards" },
+  { label: "Gift Cards", href: "/giftcard" },
 ];
 
 export function Nav() {
