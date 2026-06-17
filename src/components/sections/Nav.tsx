@@ -41,7 +41,7 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
       <nav className="mx-auto flex h-[88px] max-w-[1280px] items-center justify-between px-5 lg:px-10">
-        <div className="flex items-center gap-3 lg:gap-10">
+        <div className="flex min-w-0 items-center gap-3 lg:gap-8">
           <button
             aria-label="Open menu"
             onClick={() => setOpen((v) => !v)}
@@ -55,7 +55,7 @@ export function Nav() {
           <Logo />
 
           {/* Desktop inline links */}
-          <ul className="hidden items-center gap-7 lg:flex">
+          <ul className="hidden items-center gap-6 lg:flex">
             {links.map((l) => {
               const active = isActive(l.href);
               return (
@@ -63,7 +63,7 @@ export function Nav() {
                   <Link
                     href={l.href}
                     aria-current={active ? "page" : undefined}
-                    className={`group relative text-sm font-bold uppercase tracking-wide transition-colors ${
+                    className={`group relative whitespace-nowrap font-display text-lg uppercase leading-none transition-colors ${
                       active ? "text-ink" : "text-ink hover:text-brand-accent"
                     }`}
                   >
@@ -82,9 +82,9 @@ export function Nav() {
           </ul>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3">
           {/* Pickup conveyance (desktop) */}
-          <span className="hidden h-[38px] items-center gap-2 rounded-full border border-brand-button px-4 text-sm font-semibold text-ink lg:flex">
+          <span className="hidden h-[38px] shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-brand-button px-4 text-sm font-semibold text-ink lg:flex">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path
                 d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"
@@ -105,7 +105,7 @@ export function Nav() {
                 ? `WaBa Rewards — ${loyalty.points} points`
                 : "Sign in to WaBa Rewards"
             }
-            className={`hidden h-[38px] items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
+            className={`hidden h-[38px] shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
               loyalty.enrolled
                 ? "border-brand-button bg-brand-button text-white hover:bg-brand"
                 : "border-brand-button text-ink hover:bg-bone"
@@ -150,7 +150,7 @@ export function Nav() {
           <button
             onClick={() => cart.open()}
             aria-label="Your order"
-            className="group flex h-[38px] w-[58px] items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button transition-colors hover:bg-brand-button hover:text-white"
+            className="group flex h-[38px] w-[58px] shrink-0 items-center justify-center gap-1 rounded-full border border-brand-button p-2 text-brand-button transition-colors hover:bg-brand-button hover:text-white"
           >
           {/* Shopping bag — solid/filled */}
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
