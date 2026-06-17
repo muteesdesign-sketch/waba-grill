@@ -22,7 +22,7 @@ export function Banner() {
       type="button"
       onClick={() => teriyakiBowl && open(teriyakiBowl)}
       aria-label="New: Teriyaki Chicken Bowl — view item"
-      className="group flex w-full items-center justify-center gap-2 bg-[#c41128] px-4 py-2 text-bone transition-colors hover:bg-[#a60f22] active:[transform:none]"
+      className="group flex w-full items-center justify-center gap-2 bg-brand-accent px-4 py-2 text-bone transition-colors hover:bg-[#a60f22] active:[transform:none]"
     >
       <span className="text-center text-base leading-snug">
         <span className="font-bold">NEW: Teriyaki Chicken Bowl - </span>

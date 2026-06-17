@@ -33,7 +33,7 @@ function GreenCheck() {
 function WabaCaresBadge() {
   return (
     <span className="flex items-center gap-2.5 rounded-2xl bg-white px-3.5 py-2.5 shadow-xl">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand-accent">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
           <path
             d="M12 20.5s-6.5-4-8.8-7.9C1.5 9.5 2.9 6.2 6 6.2c1.8 0 3.1 1 4.5 3 1.4-2 2.7-3 4.5-3 3.1 0 4.5 3.3 2.8 6.4C18.5 16.5 12 20.5 12 20.5z"

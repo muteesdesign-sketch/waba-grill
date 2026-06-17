@@ -34,7 +34,7 @@ export function MenuCategoryNav({
             key={c.id}
             href={`#${c.id}`}
             className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[13.5px] ${
-              active === c.id ? "text-brand" : "text-ink"
+              active === c.id ? "text-brand-accent" : "text-ink"
             }`}
           >
             {c.name}

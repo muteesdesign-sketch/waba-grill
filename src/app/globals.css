@@ -3,6 +3,9 @@
 @theme {
   /* Brand palette (from Figma variables) */
   --color-brand: #ed1c23;
+  /* Darker, WCAG-AA-compliant red for small text & buttons (>=4.5:1 on
+     white and on light tints). Large display text keeps the brighter brand. */
+  --color-brand-accent: #c41128;
   --color-brand-button: #ea0028;
   --color-ink: #222323;
   --color-bone: #f8f8f8;

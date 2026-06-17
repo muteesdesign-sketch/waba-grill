@@ -62,7 +62,7 @@ export function Nav() {
                     href={l.href}
                     aria-current={active ? "page" : undefined}
                     className={`group relative text-sm font-bold uppercase tracking-wide transition-colors ${
-                      active ? "text-ink" : "text-ink hover:text-brand"
+                      active ? "text-ink" : "text-ink hover:text-brand-accent"
                     }`}
                   >
                     {l.label}

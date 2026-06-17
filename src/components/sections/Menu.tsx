@@ -54,7 +54,9 @@ export function Menu() {
               key={cat.id}
               onClick={() => setActive(i)}
               className={`shrink-0 whitespace-nowrap text-base font-bold transition-colors lg:text-[15px] ${
-                i === active ? "text-brand" : "text-ink hover:text-brand"
+                i === active
+                  ? "text-brand-accent"
+                  : "text-ink hover:text-brand-accent"
               }`}
             >
               {cat.name}

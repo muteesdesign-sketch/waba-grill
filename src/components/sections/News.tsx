@@ -99,7 +99,7 @@ function NewsCard({ item }: { item: Article }) {
         </div>
       </div>
       <div>
-        <p className="text-sm font-medium text-brand">{item.date}</p>
+        <p className="text-sm font-medium text-brand-accent">{item.date}</p>
         <h3 className="mt-1 font-display text-[38px] uppercase leading-none text-ink">
           {item.title}
         </h3>
@@ -123,7 +123,7 @@ function SmallCard({ item }: { item: Article }) {
         </span>
       </div>
       <div className="flex flex-col">
-        <p className="text-xs font-medium text-brand">{item.date}</p>
+        <p className="text-xs font-medium text-brand-accent">{item.date}</p>
         <h3 className="mt-1 font-display text-xl uppercase leading-none text-ink">
           {item.title}
         </h3>
@@ -186,7 +186,7 @@ export function News() {
               </div>
             </div>
             <div className="px-6 pb-7 pt-5">
-              <p className="text-sm font-medium text-brand">{featured.date}</p>
+              <p className="text-sm font-medium text-brand-accent">{featured.date}</p>
               <h3 className="mt-2 font-display text-4xl uppercase leading-none text-ink">
                 {featured.title}
               </h3>

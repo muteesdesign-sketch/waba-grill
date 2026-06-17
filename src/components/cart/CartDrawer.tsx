@@ -109,7 +109,7 @@ export function CartDrawer({
                 onClick={() => setTime(t)}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                   time === t
-                    ? "border-brand bg-brand text-white"
+                    ? "border-brand-accent bg-brand-accent text-white"
                     : "border-[#e5e7eb] text-ink hover:border-ink/40"
                 }`}
               >
@@ -142,7 +142,7 @@ export function CartDrawer({
                   onClick={() =>
                     setItems((prev) => prev.filter((_, i) => i !== idx))
                   }
-                  className="text-ink/40 hover:text-brand"
+                  className="text-ink/40 hover:text-brand-accent"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path
@@ -167,7 +167,7 @@ export function CartDrawer({
 
           {/* Rewards */}
           <div className="mt-7 flex items-center gap-2">
-            <span className="text-brand">⚙</span>
+            <span className="text-brand-accent">⚙</span>
             <h3 className="font-bold text-ink">Your rewards and offers</h3>
           </div>
           <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto pb-1">
@@ -221,7 +221,7 @@ export function CartDrawer({
                 onClick={() => setTipPct(t.pct)}
                 className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
                   tipPct === t.pct
-                    ? "border-brand bg-brand text-white"
+                    ? "border-brand-accent bg-brand-accent text-white"
                     : "border-[#e5e7eb] text-ink hover:border-ink/40"
                 }`}
               >

@@ -212,7 +212,7 @@ export function ProductModal({
                   <h3 className="text-sm font-bold uppercase tracking-wide text-ink">
                     {group.title}{" "}
                     {group.required && (
-                      <span className="text-brand">(Required)</span>
+                      <span className="text-brand-accent">(Required)</span>
                     )}
                   </h3>
                   <p className="mb-3 mt-1 text-xs text-ink/70">

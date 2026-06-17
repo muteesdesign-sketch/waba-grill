@@ -32,7 +32,7 @@ function Field({
 }
 
 const inputCls =
-  "w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-brand focus:outline-none";
+  "w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-brand-accent focus:outline-none";
 
 export default function CheckoutPage() {
   const cart = useCart();
@@ -66,7 +66,7 @@ export default function CheckoutPage() {
           </p>
           <Link
             href="/menu"
-            className="mt-8 rounded-full bg-brand-button px-10 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+            className="mt-8 rounded-full bg-brand-button px-10 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-accent"
           >
             Back to menu
           </Link>
@@ -138,11 +138,11 @@ export default function CheckoutPage() {
                 ★
               </span>
               <div>
-                <p className="font-display text-base uppercase text-brand">
+                <p className="font-display text-base uppercase text-brand-accent">
                   Sign up to receive rewards
                 </p>
                 <p className="text-xs text-ink/70">
-                  You could earn <span className="font-bold text-brand">17</span>{" "}
+                  You could earn <span className="font-bold text-brand-accent">17</span>{" "}
                   points on this order — plus points from a free drink and
                   cookie!
                 </p>
@@ -169,7 +169,7 @@ export default function CheckoutPage() {
             <label className="mt-4 flex items-center gap-2 text-sm text-ink">
               <input type="checkbox" defaultChecked className="accent-brand" />
               Join WaBa Grill rewards and earn{" "}
-              <span className="font-bold text-brand">17</span> points on your
+              <span className="font-bold text-brand-accent">17</span> points on your
               first order.
             </label>
 
@@ -180,7 +180,7 @@ export default function CheckoutPage() {
             </h3>
             <div className="mt-3 flex gap-3">
               <input className={inputCls} placeholder="Add promo code" />
-              <button className="rounded-lg border border-brand px-6 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
+              <button className="rounded-lg border border-brand-accent px-6 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
                 Apply
               </button>
             </div>
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
             <h3 className="mt-6 font-display text-xl uppercase text-ink">
               Gift card
             </h3>
-            <button className="mt-3 flex items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
+            <button className="mt-3 flex items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
               🎁 Add a gift card
             </button>
 
@@ -196,10 +196,10 @@ export default function CheckoutPage() {
               Payment method
             </h3>
             <div className="mt-3 space-y-3">
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
+              <button className="flex w-full items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
                  Pay · Apple Pay
               </button>
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand px-5 py-3 text-sm font-bold uppercase text-brand transition-colors hover:bg-brand hover:text-white">
+              <button className="flex w-full items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
                 💳 Credit Card
               </button>
             </div>
@@ -285,7 +285,7 @@ export default function CheckoutPage() {
                     onClick={() => setTipPct(t.pct)}
                     className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
                       tipPct === t.pct
-                        ? "border-brand bg-brand text-white"
+                        ? "border-brand-accent bg-brand-accent text-white"
                         : "border-[#e5e7eb] text-ink hover:border-ink/40"
                     }`}
                   >
@@ -310,13 +310,13 @@ export default function CheckoutPage() {
                   setPlaced(true);
                   window.scrollTo({ top: 0 });
                 }}
-                className="mt-4 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand hover:shadow-xl active:scale-[0.98]"
+                className="mt-4 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand-accent hover:shadow-xl active:scale-[0.98]"
               >
                 Place your order
               </button>
               <p className="mt-3 text-center text-xs text-ink/70">
                 ⚙ You&apos;re earning{" "}
-                <span className="font-bold text-brand">17</span> points on this
+                <span className="font-bold text-brand-accent">17</span> points on this
                 order
               </p>
             </div>
