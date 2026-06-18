@@ -65,7 +65,7 @@ export const POINTS_PER_DOLLAR = 10;
 export const tiers: Tier[] = [
   {
     name: "Grill Starter",
-    threshold: 0,
+    threshold: 0, // annual points
     blurb: "Welcome aboard — start earning from your very first bowl.",
     perks: [
       "10 points for every $1 spent",
@@ -75,7 +75,7 @@ export const tiers: Tier[] = [
   },
   {
     name: "Grill Pro",
-    threshold: 1000,
+    threshold: 250,
     blurb: "You're a regular now. Bigger perks, faster rewards.",
     perks: [
       "Everything in Grill Starter",
@@ -85,7 +85,7 @@ export const tiers: Tier[] = [
   },
   {
     name: "Grill Master",
-    threshold: 2500,
+    threshold: 600,
     blurb: "Top tier. The grill bows to you.",
     perks: [
       "Everything in Grill Pro",
@@ -100,7 +100,7 @@ export const rewardCatalog: Reward[] = [
   {
     id: "free-drink",
     name: "Free Drink",
-    points: 1250,
+    points: 150,
     value: 3.29,
     kind: "item",
     desc: "Any fountain drink or bottled beverage, on us.",
@@ -108,18 +108,9 @@ export const rewardCatalog: Reward[] = [
     productName: "Chicken Bowl",
   },
   {
-    id: "five-off",
-    name: "$5 Off Your Order",
-    points: 1500,
-    value: 5,
-    kind: "order",
-    desc: "Take $5 off any order — applied in your cart.",
-    image: "/images/offer-protein.png",
-  },
-  {
     id: "free-side",
     name: "Free Side",
-    points: 1800,
+    points: 200,
     value: 3.99,
     kind: "item",
     desc: "Add a side of your choice at no charge.",
@@ -127,24 +118,23 @@ export const rewardCatalog: Reward[] = [
     productName: "Steak Bowl",
   },
   {
-    id: "free-bowl",
-    name: "Free Bowl",
-    points: 2500,
-    value: 10.19,
-    kind: "item",
-    desc: "Any signature bowl — chicken, steak, tofu or veggie.",
-    image: "/images/bowl-chicken.png",
-    productName: "Chicken Bowl",
+    id: "five-off",
+    name: "$5 Off Your Order",
+    points: 250,
+    value: 5,
+    kind: "order",
+    desc: "Take $5 off any order — applied in your cart.",
+    image: "/images/offer-protein.png",
   },
   {
-    id: "free-plate",
-    name: "Free Plate",
-    points: 3000,
-    value: 12.19,
+    id: "free-bowl",
+    name: "Free Bowl",
+    points: 350,
+    value: 10.19,
     kind: "item",
-    desc: "Go big with a loaded plate, completely free.",
-    image: "/images/bowl-chicken-steak.png",
-    productName: "Dual Protein Bowl",
+    desc: "Any signature bowl — the top reward. Chicken, steak, tofu or veggie.",
+    image: "/images/bowl-chicken.png",
+    productName: "Chicken Bowl",
   },
 ];
 
@@ -255,7 +245,7 @@ export const challenges: Challenge[] = [
     id: "order-streak",
     title: "Weekly Regular",
     goal: "Order 3 times in 7 days",
-    rewardText: "+300 bonus points",
+    rewardText: "+50 bonus points",
     timeframe: "Ends Jun 24, 2026",
     progress: 2,
     target: 3,
@@ -266,7 +256,7 @@ export const challenges: Challenge[] = [
     id: "try-featured",
     title: "Taste the New Drop",
     goal: "Try the Sweet & Spicy Bowl",
-    rewardText: "+150 bonus points",
+    rewardText: "+25 bonus points",
     timeframe: "Ends Jul 31, 2026",
     progress: 0,
     target: 1,
@@ -291,8 +281,8 @@ export const activeChallenge = challenges[0];
 
 export const SAMPLE_MEMBER = {
   name: "Juan",
-  points: 1840,
-  lifetimePoints: 4120,
+  points: 280,
+  lifetimePoints: 980,
 };
 
 // The member's recent orders (for the "Recent orders / quick reorder" row).
@@ -349,12 +339,12 @@ export const personalizedOffers: PersonalOffer[] = [
   },
 ];
 
-// Points milestones for the hero rewards-progress bar.
-export const REWARDS_GOAL = 2500;
+// Points milestones for the hero rewards-progress bar (Free Bowl = max 350).
+export const REWARDS_GOAL = 350;
 export const rewardMilestones = [
-  { label: "Free Drink", at: 1250 },
-  { label: "Free Side", at: 1800 },
-  { label: "Free Bowl", at: 2500 },
+  { label: "Free Drink", at: 150 },
+  { label: "Free Side", at: 200 },
+  { label: "Free Bowl", at: 350 },
 ];
 
 // ---- Cross-journey helpers ------------------------------------------------

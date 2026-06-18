@@ -97,9 +97,9 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       if (r) setSelectedReward(JSON.parse(r) as Reward);
       const o = localStorage.getItem("waba_selectedOffer");
       if (o) setSelectedOffer(JSON.parse(o) as Offer);
-      const p = localStorage.getItem("waba_points");
+      const p = localStorage.getItem("waba_points_v2");
       if (p) setPoints(Number(p));
-      const cp = localStorage.getItem("waba_challengeProgress");
+      const cp = localStorage.getItem("waba_challengeProgress_v2");
       if (cp) setProgressById(JSON.parse(cp) as Record<string, number>);
     } catch {
       /* ignore */
@@ -107,9 +107,9 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
   }, []);
   useEffect(() => {
     try {
-      localStorage.setItem("waba_points", String(points));
+      localStorage.setItem("waba_points_v2", String(points));
       localStorage.setItem(
-        "waba_challengeProgress",
+        "waba_challengeProgress_v2",
         JSON.stringify(progressById),
       );
     } catch {

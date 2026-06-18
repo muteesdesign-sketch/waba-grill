@@ -128,14 +128,14 @@ export function LoyaltyHero() {
                 </span>
               </div>
               <p className="mt-2 font-display text-[56px] leading-none text-ink">
-                {enrolled ? points.toLocaleString() : "1,840"}
+                {enrolled ? points.toLocaleString() : "280"}
                 <span className="ml-2 text-[20px] text-ink/50">pts</span>
               </p>
               <div className="mt-5 grid grid-cols-3 gap-3 text-center">
                 {[
-                  { k: "Free drink", v: "1,250" },
-                  { k: "Free side", v: "1,800" },
-                  { k: "Free bowl", v: "2,500" },
+                  { k: "Free drink", v: "150" },
+                  { k: "Free side", v: "200" },
+                  { k: "Free bowl", v: "350" },
                 ].map((r) => (
                   <div key={r.k} className="rounded-xl bg-bone px-2 py-3">
                     <p className="font-display text-[20px] leading-none text-ink">
