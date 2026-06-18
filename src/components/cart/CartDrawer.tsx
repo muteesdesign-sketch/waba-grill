@@ -34,7 +34,7 @@ export function CartDrawer({
     setFreeDrink,
     totals,
   } = useCart();
-  const { selectedReward } = useLoyalty();
+  const { selectedReward, selectedOffer, selectOffer } = useLoyalty();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -181,6 +181,31 @@ export function CartDrawer({
               </span>
             </div>
           )}
+          {selectedOffer && (
+            <div className="mt-3 rounded-xl border border-brand-accent bg-brand/5 px-4 py-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-semibold text-ink">
+                  <span className="rounded bg-brand-button px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
+                    {selectedOffer.badge}
+                  </span>{" "}
+                  {selectedOffer.title}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => selectOffer(null)}
+                  className="text-[11px] font-bold uppercase tracking-wide text-brand-accent hover:underline"
+                >
+                  Remove
+                </button>
+              </div>
+              {/* Help the customer understand what's missing for complex offers */}
+              {!items.some((i) => /drink|lemonade|pepsi|aquafina|soda|tea|water/i.test(i.name)) && (
+                <p className="mt-2 text-xs font-medium text-brand-accent">
+                  ⚠ Add a drink to unlock this offer.
+                </p>
+              )}
+            </div>
+          )}
           <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto pb-1">
             <RewardCard label="5% off" sub="Used by 10/26" />
             <RewardCard
@@ -218,6 +243,12 @@ export function CartDrawer({
               <Row
                 label={totals.rewardLabel}
                 value={`-${money(Math.abs(totals.reward))}`}
+              />
+            )}
+            {totals.offer < 0 && (
+              <Row
+                label={totals.offerLabel}
+                value={`-${money(Math.abs(totals.offer))}`}
               />
             )}
             <Row label="Taxes & Fees" value={money(totals.taxes)} />

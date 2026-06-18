@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { MenuItem, MenuOptionGroup } from "@/components/ui/MenuItemCard";
 import { useCart } from "@/components/cart/CartProvider";
+import { offerForProduct } from "@/components/loyalty/loyalty-data";
 
 const TAGS = ["Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free"];
 
@@ -203,6 +204,26 @@ export function ProductModal({
                   </span>
                 ))}
               </div>
+              {/* Loyalty incentive tied to this item */}
+              {(() => {
+                const o = offerForProduct(item.name);
+                if (!o) return null;
+                return (
+                  <div className="mt-4 flex items-center gap-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                    <span className="flex h-9 shrink-0 items-center rounded-lg bg-brand-button px-2.5 font-display text-sm uppercase text-white">
+                      {o.badge === "2X" ? "2X" : o.badge}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-white">
+                        {o.title}
+                      </p>
+                      <p className="text-xs text-white/60">
+                        Expires {o.expires} · earn rewards on this item
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* RIGHT — options */}

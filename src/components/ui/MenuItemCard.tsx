@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useProductModal } from "@/components/pdp/ProductModalProvider";
+import { badgeForProduct } from "@/components/loyalty/loyalty-data";
 
 export type MenuOption = {
   name: string;
@@ -28,6 +29,7 @@ export type MenuItem = {
 
 export function MenuItemCard({ item }: { item: MenuItem }) {
   const open = useProductModal();
+  const loyaltyBadge = badgeForProduct(item.name);
 
   return (
     <article
@@ -42,6 +44,11 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
           fill
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
+        {loyaltyBadge && (
+          <span className="absolute left-2 top-2 rounded-full bg-brand-button px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow">
+            {loyaltyBadge === "2X" ? "2X Rewards" : loyaltyBadge}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-3">

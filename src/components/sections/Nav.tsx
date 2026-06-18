@@ -105,7 +105,7 @@ export function Nav() {
                 ? `WaBa Rewards — ${loyalty.points} points`
                 : "Sign in to WaBa Rewards"
             }
-            className={`hidden h-[38px] shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
+            className={`relative hidden h-[38px] shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors lg:flex ${
               loyalty.enrolled
                 ? "border-brand-button bg-brand-button text-white hover:bg-brand"
                 : "border-brand-button text-ink hover:bg-bone"
@@ -118,6 +118,11 @@ export function Nav() {
                   {loyalty.points.toLocaleString()}
                 </span>
                 pts
+                {loyalty.notifications > 0 && (
+                  <span className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 font-display text-[11px] leading-none text-ink">
+                    {loyalty.notifications}
+                  </span>
+                )}
               </>
             ) : (
               <>
@@ -196,6 +201,21 @@ export function Nav() {
               </span>
             )}
           </Link>
+          {loyalty.enrolled && (
+            <Link
+              href="/rewards"
+              onClick={() => setOpen(false)}
+              className="mb-2 flex items-center justify-between rounded-xl bg-ink px-4 py-3 text-white"
+            >
+              <span className="text-sm font-semibold">
+                {loyalty.activeChallenge.title}
+              </span>
+              <span className="font-display text-sm">
+                {loyalty.activeChallenge.progress}/
+                {loyalty.activeChallenge.target}
+              </span>
+            </Link>
+          )}
           <ul className="flex flex-col">
             {links.map((l) => (
               <li key={l.label}>

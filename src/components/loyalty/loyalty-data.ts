@@ -1,37 +1,65 @@
-// Loyalty model for the WaBa Rewards page. Mirrors the WaBa Rewards mobile app
-// (points per dollar, redeemable freebies, birthday reward) with a light tier
-// system inspired by Chipotle Rewards and Core Life Eatery rewards.
+// WaBa Loyalty model — three incentive types (Rewards, Offers, Challenges)
+// per the loyalty program recommendations. Rewards are earned by spend and
+// don't expire; Offers are campaign-based and time-limited; Challenges gamify
+// repeat ordering.
+import { menuCategories } from "@/app/menu/menu-data";
 
 export type Tier = {
   name: string;
-  threshold: number; // annual points to reach this tier
+  threshold: number;
   blurb: string;
   perks: string[];
 };
 
+// ---- Rewards (point-redeemable, never expire) -----------------------------
+// kind "item"  → redeeming opens the relevant product detail page
+// kind "order" → redeeming opens the cart and applies an order-level discount
 export type Reward = {
   id: string;
   name: string;
-  points: number; // 0 = earned offer (not point-redeemed)
-  value: number; // dollar discount applied to the order when redeemed
+  points: number; // cost in points (0 = already-granted/earned reward)
+  value: number; // dollar value applied to the order
+  kind: "item" | "order";
   desc: string;
   image?: string;
-  expires?: string; // absolute date string
+  productName?: string; // for item rewards → which PDP to open
   eligibility?: string;
 };
 
+// ---- Offers (campaign-based, time-limited) --------------------------------
+export type OfferKind = "item" | "cart" | "multiplier" | "bogo";
 export type Offer = {
   id: string;
-  tag: string;
+  badge: string; // short label shown on menu cards / PDP, e.g. "50% OFF", "2X"
   title: string;
   desc: string;
+  kind: OfferKind;
+  expires: string; // absolute date string — always shown
+  auto: boolean; // auto-applied vs. needs to be selected
   eligibility: string;
   cta: string;
+  ctaTarget: "menu" | "pdp" | "cart";
+  value?: number; // dollar discount (cart offers)
+  multiplier?: number; // points multiplier (multiplier offers)
+  category?: string; // menu category id the offer applies to
+  productName?: string; // specific product the offer applies to
   image?: string;
   members?: boolean;
 };
 
-// Earn rate — 10 points for every $1 spent, matching the WaBa Rewards app.
+// ---- Challenges (gamified, progress-based) --------------------------------
+export type Challenge = {
+  id: string;
+  title: string;
+  goal: string;
+  rewardText: string;
+  timeframe: string;
+  progress: number;
+  target: number;
+  nextAction: string;
+  kind: "count" | "streak";
+};
+
 export const POINTS_PER_DOLLAR = 10;
 
 export const tiers: Tier[] = [
@@ -67,118 +95,224 @@ export const tiers: Tier[] = [
   },
 ];
 
-// Catalog of point-redeemable rewards (what you can spend points on).
+// Catalog of point-redeemable rewards.
 export const rewardCatalog: Reward[] = [
   {
     id: "free-drink",
     name: "Free Drink",
     points: 1250,
     value: 3.29,
+    kind: "item",
     desc: "Any fountain drink or bottled beverage, on us.",
     image: "/images/bowl-grilled.png",
+    productName: "Chicken Bowl",
+  },
+  {
+    id: "five-off",
+    name: "$5 Off Your Order",
+    points: 1500,
+    value: 5,
+    kind: "order",
+    desc: "Take $5 off any order — applied in your cart.",
+    image: "/images/offer-protein.png",
   },
   {
     id: "free-side",
     name: "Free Side",
     points: 1800,
     value: 3.99,
+    kind: "item",
     desc: "Add a side of your choice at no charge.",
     image: "/images/offer-protein.png",
+    productName: "Steak Bowl",
   },
   {
     id: "free-bowl",
     name: "Free Bowl",
     points: 2500,
     value: 10.19,
+    kind: "item",
     desc: "Any signature bowl — chicken, steak, tofu or veggie.",
     image: "/images/bowl-chicken.png",
+    productName: "Chicken Bowl",
   },
   {
     id: "free-plate",
     name: "Free Plate",
     points: 3000,
     value: 12.19,
+    kind: "item",
     desc: "Go big with a loaded plate, completely free.",
     image: "/images/bowl-chicken-steak.png",
+    productName: "Dual Protein Bowl",
   },
 ];
 
-// Rewards the sample member has already unlocked, with clear expirations.
+// Rewards the sample member has already unlocked (ready to use now).
 export const memberRewards: Reward[] = [
   {
     id: "welcome-drink",
     name: "Welcome Reward · Free Drink",
     points: 0,
     value: 3.29,
+    kind: "item",
     desc: "Thanks for joining! Redeem on any order.",
     image: "/images/bowl-grilled.png",
-    expires: "Jul 15, 2026",
+    productName: "Chicken Bowl",
   },
   {
     id: "birthday-bowl",
     name: "Birthday Bowl",
     points: 0,
     value: 10.19,
+    kind: "item",
     desc: "A free signature bowl during your birthday month.",
     image: "/images/bowl-chicken.png",
-    expires: "Jun 30, 2026",
+    productName: "Chicken Bowl",
     eligibility: "Birthday month only",
   },
   {
-    id: "free-side-earned",
-    name: "Free Side",
+    id: "five-off-earned",
+    name: "$5 Off Your Order",
     points: 0,
-    value: 3.99,
-    desc: "Redeemed from your points — ready to use.",
+    value: 5,
+    kind: "order",
+    desc: "Redeemed from your points — applied at checkout.",
     image: "/images/offer-protein.png",
-    expires: "Aug 1, 2026",
   },
 ];
 
-// Promotional offers to browse (eligibility varies).
+// Rewards the member has already redeemed (tangible value received).
+export const redeemedRewards: { name: string; date: string; value: number }[] = [
+  { name: "Free Drink", date: "May 2, 2026", value: 3.29 },
+  { name: "Free Side", date: "Apr 18, 2026", value: 3.99 },
+  { name: "$5 Off Your Order", date: "Mar 30, 2026", value: 5 },
+];
+
+// Campaign offers (time-limited). Badges surface on menu cards / PDP.
 export const offers: Offer[] = [
   {
+    id: "dumplings-50",
+    badge: "50% OFF",
+    title: "50% Off Dumplings",
+    desc: "Half off any order of dumplings — the perfect add-on.",
+    kind: "item",
+    expires: "Jun 30, 2026",
+    auto: false,
+    eligibility: "Dumplings only · one per order",
+    cta: "Shop dumplings",
+    ctaTarget: "menu",
+    category: "dumplings",
+    image: "/images/offer-protein.png",
+  },
+  {
     id: "double-points",
-    tag: "Limited time",
-    title: "Double Points Weekend",
-    desc: "Earn 2x points on every order all weekend long.",
-    eligibility: "App & web orders · Jun 20–22, 2026",
-    cta: "Activate offer",
+    badge: "2X",
+    title: "2X Points on Bowls",
+    desc: "Earn double points on every bowl this weekend.",
+    kind: "multiplier",
+    expires: "Jun 22, 2026",
+    auto: true,
+    eligibility: "Bowls · app & web orders",
+    cta: "Shop bowls",
+    ctaTarget: "menu",
+    multiplier: 2,
+    category: "bowls",
     image: "/images/bowl-steak.png",
   },
   {
-    id: "chips-drink",
-    tag: "Spend & save",
-    title: "Free Chips & Drink",
-    desc: "Add chips and a drink free on orders of $15 or more.",
-    eligibility: "One per order · pickup or dine-in",
-    cta: "Apply offer",
-    image: "/images/offer-protein.png",
-  },
-  {
-    id: "refer",
-    tag: "Refer a friend",
-    title: "Give $5, Get 500 points",
-    desc: "Share your code — they save, you earn.",
-    eligibility: "New customers only",
-    cta: "Invite friends",
+    id: "bowl-drink",
+    badge: "BOGO",
+    title: "Buy a Bowl, Get a Free Drink",
+    desc: "Add any bowl and a drink — the drink's on us.",
+    kind: "cart",
+    expires: "Jul 4, 2026",
+    auto: false,
+    eligibility: "Add 1 bowl + 1 drink · auto-discount in cart",
+    cta: "Apply in cart",
+    ctaTarget: "cart",
+    value: 3.29,
     image: "/images/bowl-grilled.png",
   },
   {
-    id: "birthday",
-    tag: "Members only",
-    title: "Birthday Bowl",
-    desc: "A free signature bowl during your birthday month.",
-    eligibility: "Verified birthday on file required",
-    cta: "Add birthday",
-    image: "/images/bowl-chicken.png",
-    members: true,
+    id: "new-sweet-spicy",
+    badge: "NEW",
+    title: "Try the Sweet & Spicy Bowl",
+    desc: "Our newest bowl — bold, glazed and a little fiery.",
+    kind: "item",
+    expires: "Jul 31, 2026",
+    auto: false,
+    eligibility: "New item · while supplies last",
+    cta: "View item",
+    ctaTarget: "pdp",
+    productName: "Sweet & Spicy Bowl",
+    image: "/images/bowl-chicken-steak.png",
   },
 ];
 
-// Sample member snapshot (stands in for a signed-in WaBa Rewards account).
+export const challenges: Challenge[] = [
+  {
+    id: "order-streak",
+    title: "Weekly Regular",
+    goal: "Order 3 times in 7 days",
+    rewardText: "+300 bonus points",
+    timeframe: "Ends Jun 24, 2026",
+    progress: 2,
+    target: 3,
+    nextAction: "Place 1 more order this week",
+    kind: "count",
+  },
+  {
+    id: "try-featured",
+    title: "Taste the New Drop",
+    goal: "Try the Sweet & Spicy Bowl",
+    rewardText: "+150 bonus points",
+    timeframe: "Ends Jul 31, 2026",
+    progress: 0,
+    target: 1,
+    nextAction: "Add it to your next order",
+    kind: "count",
+  },
+  {
+    id: "three-day-streak",
+    title: "On a Roll",
+    goal: "Complete a 3-day ordering streak",
+    rewardText: "Free side",
+    timeframe: "Resets if you miss a day",
+    progress: 1,
+    target: 3,
+    nextAction: "Order again tomorrow",
+    kind: "streak",
+  },
+];
+
+// The challenge surfaced in the nav / checkout (closest to completion).
+export const activeChallenge = challenges[0];
+
 export const SAMPLE_MEMBER = {
   name: "Juan",
   points: 1840,
   lifetimePoints: 4120,
 };
+
+// ---- Cross-journey helpers ------------------------------------------------
+const categoryOfProduct = (name: string) =>
+  menuCategories.find((c) => c.items.some((i) => i.name === name))?.id;
+
+/** Active offer that applies to a given product (by name or its category). */
+export function offerForProduct(name: string): Offer | undefined {
+  const cat = categoryOfProduct(name);
+  return offers.find(
+    (o) => o.productName === name || (o.category && o.category === cat),
+  );
+}
+
+/** Short loyalty badge for a product card / PDP (e.g. "50% OFF", "2X", "NEW"). */
+export function badgeForProduct(name: string): string | undefined {
+  return offerForProduct(name)?.badge;
+}
+
+/** Points a customer earns for an order subtotal, honoring active multipliers. */
+export function pointsForSubtotal(subtotal: number, multiplier = 1): number {
+  return Math.round(subtotal * POINTS_PER_DOLLAR * multiplier);
+}

@@ -5,8 +5,7 @@ import { PreFooter } from "@/components/sections/PreFooter";
 import { Footer } from "@/components/sections/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { LoyaltyHero } from "@/components/loyalty/LoyaltyHero";
-import { HowItWorks } from "@/components/loyalty/HowItWorks";
-import { MemberSections } from "@/components/loyalty/MemberSections";
+import { LoyaltyBody } from "@/components/loyalty/LoyaltyBody";
 import { DownloadApp } from "@/components/loyalty/DownloadApp";
 
 export const metadata: Metadata = {
@@ -23,10 +22,8 @@ export default function RewardsPage() {
       <main>
         {/* Header — overview + Register Now (Punchh) */}
         <LoyaltyHero />
-        {/* How it works */}
-        <HowItWorks />
-        {/* Member-only: points, redeem & offers (hidden for guests) */}
-        <MemberSections />
+        {/* Member → Loyalty Hub (Rewards/Offers/Challenges); Guest → education */}
+        <LoyaltyBody />
         {/* Download App */}
         <Reveal>
           <DownloadApp />

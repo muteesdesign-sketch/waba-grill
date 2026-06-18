@@ -1,6 +1,7 @@
 import { Banner } from "@/components/sections/Banner";
 import { Nav } from "@/components/sections/Nav";
 import { Hero } from "@/components/sections/Hero";
+import { LoyaltyPromo } from "@/components/sections/LoyaltyPromo";
 import { Offer } from "@/components/sections/Offer";
 import { Menu } from "@/components/sections/Menu";
 import { Rewards } from "@/components/sections/Rewards";
@@ -19,6 +20,10 @@ export default function Home() {
       <main>
         {/* Hero animates on load; the rest reveal as they scroll into view. */}
         <Hero />
+        {/* Loyalty promo space directly below the hero (offers + rewards) */}
+        <Reveal>
+          <LoyaltyPromo />
+        </Reveal>
         <Reveal>
           <Offer />
         </Reveal>

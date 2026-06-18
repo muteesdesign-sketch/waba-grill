@@ -6,6 +6,8 @@ import { Banner } from "@/components/sections/Banner";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { useCart } from "@/components/cart/CartProvider";
+import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
+import { pointsForSubtotal } from "@/components/loyalty/loyalty-data";
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 const TIPS = [
@@ -37,6 +39,9 @@ const inputCls =
 export default function CheckoutPage() {
   const cart = useCart();
   const { items, totals, utensils, setUtensils, tipPct, setTipPct, time } = cart;
+  const { enrolled, memberName, pointsToNextReward, nextReward, activeChallenge } =
+    useLoyalty();
+  const earnedPoints = pointsForSubtotal(totals.subtotal);
   const [placed, setPlaced] = useState(false);
   const [showItems, setShowItems] = useState(false);
 
@@ -132,21 +137,38 @@ export default function CheckoutPage() {
               you order updates.
             </p>
 
-            {/* Rewards banner */}
+            {/* Rewards banner — reinforces loyalty value without distracting */}
             <div className="mt-4 flex items-center gap-3 rounded-xl bg-[#fff4ee] p-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-button text-white">
                 ★
               </span>
-              <div>
-                <p className="font-display text-base uppercase text-brand-accent">
-                  Sign up to receive rewards
-                </p>
-                <p className="text-xs text-ink/70">
-                  You could earn <span className="font-bold text-brand-accent">17</span>{" "}
-                  points on this order — plus points from a free drink and
-                  cookie!
-                </p>
-              </div>
+              {enrolled ? (
+                <div>
+                  <p className="font-display text-base uppercase text-brand-accent">
+                    {memberName}, you&apos;ll earn{" "}
+                    {earnedPoints.toLocaleString()} points
+                  </p>
+                  <p className="text-xs text-ink/70">
+                    {nextReward
+                      ? `Just ${pointsToNextReward.toLocaleString()} points away from ${nextReward.name}.`
+                      : "You're at the top — enjoy every perk."}{" "}
+                    {activeChallenge.nextAction} to keep your challenge going.
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p className="font-display text-base uppercase text-brand-accent">
+                    Join WaBa Rewards
+                  </p>
+                  <p className="text-xs text-ink/70">
+                    Earn{" "}
+                    <span className="font-bold text-brand-accent">
+                      {earnedPoints.toLocaleString()}
+                    </span>{" "}
+                    points on this order — free food adds up fast.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="mt-5 space-y-4">
@@ -166,12 +188,16 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <label className="mt-4 flex items-center gap-2 text-sm text-ink">
-              <input type="checkbox" defaultChecked className="accent-brand" />
-              Join WaBa Grill rewards and earn{" "}
-              <span className="font-bold text-brand-accent">17</span> points on your
-              first order.
-            </label>
+            {!enrolled && (
+              <label className="mt-4 flex items-center gap-2 text-sm text-ink">
+                <input type="checkbox" defaultChecked className="accent-brand" />
+                Join WaBa Grill rewards and earn{" "}
+                <span className="font-bold text-brand-accent">
+                  {earnedPoints.toLocaleString()}
+                </span>{" "}
+                points on this order.
+              </label>
+            )}
 
             <hr className="my-6 border-black/5" />
 
@@ -270,6 +296,14 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                 )}
+                {totals.offer < 0 && (
+                  <div className="flex justify-between">
+                    <span className="text-ink/70">{totals.offerLabel}</span>
+                    <span className="text-ink/70">
+                      -{money(Math.abs(totals.offer))}
+                    </span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="text-ink/70">Taxes &amp; Fees</span>
                   <span className="text-ink/70">{money(totals.taxes)}</span>
@@ -317,9 +351,14 @@ export default function CheckoutPage() {
                 Place your order
               </button>
               <p className="mt-3 text-center text-xs text-ink/70">
-                ⚙ You&apos;re earning{" "}
-                <span className="font-bold text-brand-accent">17</span> points on this
-                order
+                ⚙ {enrolled ? "You're earning" : "Join to earn"}{" "}
+                <span className="font-bold text-brand-accent">
+                  {earnedPoints.toLocaleString()}
+                </span>{" "}
+                points on this order
+                {enrolled && nextReward
+                  ? ` · ${pointsToNextReward.toLocaleString()} from ${nextReward.name}`
+                  : ""}
               </p>
             </div>
           </div>

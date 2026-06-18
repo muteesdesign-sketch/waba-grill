@@ -19,6 +19,8 @@ export type Totals = {
   subtotal: number;
   reward: number;
   rewardLabel: string;
+  offer: number;
+  offerLabel: string;
   taxes: number;
   tip: number;
   total: number;
@@ -65,7 +67,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [tipPct, setTipPct] = useState(0.1);
   const [utensils, setUtensils] = useState(true);
   const [freeDrink, setFreeDrink] = useState(true);
-  const { selectedReward } = useLoyalty();
+  const { selectedReward, selectedOffer } = useLoyalty();
 
   const add = (item: CartItem) => {
     setItems((prev) => [...prev, item]);
@@ -85,17 +87,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
       reward = -Math.min(REWARD_AMOUNT, subtotal);
       rewardLabel = "Reward (Free drink)";
     }
+    // A cart-level offer (e.g. BOGO / free drink) applies as its own line item.
+    let offer = 0;
+    let offerLabel = "";
+    if (selectedOffer && selectedOffer.value) {
+      offer = -Math.min(selectedOffer.value, subtotal + reward);
+      offerLabel = `Offer (${selectedOffer.title})`;
+    }
     const taxes = subtotal * TAX_RATE;
     const tip = subtotal * tipPct;
     return {
       subtotal,
       reward,
       rewardLabel,
+      offer,
+      offerLabel,
       taxes,
       tip,
-      total: subtotal + reward + taxes + tip,
+      total: subtotal + reward + offer + taxes + tip,
     };
-  }, [items, freeDrink, tipPct, selectedReward]);
+  }, [items, freeDrink, tipPct, selectedReward, selectedOffer]);
 
   return (
     <CartContext.Provider

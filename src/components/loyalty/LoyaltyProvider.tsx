@@ -12,6 +12,10 @@ import {
 import {
   SAMPLE_MEMBER,
   tiers,
+  rewardCatalog,
+  activeChallenge,
+  type Challenge,
+  type Offer,
   type Reward,
   type Tier,
 } from "./loyalty-data";
@@ -20,19 +24,27 @@ export type LinkProvider = "punchh" | "thanx";
 export type LinkStatus = "idle" | "linking" | "linked" | "error";
 
 type LoyaltyContextValue = {
-  /** Guest vs. signed-in member (no real auth — toggled in the UI for preview). */
   enrolled: boolean;
   setEnrolled: (v: boolean) => void;
   memberName: string;
   points: number;
   tier: Tier;
   nextTier: Tier | null;
-  /** 0–1 progress toward the next tier. */
   tierProgress: number;
   pointsToNextTier: number;
-  /** The reward the member has chosen to use on their next order. */
+  /** Cheapest reward the member can't quite afford yet, and the gap. */
+  nextReward: Reward | null;
+  pointsToNextReward: number;
+  /** The challenge surfaced in the nav / checkout. */
+  activeChallenge: Challenge;
+  /** Count of new rewards/offers/challenge updates → nav notification badge. */
+  notifications: number;
+  /** A reward the member is using on their next order (item or order-level). */
   selectedReward: Reward | null;
   selectReward: (r: Reward | null) => void;
+  /** A cart-level offer applied to the order. */
+  selectedOffer: Offer | null;
+  selectOffer: (o: Offer | null) => void;
   /** Account-linking simulation (Punchh / Thanx). */
   linkStatus: Record<LinkProvider, LinkStatus>;
   linkAccount: (p: LinkProvider, email: string) => void;
@@ -59,23 +71,23 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
   const [enrolled, setEnrolled] = useState(false);
   const [points] = useState(SAMPLE_MEMBER.points);
   const [selectedReward, setSelectedReward] = useState<Reward | null>(null);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
   const [linkStatus, setLinkStatus] = useState<
     Record<LinkProvider, LinkStatus>
   >({ punchh: "idle", thanx: "idle" });
 
-  // Persist enrollment + selected reward so they survive page reloads and follow
-  // the customer through the ordering and checkout flow (static export = full
-  // page loads between routes). Read after mount to avoid hydration mismatch.
+  // Persist enrollment + selections across page loads (static export).
   useEffect(() => {
     try {
       if (localStorage.getItem("waba_enrolled") === "1") setEnrolled(true);
       const r = localStorage.getItem("waba_selectedReward");
       if (r) setSelectedReward(JSON.parse(r) as Reward);
+      const o = localStorage.getItem("waba_selectedOffer");
+      if (o) setSelectedOffer(JSON.parse(o) as Offer);
     } catch {
       /* ignore */
     }
   }, []);
-
   useEffect(() => {
     try {
       localStorage.setItem("waba_enrolled", enrolled ? "1" : "0");
@@ -83,7 +95,6 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       /* ignore */
     }
   }, [enrolled]);
-
   useEffect(() => {
     try {
       if (selectedReward)
@@ -96,6 +107,15 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       /* ignore */
     }
   }, [selectedReward]);
+  useEffect(() => {
+    try {
+      if (selectedOffer)
+        localStorage.setItem("waba_selectedOffer", JSON.stringify(selectedOffer));
+      else localStorage.removeItem("waba_selectedOffer");
+    } catch {
+      /* ignore */
+    }
+  }, [selectedOffer]);
 
   const { current: tier, next: nextTier } = useMemo(
     () => tierFor(points),
@@ -112,12 +132,22 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
     };
   }, [points, tier, nextTier]);
 
+  const { nextReward, pointsToNextReward } = useMemo(() => {
+    const upcoming = [...rewardCatalog]
+      .filter((r) => r.points > points)
+      .sort((a, b) => a.points - b.points);
+    const nr = upcoming[0] ?? null;
+    return {
+      nextReward: nr,
+      pointsToNextReward: nr ? nr.points - points : 0,
+    };
+  }, [points]);
+
   const linkAccount = useCallback((p: LinkProvider, email: string) => {
     setLinkStatus((s) => ({ ...s, [p]: "linking" }));
-    // Simulate an async link with a deterministic mismatch case so the error
-    // path is demonstrable: any address containing "mismatch" fails.
     window.setTimeout(() => {
-      const ok = email.includes("@") && !email.toLowerCase().includes("mismatch");
+      const ok =
+        email.includes("@") && !email.toLowerCase().includes("mismatch");
       setLinkStatus((s) => ({ ...s, [p]: ok ? "linked" : "error" }));
       if (ok) setEnrolled(true);
     }, 1100);
@@ -136,8 +166,14 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
     nextTier,
     tierProgress,
     pointsToNextTier,
+    nextReward,
+    pointsToNextReward,
+    activeChallenge,
+    notifications: 2,
     selectedReward,
     selectReward: setSelectedReward,
+    selectedOffer,
+    selectOffer: setSelectedOffer,
     linkStatus,
     linkAccount,
     resetLink,
