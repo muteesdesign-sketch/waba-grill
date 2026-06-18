@@ -1,10 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Banner } from "@/components/sections/Banner";
-import { Nav } from "@/components/sections/Nav";
-import { Footer } from "@/components/sections/Footer";
 import { useCart } from "@/components/cart/CartProvider";
 import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
 import { pointsForSubtotal } from "@/components/loyalty/loyalty-data";
@@ -16,40 +14,88 @@ const TIPS = [
   { label: "20%", pct: 0.2 },
 ];
 
+/* ---- DS primitives ------------------------------------------------------- */
+
+function CheckoutHeader() {
+  return (
+    <header className="sticky top-0 z-40 bg-white">
+      <div className="flex items-center justify-center border-b border-black/10 py-3">
+        <Link href="/" aria-label="WaBa Grill home">
+          <Image
+            src="/images/logo.svg"
+            alt="WaBa Grill"
+            width={120}
+            height={30}
+            className="h-7 w-auto"
+            priority
+          />
+        </Link>
+      </div>
+      <div className="relative flex items-center justify-center border-b border-black/10 py-4">
+        <Link
+          href="/menu"
+          className="absolute left-4 flex items-center gap-1 text-sm font-semibold text-ink transition-colors hover:text-brand-accent lg:left-8"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M15 5l-7 7 7 7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="hidden sm:inline">Back</span>
+        </Link>
+        <h1 className="text-xl font-bold text-ink">Checkout</h1>
+      </div>
+    </header>
+  );
+}
+
 function Field({
   label,
-  children,
+  defaultValue,
+  placeholder,
+  type = "text",
 }: {
   label: string;
-  children: React.ReactNode;
+  defaultValue?: string;
+  placeholder?: string;
+  type?: string;
 }) {
   return (
-    <label className="block">
-      <span className="mb-1 block text-xs font-bold uppercase tracking-wide text-ink">
-        {label}
-      </span>
-      {children}
+    <label className="block rounded-xl border border-[#e1e3e6] px-4 py-2.5 transition-colors focus-within:border-ink">
+      <span className="block text-[11px] font-medium text-ink/50">{label}</span>
+      <input
+        type={type}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        className="mt-0.5 w-full bg-transparent text-sm font-medium text-ink outline-none placeholder:text-ink/40"
+      />
     </label>
   );
 }
 
-const inputCls =
-  "w-full rounded-lg border border-[#e5e7eb] px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-brand-accent focus:outline-none";
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return <h2 className="text-[22px] font-bold text-ink">{children}</h2>;
+}
+
+/* ---- Page ---------------------------------------------------------------- */
 
 export default function CheckoutPage() {
   const cart = useCart();
   const { items, totals, utensils, setUtensils, tipPct, setTipPct, time } = cart;
-  const { enrolled, memberName, pointsToNextReward, nextReward, activeChallenge } =
-    useLoyalty();
+  const { enrolled, memberName, pointsToNextReward, nextReward } = useLoyalty();
   const earnedPoints = pointsForSubtotal(totals.subtotal);
   const [placed, setPlaced] = useState(false);
   const [showItems, setShowItems] = useState(false);
+  const [pay, setPay] = useState<"apple" | "card">("apple");
 
   if (placed) {
     return (
       <div className="flex min-h-screen w-full flex-col bg-white">
-        <Banner />
-        <Nav />
+        <CheckoutHeader />
         <main className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-white">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -67,192 +113,213 @@ export default function CheckoutPage() {
           </h1>
           <p className="mt-3 max-w-md text-ink/70">
             Thanks! Your WaBa Grill order is being prepared for pickup at Clovis
-            (Shaw Ave). You earned 17 points on this order.
+            (Shaw Ave). You earned {earnedPoints.toLocaleString()} points on this
+            order.
           </p>
           <Link
             href="/menu"
-            className="mt-8 rounded-full bg-brand-button px-10 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-accent"
+            className="mt-8 rounded-full bg-brand-button px-10 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
           >
             Back to menu
           </Link>
         </main>
-        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full bg-bone">
-      <Banner />
-      <Nav />
+    <div className="min-h-screen w-full bg-white">
+      <CheckoutHeader />
 
-      {/* Dark header */}
-      <section className="bg-ink px-5 py-7 lg:px-10">
-        <div className="mx-auto max-w-[1180px]">
-          <Link
-            href="/menu"
-            className="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white"
-          >
-            <span>‹</span> Back to menu
-          </Link>
-          <h1 className="mt-2 font-display text-5xl uppercase text-white lg:text-6xl">
-            Checkout
-          </h1>
-        </div>
-      </section>
-
-      <main className="mx-auto max-w-[1180px] px-5 py-8 lg:px-10 lg:py-10">
-        <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-          {/* LEFT — order details */}
-          <div className="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
-            <h2 className="font-display text-2xl uppercase text-ink">
-              Order details
-            </h2>
-
-            <p className="mt-5 text-sm font-bold uppercase tracking-wide text-ink">
-              Pickup location
-            </p>
-            <p className="mt-2 text-sm text-ink/80">Clovis (Shaw Ave)</p>
-            <p className="text-sm text-ink/80">Hill Country Village</p>
-            <p className="text-sm text-ink/80">
-              3770 Shaw Ave suite 106, Clovis, CA 93619
-            </p>
-
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <Field label="Date">
-                <input className={inputCls} defaultValue="June 1, 2026" />
-              </Field>
-              <Field label="Time">
-                <input className={inputCls} defaultValue={time} />
-              </Field>
-            </div>
-
-            <hr className="my-6 border-black/5" />
-
-            <h3 className="font-display text-xl uppercase text-ink">
-              Your information
-            </h3>
-            <p className="mt-1 text-sm text-ink/70">
-              We&apos;ll use this to find your account (or set one up) and send
-              you order updates.
-            </p>
-
-            {/* Rewards banner — reinforces loyalty value without distracting */}
-            <div className="mt-4 flex items-center gap-3 rounded-xl bg-[#fff4ee] p-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-button text-white">
-                ★
-              </span>
-              {enrolled ? (
-                <div>
-                  <p className="font-display text-base uppercase text-brand-accent">
-                    {memberName}, you&apos;ll earn{" "}
-                    {earnedPoints.toLocaleString()} points
-                  </p>
-                  <p className="text-xs text-ink/70">
-                    {nextReward
-                      ? `Just ${pointsToNextReward.toLocaleString()} points away from ${nextReward.name}.`
-                      : "You're at the top — enjoy every perk."}{" "}
-                    {activeChallenge.nextAction} to keep your challenge going.
+      <main className="mx-auto max-w-[1180px] px-5 py-8 lg:px-10 lg:py-12">
+        <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
+          {/* LEFT — form sections separated by thin dividers */}
+          <div className="divide-y divide-black/10">
+            {/* Pickup Details */}
+            <section className="pb-7">
+              <SectionTitle>Pickup Details</SectionTitle>
+              <div className="mt-4 flex items-start gap-3">
+                <PinIcon />
+                <div className="flex-1">
+                  <p className="font-bold text-ink">Clovis (Shaw Ave)</p>
+                  <p className="text-sm leading-snug text-ink/70 underline">
+                    3770 Shaw Ave suite 106
+                    <br />
+                    Clovis, CA 93619
                   </p>
                 </div>
-              ) : (
-                <div>
-                  <p className="font-display text-base uppercase text-brand-accent">
-                    Join WaBa Rewards
-                  </p>
-                  <p className="text-xs text-ink/70">
-                    Earn{" "}
-                    <span className="font-bold text-brand-accent">
-                      {earnedPoints.toLocaleString()}
-                    </span>{" "}
-                    points on this order — free food adds up fast.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="mt-5 space-y-4">
-              <Field label="Phone number">
-                <input className={inputCls} placeholder="(123) 456-7890" />
-              </Field>
-              <Field label="Email address">
-                <input className={inputCls} placeholder="shawn@google.com" />
-              </Field>
-              <div className="grid grid-cols-2 gap-4">
-                <Field label="First name">
-                  <input className={inputCls} placeholder="Shawn" />
-                </Field>
-                <Field label="Last name">
-                  <input className={inputCls} placeholder="Jones" />
-                </Field>
+                <button className="shrink-0 rounded-full bg-brand-button px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand">
+                  Change
+                </button>
               </div>
-            </div>
+              <div className="mt-4 flex items-center gap-3">
+                <ClockIcon />
+                <p className="text-sm text-ink/80">ASAP (20–30 Min) · {time}</p>
+              </div>
+            </section>
 
-            {!enrolled && (
-              <label className="mt-4 flex items-center gap-2 text-sm text-ink">
-                <input type="checkbox" defaultChecked className="accent-brand" />
-                Join WaBa Grill rewards and earn{" "}
-                <span className="font-bold text-brand-accent">
-                  {earnedPoints.toLocaleString()}
-                </span>{" "}
-                points on this order.
-              </label>
-            )}
+            {/* Contact Info */}
+            <section className="py-7">
+              <SectionTitle>Contact Info</SectionTitle>
+              <p className="mt-3 text-sm text-ink/80">
+                <Link href="/rewards" className="font-bold text-ink underline">
+                  Sign In
+                </Link>{" "}
+                to use your saved payment and contact information.
+              </p>
 
-            <hr className="my-6 border-black/5" />
+              <div className="my-5 flex items-center gap-4">
+                <span className="h-px flex-1 bg-black/10" />
+                <span className="text-sm font-bold text-ink">
+                  Or continue as guest
+                </span>
+                <span className="h-px flex-1 bg-black/10" />
+              </div>
 
-            <h3 className="font-display text-xl uppercase text-ink">
-              Promo code
-            </h3>
-            <div className="mt-3 flex gap-3">
-              <input className={inputCls} placeholder="Add promo code" />
-              <button className="rounded-lg border border-brand-accent px-6 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
-                Apply
-              </button>
-            </div>
+              {/* Loyalty value reminder */}
+              <div className="mb-4 flex items-center gap-3 rounded-xl bg-[#fff4ee] p-3.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-button text-white">
+                  ★
+                </span>
+                <p className="text-xs text-ink/80">
+                  {enrolled ? (
+                    <>
+                      <span className="font-bold text-ink">{memberName}</span>,
+                      you&apos;ll earn{" "}
+                      <span className="font-bold text-brand-accent">
+                        {earnedPoints.toLocaleString()}
+                      </span>{" "}
+                      points
+                      {nextReward
+                        ? ` — ${pointsToNextReward.toLocaleString()} from ${nextReward.name}.`
+                        : "."}
+                    </>
+                  ) : (
+                    <>
+                      Join WaBa Rewards and earn{" "}
+                      <span className="font-bold text-brand-accent">
+                        {earnedPoints.toLocaleString()}
+                      </span>{" "}
+                      points on this order.
+                    </>
+                  )}
+                </p>
+              </div>
 
-            <h3 className="mt-6 font-display text-xl uppercase text-ink">
-              Gift card
-            </h3>
-            <button className="mt-3 flex items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
-              🎁 Add a gift card
-            </button>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="First Name" defaultValue="John" />
+                <Field label="Last Name" defaultValue="Smith" />
+              </div>
+              <div className="mt-3 space-y-3">
+                <Field
+                  label="Email Address"
+                  type="email"
+                  defaultValue="johnsmith@gmail.com"
+                />
+                <Field label="Mobile Phone Number" defaultValue="(235) 456-7890" />
+              </div>
+            </section>
 
-            <h3 className="mt-6 font-display text-xl uppercase text-ink">
-              Payment method
-            </h3>
-            <div className="mt-3 space-y-3">
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
-                 Pay · Apple Pay
-              </button>
-              <button className="flex w-full items-center gap-2 rounded-lg border border-brand-accent px-5 py-3 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
-                💳 Credit Card
-              </button>
-            </div>
+            {/* Tip */}
+            <section className="py-7">
+              <SectionTitle>Add a Tip</SectionTitle>
+              <p className="mt-1 text-sm text-ink/60">
+                100% of your tip goes to the team.
+              </p>
+              <div className="mt-4 flex gap-2">
+                {TIPS.map((t) => (
+                  <button
+                    key={t.label}
+                    onClick={() => setTipPct(t.pct)}
+                    className={`flex-1 rounded-xl border py-3 text-sm font-bold transition-colors ${
+                      tipPct === t.pct
+                        ? "border-brand-accent bg-brand-accent text-white"
+                        : "border-[#e1e3e6] text-ink hover:border-ink/40"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+                <button className="flex-1 rounded-xl border border-[#e1e3e6] py-3 text-sm font-bold text-ink hover:border-ink/40">
+                  Other
+                </button>
+              </div>
+            </section>
+
+            {/* Promo code */}
+            <section className="py-7">
+              <SectionTitle>Promo Code</SectionTitle>
+              <div className="mt-4 flex gap-3">
+                <label className="flex-1 rounded-xl border border-[#e1e3e6] px-4 py-2.5 transition-colors focus-within:border-ink">
+                  <span className="block text-[11px] font-medium text-ink/50">
+                    Promo code
+                  </span>
+                  <input
+                    placeholder="Enter code"
+                    className="mt-0.5 w-full bg-transparent text-sm font-medium text-ink outline-none placeholder:text-ink/40"
+                  />
+                </label>
+                <button className="shrink-0 rounded-xl border border-brand-accent px-6 text-sm font-bold uppercase text-brand-accent transition-colors hover:bg-brand-accent hover:text-white">
+                  Apply
+                </button>
+              </div>
+            </section>
+
+            {/* Payment */}
+            <section className="pt-7">
+              <SectionTitle>Payment Method</SectionTitle>
+              <div className="mt-4 space-y-3">
+                <PaymentRow
+                  label="Apple Pay"
+                  icon=""
+                  selected={pay === "apple"}
+                  onClick={() => setPay("apple")}
+                />
+                <PaymentRow
+                  label="Credit Card"
+                  icon="💳"
+                  selected={pay === "card"}
+                  onClick={() => setPay("card")}
+                />
+              </div>
+            </section>
           </div>
 
-          {/* RIGHT — order summary */}
-          <div className="lg:sticky lg:top-[24px] lg:self-start">
-            <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-display text-2xl uppercase text-ink">
-                Order summary
-              </h2>
+          {/* RIGHT — order summary card (sticky) */}
+          <div className="lg:sticky lg:top-[140px] lg:self-start">
+            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <h2 className="text-[22px] font-bold text-ink">Order Summary</h2>
 
               <button
                 onClick={() => setShowItems((v) => !v)}
-                className="mt-5 flex w-full items-center justify-between border-b border-black/10 pb-3 text-left"
+                className="mt-4 flex w-full items-center justify-between text-left"
               >
-                <span className="flex items-center gap-2 font-bold text-ink">
-                  🛍 Order ({items.length} item{items.length !== 1 ? "s" : ""})
+                <span className="font-semibold text-ink">
+                  {items.length} Item{items.length !== 1 ? "s" : ""}
                 </span>
-                <span className={showItems ? "rotate-180" : ""}>⌄</span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                  className={showItems ? "rotate-180" : ""}
+                >
+                  <path
+                    d="M6 9l6 6 6-6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
               {showItems && (
-                <div className="border-b border-black/10 py-2">
+                <div className="mt-2 space-y-1">
                   {items.map((it, i) => (
                     <div
                       key={`${it.name}-${i}`}
-                      className="flex justify-between py-1 text-sm text-ink/80"
+                      className="flex justify-between text-sm text-ink/80"
                     >
                       <span>{it.name}</span>
                       <span>{money(it.price)}</span>
@@ -261,9 +328,30 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              <div className="flex items-center justify-between border-b border-black/10 py-3">
-                <span className="flex items-center gap-2 font-bold text-ink">
-                  🍴 Include utensils
+              <div className="mt-4 space-y-2 border-t border-black/10 pt-4 text-sm">
+                <Row label="Subtotal" value={money(totals.subtotal)} />
+                {totals.reward < 0 && (
+                  <Row
+                    label={totals.rewardLabel}
+                    value={`-${money(Math.abs(totals.reward))}`}
+                    muted
+                  />
+                )}
+                {totals.offer < 0 && (
+                  <Row
+                    label={totals.offerLabel}
+                    value={`-${money(Math.abs(totals.offer))}`}
+                    muted
+                  />
+                )}
+                <Row label="Taxes & Fees" value={money(totals.taxes)} muted />
+                <Row label="Tip" value={money(totals.tip)} muted />
+              </div>
+
+              {/* Utensils */}
+              <div className="mt-3 flex items-center justify-between border-t border-black/10 pt-3">
+                <span className="text-sm font-medium text-ink">
+                  Include utensils
                 </span>
                 <button
                   role="switch"
@@ -281,59 +369,7 @@ export default function CheckoutPage() {
                 </button>
               </div>
 
-              <div className="space-y-2 py-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-ink/70">Order subtotal</span>
-                  <span className="font-semibold text-ink">
-                    {money(totals.subtotal)}
-                  </span>
-                </div>
-                {totals.reward < 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-ink/70">{totals.rewardLabel}</span>
-                    <span className="text-ink/70">
-                      -{money(Math.abs(totals.reward))}
-                    </span>
-                  </div>
-                )}
-                {totals.offer < 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-ink/70">{totals.offerLabel}</span>
-                    <span className="text-ink/70">
-                      -{money(Math.abs(totals.offer))}
-                    </span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-ink/70">Taxes &amp; Fees</span>
-                  <span className="text-ink/70">{money(totals.taxes)}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-ink">Tip</span>
-                <span className="font-bold text-ink">{money(totals.tip)}</span>
-              </div>
-              <div className="mt-3 flex gap-2">
-                {TIPS.map((t) => (
-                  <button
-                    key={t.label}
-                    onClick={() => setTipPct(t.pct)}
-                    className={`flex-1 rounded-lg border py-2 text-sm font-bold transition-colors ${
-                      tipPct === t.pct
-                        ? "border-brand-accent bg-brand-accent text-white"
-                        : "border-[#e5e7eb] text-ink hover:border-ink/40"
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-                <button className="flex-1 rounded-lg border border-[#e5e7eb] py-2 text-sm font-bold text-ink">
-                  Other
-                </button>
-              </div>
-
-              <div className="mt-5 flex items-center justify-between border-t border-black/10 pt-4">
+              <div className="mt-4 flex items-center justify-between border-t border-black/10 pt-4">
                 <span className="font-bold text-ink">Total</span>
                 <span className="text-lg font-bold text-ink">
                   {money(totals.total)}
@@ -346,26 +382,94 @@ export default function CheckoutPage() {
                   setPlaced(true);
                   window.scrollTo({ top: 0 });
                 }}
-                className="mt-4 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand-accent hover:shadow-xl active:scale-[0.98]"
+                className="mt-5 w-full rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-brand active:translate-y-0 active:scale-[0.98]"
               >
-                Place your order
+                Place order · {money(totals.total)}
               </button>
-              <p className="mt-3 text-center text-xs text-ink/70">
+              <p className="mt-3 text-center text-xs text-ink/60">
                 ⚙ {enrolled ? "You're earning" : "Join to earn"}{" "}
                 <span className="font-bold text-brand-accent">
                   {earnedPoints.toLocaleString()}
                 </span>{" "}
                 points on this order
-                {enrolled && nextReward
-                  ? ` · ${pointsToNextReward.toLocaleString()} from ${nextReward.name}`
-                  : ""}
               </p>
             </div>
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
+  );
+}
+
+function Row({
+  label,
+  value,
+  muted,
+}: {
+  label: string;
+  value: string;
+  muted?: boolean;
+}) {
+  return (
+    <div className="flex justify-between">
+      <span className={muted ? "text-ink/60" : "font-semibold text-ink"}>
+        {label}
+      </span>
+      <span className={muted ? "text-ink/60" : "font-semibold text-ink"}>
+        {value}
+      </span>
+    </div>
+  );
+}
+
+function PaymentRow({
+  label,
+  icon,
+  selected,
+  onClick,
+}: {
+  label: string;
+  icon: string;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-colors ${
+        selected ? "border-ink bg-bone" : "border-[#e1e3e6] hover:border-ink/40"
+      }`}
+    >
+      <span
+        className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${
+          selected ? "border-brand-accent" : "border-black/25"
+        }`}
+      >
+        {selected && <span className="h-2.5 w-2.5 rounded-full bg-brand-accent" />}
+      </span>
+      <span aria-hidden>{icon}</span>
+      <span className="text-sm font-semibold text-ink">{label}</span>
+    </button>
+  );
+}
+
+function PinIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="mt-0.5 shrink-0">
+      <path
+        d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"
+        stroke="#222323"
+        strokeWidth="1.8"
+      />
+      <circle cx="12" cy="10" r="2.4" stroke="#222323" strokeWidth="1.8" />
+    </svg>
+  );
+}
+function ClockIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden className="shrink-0">
+      <circle cx="12" cy="12" r="9" stroke="#222323" strokeWidth="1.8" />
+      <path d="M12 7v5l3 2" stroke="#222323" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
   );
 }
