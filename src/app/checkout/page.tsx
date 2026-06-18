@@ -39,10 +39,21 @@ const inputCls =
 export default function CheckoutPage() {
   const cart = useCart();
   const { items, totals, utensils, setUtensils, tipPct, setTipPct, time } = cart;
-  const { enrolled, memberName, pointsToNextReward, nextReward, activeChallenge } =
-    useLoyalty();
+  const {
+    enrolled,
+    memberName,
+    pointsToNextReward,
+    nextReward,
+    activeChallenge,
+    recordOrder,
+  } = useLoyalty();
   const earnedPoints = pointsForSubtotal(totals.subtotal);
   const [placed, setPlaced] = useState(false);
+  const [orderResult, setOrderResult] = useState<{
+    challengeTitle: string;
+    completed: boolean;
+    awarded: number;
+  } | null>(null);
   const [showItems, setShowItems] = useState(false);
 
   if (placed) {
@@ -67,8 +78,26 @@ export default function CheckoutPage() {
           </h1>
           <p className="mt-3 max-w-md text-ink/70">
             Thanks! Your WaBa Grill order is being prepared for pickup at Clovis
-            (Shaw Ave). You earned 17 points on this order.
+            (Shaw Ave). You earned {earnedPoints.toLocaleString()} points on this
+            order.
           </p>
+          {orderResult &&
+            (orderResult.completed ? (
+              <div className="mt-5 max-w-md rounded-2xl border border-brand-accent bg-brand/5 px-5 py-4">
+                <p className="font-bold text-ink">
+                  🎉 Challenge complete: {orderResult.challengeTitle}
+                </p>
+                <p className="mt-1 text-sm text-ink/70">
+                  {orderResult.awarded > 0
+                    ? `You earned ${orderResult.awarded.toLocaleString()} bonus points!`
+                    : "Reward unlocked!"}
+                </p>
+              </div>
+            ) : (
+              <p className="mt-3 max-w-md text-sm font-semibold text-brand-accent">
+                Challenge progress updated — keep it going!
+              </p>
+            ))}
           <Link
             href="/menu"
             className="mt-8 rounded-full bg-brand-button px-10 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-accent"
@@ -342,6 +371,12 @@ export default function CheckoutPage() {
 
               <button
                 onClick={() => {
+                  const res = recordOrder();
+                  setOrderResult({
+                    challengeTitle: res.challenge.title,
+                    completed: res.completed,
+                    awarded: res.awarded,
+                  });
                   cart.setItems(() => []);
                   setPlaced(true);
                   window.scrollTo({ top: 0 });

@@ -14,7 +14,7 @@ import {
   memberRewards,
   redeemedRewards,
   offers,
-  challenges,
+  type Challenge,
   type Offer,
   type Reward,
 } from "./loyalty-data";
@@ -36,6 +36,7 @@ export function LoyaltyHub() {
     pointsToNextTier,
     nextReward,
     pointsToNextReward,
+    challenges,
     selectedReward,
     selectReward,
     selectOffer,
@@ -367,13 +368,22 @@ function OfferCard({ offer, onAct }: { offer: Offer; onAct: () => void }) {
   );
 }
 
-function ChallengeCard({ challenge: c }: { challenge: (typeof challenges)[number] }) {
+function ChallengeCard({ challenge: c }: { challenge: Challenge }) {
+  const done = c.progress >= c.target;
   const pct = Math.round((c.progress / c.target) * 100);
   return (
-    <article className="flex flex-col rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+    <article
+      className={`flex flex-col rounded-2xl border bg-white p-6 shadow-sm ${
+        done ? "border-brand-button" : "border-black/10"
+      }`}
+    >
       <div className="flex items-center justify-between">
-        <span className="rounded-full bg-gold/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink">
-          {c.kind === "streak" ? "Streak" : "Challenge"}
+        <span
+          className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide ${
+            done ? "bg-brand-button text-white" : "bg-gold/20 text-ink"
+          }`}
+        >
+          {done ? "Completed ✓" : c.kind === "streak" ? "Streak" : "Challenge"}
         </span>
         <span className="text-[11px] font-bold uppercase tracking-wide text-brand-accent">
           {c.rewardText}
@@ -407,9 +417,17 @@ function ChallengeCard({ challenge: c }: { challenge: (typeof challenges)[number
         </div>
       )}
 
-      <div className="mt-5 flex items-center gap-2 rounded-xl bg-bone px-4 py-3">
-        <span aria-hidden className="text-brand-accent">→</span>
-        <p className="text-sm font-semibold text-ink">{c.nextAction}</p>
+      <div
+        className={`mt-5 flex items-center gap-2 rounded-xl px-4 py-3 ${
+          done ? "bg-brand/5" : "bg-bone"
+        }`}
+      >
+        <span aria-hidden className="text-brand-accent">
+          {done ? "★" : "→"}
+        </span>
+        <p className="text-sm font-semibold text-ink">
+          {done ? `Reward unlocked — ${c.rewardText}!` : c.nextAction}
+        </p>
       </div>
       <p className="mt-3 text-[11px] font-medium uppercase tracking-wide text-ink/50">
         {c.timeframe}
