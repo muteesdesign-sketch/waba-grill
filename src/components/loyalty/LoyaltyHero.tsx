@@ -37,18 +37,6 @@ function PreviewToggle() {
   );
 }
 
-/** Small "Powered by Punchh" badge shown next to Register Now. */
-function PunchhBadge() {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white px-2.5 py-1.5 shadow-sm">
-      <span className="flex h-5 w-5 items-center justify-center rounded bg-[#2b2350] font-display text-[11px] leading-none text-white">
-        P
-      </span>
-      <span className="text-sm font-bold text-[#2b2350]">Punchh</span>
-    </span>
-  );
-}
-
 export function LoyaltyHero() {
   const { enrolled, memberName, points } = useLoyalty();
   const [showRegister, setShowRegister] = useState(false);
@@ -102,8 +90,7 @@ export function LoyaltyHero() {
                 </Button>
               </div>
             ) : (
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                {/* Register Now (dark CTA) + Punchh badge, per the page structure */}
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
                   onClick={() => {
@@ -111,19 +98,17 @@ export function LoyaltyHero() {
                     setShowRegister(true);
                   }}
                   aria-expanded={showRegister}
-                  className="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 active:scale-[0.98]"
+                  className="inline-flex items-center justify-center rounded-full bg-brand-button px-9 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-brand active:translate-y-0 active:scale-[0.97]"
                 >
                   Register Now
-                  <span aria-hidden>↗</span>
                 </button>
-                <PunchhBadge />
                 <button
                   type="button"
                   onClick={() => {
                     setAuthMode("login");
                     setShowRegister(true);
                   }}
-                  className="text-sm font-bold uppercase tracking-wide text-white underline-offset-4 hover:underline"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-9 py-4 text-sm font-bold uppercase tracking-wide text-ink shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-bone active:translate-y-0 active:scale-[0.97]"
                 >
                   Log in
                 </button>
