@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "./CartProvider";
 import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
+import { memberRewards, offers } from "@/components/loyalty/loyalty-data";
 
 const TIMES = ["ASAP (25-30 min)", "12:00pm", "12:30pm", "1:00pm", "1:30pm"];
 const TIPS = [
@@ -30,11 +31,10 @@ export function CartDrawer({
     setTipPct,
     utensils,
     setUtensils,
-    freeDrink,
-    setFreeDrink,
     totals,
   } = useCart();
-  const { selectedReward, selectedOffer, selectOffer } = useLoyalty();
+  const { selectedReward, selectReward, selectedOffer, selectOffer } =
+    useLoyalty();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -165,57 +165,54 @@ export function CartDrawer({
             </Link>
           </div>
 
-          {/* Rewards */}
+          {/* Rewards — point/earned rewards, one applies at a time */}
           <div className="mt-7 flex items-center gap-2">
-            <span className="text-brand-accent">⚙</span>
-            <h3 className="font-bold text-ink">Your rewards and offers</h3>
+            <span className="text-brand-accent">★</span>
+            <h3 className="font-bold text-ink">Rewards</h3>
           </div>
-          {selectedReward && (
-            <div className="mt-3 flex items-center justify-between gap-2 rounded-xl border border-brand-accent bg-brand/5 px-4 py-3">
-              <span className="text-sm font-semibold text-ink">
-                <span className="text-brand-accent">★</span>{" "}
-                {selectedReward.name}
-              </span>
-              <span className="text-[11px] font-bold uppercase tracking-wide text-brand-accent">
-                Applied
-              </span>
-            </div>
-          )}
-          {selectedOffer && (
-            <div className="mt-3 rounded-xl border border-brand-accent bg-brand/5 px-4 py-3">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-semibold text-ink">
-                  <span className="rounded bg-brand-button px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
-                    {selectedOffer.badge}
-                  </span>{" "}
-                  {selectedOffer.title}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => selectOffer(null)}
-                  className="text-[11px] font-bold uppercase tracking-wide text-brand-accent hover:underline"
-                >
-                  Remove
-                </button>
-              </div>
-              {/* Help the customer understand what's missing for complex offers */}
-              {!items.some((i) => /drink|lemonade|pepsi|aquafina|soda|tea|water/i.test(i.name)) && (
-                <p className="mt-2 text-xs font-medium text-brand-accent">
-                  ⚠ Add a drink to unlock this offer.
-                </p>
-              )}
-            </div>
-          )}
           <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto pb-1">
-            <RewardCard label="5% off" sub="Used by 10/26" />
-            <RewardCard
-              label="Free drink"
-              added={freeDrink}
-              onToggle={() => setFreeDrink(!freeDrink)}
-              highlight
-            />
-            <RewardCard label="Free cookie" />
+            {memberRewards.map((r) => {
+              const added = selectedReward?.id === r.id;
+              return (
+                <RewardCard
+                  key={r.id}
+                  label={r.name}
+                  sub={r.eligibility ?? `$${r.value.toFixed(2)} value`}
+                  added={added}
+                  onToggle={() => selectReward(added ? null : r)}
+                />
+              );
+            })}
           </div>
+
+          {/* Offers — campaign offers, one applies at a time */}
+          <div className="mt-6 flex items-center gap-2">
+            <span className="text-brand-accent">%</span>
+            <h3 className="font-bold text-ink">Offers</h3>
+          </div>
+          <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto pb-1">
+            {offers.map((o) => {
+              const added = selectedOffer?.id === o.id;
+              return (
+                <RewardCard
+                  key={o.id}
+                  label={o.title}
+                  sub={`Exp ${o.expires}`}
+                  badge={o.badge}
+                  added={added}
+                  onToggle={() => selectOffer(added ? null : o)}
+                />
+              );
+            })}
+          </div>
+          {selectedOffer?.kind === "cart" &&
+            !items.some((i) =>
+              /drink|lemonade|pepsi|aquafina|soda|tea|water/i.test(i.name),
+            ) && (
+              <p className="mt-2 text-xs font-medium text-brand-accent">
+                ⚠ Add a drink to unlock &ldquo;{selectedOffer.title}&rdquo;.
+              </p>
+            )}
 
           {/* Utensils */}
           <div className="mt-6 flex items-center justify-between border-y border-black/5 py-4">
@@ -324,27 +321,34 @@ function Row({
 function RewardCard({
   label,
   sub,
+  badge,
   added,
-  highlight,
   onToggle,
 }: {
   label: string;
   sub?: string;
+  badge?: string;
   added?: boolean;
-  highlight?: boolean;
   onToggle?: () => void;
 }) {
   return (
     <div
-      className={`flex w-[120px] shrink-0 flex-col items-center rounded-xl border-2 p-3 text-center ${
-        highlight ? "border-brand" : "border-[#e5e7eb]"
+      className={`flex w-[128px] shrink-0 flex-col items-center rounded-xl border-2 p-3 text-center transition-colors ${
+        added ? "border-brand" : "border-[#e5e7eb]"
       }`}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand font-display text-2xl text-white">
+      <div className="relative flex h-12 w-12 items-center justify-center rounded-lg bg-brand font-display text-2xl text-white">
         W
+        {badge && (
+          <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink px-1.5 py-0.5 text-[8px] font-bold uppercase leading-none text-white">
+            {badge}
+          </span>
+        )}
       </div>
-      <span className="mt-2 text-xs font-bold text-ink">{label}</span>
-      {sub && <span className="text-[10px] text-ink/70">{sub}</span>}
+      <span className="mt-3 line-clamp-2 text-xs font-bold leading-tight text-ink">
+        {label}
+      </span>
+      {sub && <span className="mt-0.5 text-[10px] text-ink/70">{sub}</span>}
       <button
         onClick={onToggle}
         className={`mt-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase ${
@@ -353,7 +357,7 @@ function RewardCard({
             : "border border-[#e5e7eb] text-ink hover:border-ink/40"
         }`}
       >
-        {added ? "Added" : "Redeem"}
+        {added ? "Added" : "Apply"}
       </button>
     </div>
   );
