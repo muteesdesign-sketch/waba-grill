@@ -295,6 +295,68 @@ export const SAMPLE_MEMBER = {
   lifetimePoints: 4120,
 };
 
+// The member's recent orders (for the "Recent orders / quick reorder" row).
+export const recentOrderNames = [
+  "Steak Bowl",
+  "Chicken Bowl",
+  "Dual Protein Bowl",
+  "Sweet & Spicy Bowl",
+];
+
+// Personalized offers shown in the logged-in home "YOUR OFFERS" section.
+export type PersonalOffer = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  desc: string;
+  timer?: string;
+  timerLabel?: string;
+  cta: string;
+  icon: string;
+  productName?: string;
+};
+
+export const personalizedOffers: PersonalOffer[] = [
+  {
+    id: "lunch-drink",
+    eyebrow: "Lunch special",
+    title: "Add a drink for only $1",
+    desc: "With any bowl order. You usually skip drinks — today's a great day to hydrate.",
+    timer: "02:17:34",
+    timerLabel: "Remaining",
+    cta: "Claim offer",
+    icon: "🥤",
+  },
+  {
+    id: "shrimp-3x",
+    eyebrow: "Rewards boost",
+    title: "3X Points on Shrimp Bowl",
+    desc: "You haven't had it in 13 days. Today only: earn 3x points on any Shrimp Bowl.",
+    cta: "Order now",
+    icon: "★",
+    productName: "Shrimp Bowl",
+  },
+  {
+    id: "birthday-veggie",
+    eyebrow: "Birthday month offer",
+    title: "Free Veggie Bowl — on us",
+    desc: "Happy birthday month, Juan! Redeem your free bowl before the 30th.",
+    timer: "9 DAYS",
+    timerLabel: "to Redeem",
+    cta: "Redeem free bowl",
+    icon: "🎂",
+    productName: "Veggie Bowl",
+  },
+];
+
+// Points milestones for the hero rewards-progress bar.
+export const REWARDS_GOAL = 2500;
+export const rewardMilestones = [
+  { label: "Free Drink", at: 1250 },
+  { label: "Free Side", at: 1800 },
+  { label: "Free Bowl", at: 2500 },
+];
+
 // ---- Cross-journey helpers ------------------------------------------------
 const categoryOfProduct = (name: string) =>
   menuCategories.find((c) => c.items.some((i) => i.name === name))?.id;
