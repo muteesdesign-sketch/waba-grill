@@ -103,39 +103,121 @@ export function HeroLoggedIn() {
       </div>
 
       {/* RIGHT — your favorite bowl (quick reorder) */}
-      <div className="relative flex flex-col items-center justify-center bg-bone px-6 py-12 text-center lg:px-14 lg:py-16">
-        <div className="relative aspect-square w-full max-w-[420px]">
-          {fav && (
-            <Image src={fav.image} alt={fav.name} fill className="object-contain" />
-          )}
+      <div className="relative flex flex-col items-center justify-center bg-[#eceef1] px-6 py-12 text-center lg:px-12 lg:py-14">
+        {/* Stage: bowl with hand-drawn callouts */}
+        <div className="relative w-full max-w-[460px]">
+          <div className="relative aspect-square w-full">
+            {fav && (
+              <Image
+                src={fav.image}
+                alt={fav.name}
+                fill
+                className="object-contain"
+              />
+            )}
+          </div>
+
+          {/* Callout pills + arrows (desktop / tablet only) */}
+          <div className="pointer-events-none absolute inset-0 hidden sm:block">
+            <Callout className="left-0 top-1" icon="🔥" label="680 cal" />
+            <Callout className="right-0 top-1" icon="🌶️" label="Sweet Chili Sauce" />
+            <Callout className="bottom-[14%] left-0" icon="🍗" label="Grilled chicken" />
+
+            {/* down-right (from 680 cal) */}
+            <Arrow
+              className="absolute left-[14%] top-[16%] h-20 w-20"
+              main="M22 6 C 6 26 38 30 24 48 C 16 60 40 58 70 92"
+              head="M70 92 L 52 90 M70 92 L 64 74"
+            />
+            {/* down-left (from Sweet Chili Sauce) */}
+            <Arrow
+              className="absolute right-[12%] top-[18%] h-20 w-20"
+              main="M78 6 C 94 26 62 30 76 48 C 84 60 60 58 30 92"
+              head="M30 92 L 48 90 M30 92 L 36 74"
+            />
+            {/* up-right (from Grilled chicken) */}
+            <Arrow
+              className="absolute bottom-[22%] left-[16%] h-20 w-20"
+              main="M16 92 C 4 70 34 70 22 50 C 14 36 40 40 72 14"
+              head="M72 14 L 54 16 M72 14 L 66 30"
+            />
+          </div>
         </div>
-        <p className="font-script text-[26px] leading-none text-brand lg:text-[32px]">
+
+        <p className="-rotate-2 font-script text-[30px] leading-none text-ink lg:text-[40px]">
           Your favorite bowl!
         </p>
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-          <span className="rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-md bg-brand-button px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
             Most ordered
           </span>
-          <span className="rounded-full bg-brand-button px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+          <span className="rounded-md bg-gold px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-ink">
             +50 pts today
           </span>
         </div>
-        <h2 className="mt-2 font-display text-4xl uppercase text-ink">
-          {fav?.name ?? "Chicken Bowl"}
+        <h2 className="mt-3 font-display text-[40px] uppercase leading-none text-ink lg:text-[52px]">
+          Chicken Bowl
         </h2>
-        <p className="text-lg font-bold text-ink">{fav?.price ?? "$10.49"}</p>
-        <p className="mt-1 max-w-[360px] text-sm text-ink/70">
-          {fav?.description ??
-            "Grilled chicken, your choice of rice, WaBa sauce, fresh veggies."}
+        <p className="mt-2 text-2xl font-bold text-brand">$12.49</p>
+        <p className="mt-2 max-w-[420px] text-base text-ink/80">
+          Grilled chicken, your choice of rice, WaBa sauce, fresh veggies
         </p>
         <button
           type="button"
           onClick={() => fav && openPDP(fav)}
-          className="mt-5 w-full max-w-[360px] rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-brand active:translate-y-0 active:scale-[0.98]"
+          className="mt-5 w-full max-w-[520px] rounded-full bg-brand-button py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-brand active:translate-y-0 active:scale-[0.98]"
         >
           Reorder
         </button>
       </div>
     </section>
+  );
+}
+
+function Callout({
+  className,
+  icon,
+  label,
+}: {
+  className: string;
+  icon: string;
+  label: string;
+}) {
+  return (
+    <span
+      className={`absolute inline-flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-sm font-bold text-ink shadow-md ${className}`}
+    >
+      <span aria-hidden>{icon}</span>
+      {label}
+    </span>
+  );
+}
+
+function Arrow({
+  className,
+  main,
+  head,
+}: {
+  className: string;
+  main: string;
+  head: string;
+}) {
+  return (
+    <svg viewBox="0 0 100 100" fill="none" aria-hidden className={className}>
+      <path
+        d={main}
+        stroke="#ED1C23"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d={head}
+        stroke="#ED1C23"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
