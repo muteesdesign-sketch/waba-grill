@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { distressStyle } from "@/lib/distress";
 import { useLoyalty } from "./LoyaltyProvider";
 import { POINTS_PER_DOLLAR } from "./loyalty-data";
-import { LinkPanel } from "./AccountLinking";
+import { AuthPanel } from "./AuthPanel";
 
 /** Demo-only control to preview the page as a guest or a signed-in member. */
 function PreviewToggle() {
@@ -52,6 +52,7 @@ function PunchhBadge() {
 export function LoyaltyHero() {
   const { enrolled, memberName, points } = useLoyalty();
   const [showRegister, setShowRegister] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
 
   return (
     <section id="header" className="relative overflow-hidden bg-ink text-white">
@@ -105,7 +106,10 @@ export function LoyaltyHero() {
                 {/* Register Now (dark CTA) + Punchh badge, per the page structure */}
                 <button
                   type="button"
-                  onClick={() => setShowRegister((v) => !v)}
+                  onClick={() => {
+                    setAuthMode("signup");
+                    setShowRegister(true);
+                  }}
                   aria-expanded={showRegister}
                   className="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 active:scale-[0.98]"
                 >
@@ -115,7 +119,10 @@ export function LoyaltyHero() {
                 <PunchhBadge />
                 <button
                   type="button"
-                  onClick={() => setShowRegister((v) => !v)}
+                  onClick={() => {
+                    setAuthMode("login");
+                    setShowRegister(true);
+                  }}
                   className="text-sm font-bold uppercase tracking-wide text-white underline-offset-4 hover:underline"
                 >
                   Log in
@@ -164,29 +171,18 @@ export function LoyaltyHero() {
           </div>
         </div>
 
-        {/* Inline register / link panel (Punchh + Thanx) */}
+        {/* Inline auth panel — social + email login / signup */}
         {!enrolled && showRegister && (
           <div className="relative mt-10 rounded-3xl bg-white p-6 text-ink shadow-2xl lg:p-8">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <div>
-                <h2 className="font-display text-2xl uppercase text-ink">
-                  Register or log in
-                </h2>
-                <p className="mt-1 text-sm text-ink/70">
-                  Powered by Punchh — link an existing account or create a new
-                  one.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowRegister(false)}
-                aria-label="Close"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-bone text-ink hover:bg-black/10"
-              >
-                ✕
-              </button>
-            </div>
-            <LinkPanel />
+            <button
+              type="button"
+              onClick={() => setShowRegister(false)}
+              aria-label="Close"
+              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-bone text-ink hover:bg-black/10"
+            >
+              ✕
+            </button>
+            <AuthPanel key={authMode} initialMode={authMode} />
           </div>
         )}
       </div>
