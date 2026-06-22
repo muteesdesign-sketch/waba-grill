@@ -6,10 +6,18 @@ const explore = [
   "Locations",
   "Catering",
   "Rewards",
+  "How Rewards Work",
   "Gift Cards",
   "Do not sell",
   "Nutrition and allergies",
 ];
+
+const hrefFor: Record<string, string> = {
+  Menu: "/menu",
+  Rewards: "/rewards",
+  "How Rewards Work": "/how-rewards-work",
+  "Gift Cards": "/giftcard",
+};
 
 const about = [
   "Our Story",
@@ -64,7 +72,10 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
       <ul className="mt-3 flex flex-col gap-2.5">
         {items.map((item) => (
           <li key={item}>
-            <Link href="#" className="text-sm text-white/80 hover:text-white">
+            <Link
+              href={hrefFor[item] ?? "#"}
+              className="text-sm text-white/80 hover:text-white"
+            >
               {item}
             </Link>
           </li>
