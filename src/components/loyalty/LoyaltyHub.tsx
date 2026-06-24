@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SectionHeading } from "./SectionHeading";
+import { PreviewToggle } from "./PreviewToggle";
 import { useLoyalty } from "./LoyaltyProvider";
 import { useCart } from "@/components/cart/CartProvider";
 import { useProductModal } from "@/components/pdp/ProductModalProvider";
@@ -81,6 +82,9 @@ export function LoyaltyHub() {
       className="scroll-mt-[110px] bg-bone px-6 py-14 lg:px-10 lg:py-20"
     >
       <div className="mx-auto max-w-[1180px]">
+        <div className="mb-4 flex justify-end">
+          <PreviewToggle tone="onLight" />
+        </div>
         <SectionHeading eyebrow={`Welcome back, ${memberName}`} title="Your loyalty hub" />
 
         {/* Tabs */}

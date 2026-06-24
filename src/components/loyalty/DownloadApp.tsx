@@ -41,20 +41,10 @@ export function DownloadApp() {
   return (
     <section
       id="download-app"
-      className="relative overflow-hidden bg-brand px-4 py-6 lg:px-10 lg:py-16"
+      className="relative overflow-hidden bg-white px-4 py-6 lg:px-10 lg:py-16"
     >
-      {/* Red palm-tree backdrop, anchored at the bottom (shows around the card) */}
-      <Image
-        src="/images/rewards-bg.png"
-        alt=""
-        width={1440}
-        height={725}
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 w-full select-none"
-      />
-
-      {/* White halftone card holding all the content (matches the homepage block) */}
-      <div className="relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-white shadow-xl">
+      {/* White halftone card holding all the content */}
+      <div className="relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-white shadow-xl ring-1 ring-black/5">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,#d8d8d8_1.4px,transparent_1.4px)] opacity-50 [background-size:14px_14px]" />
 
         <div className="relative lg:flex lg:items-center lg:gap-10 lg:p-12">

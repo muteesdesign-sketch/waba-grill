@@ -59,7 +59,7 @@ function SocialButton({
 }
 
 export function AuthPanel({ initialMode = "signup" }: { initialMode?: Mode }) {
-  const { setEnrolled } = useLoyalty();
+  const { signUp, previewMember } = useLoyalty();
   const [mode, setMode] = useState<Mode>(initialMode);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -71,7 +71,12 @@ export function AuthPanel({ initialMode = "signup" }: { initialMode?: Mode }) {
     password: "",
   });
 
-  const finish = () => window.setTimeout(() => setEnrolled(true), 900);
+  // Sign-up creates a fresh account; log-in restores the returning member.
+  const finish = () =>
+    window.setTimeout(() => {
+      if (mode === "signup") signUp(form.first);
+      else previewMember();
+    }, 900);
   const social = (provider: string) => {
     setError("");
     setBusy(provider);

@@ -4,6 +4,14 @@
 // repeat ordering.
 import { menuCategories } from "@/app/menu/menu-data";
 
+// Real product photos, keyed by product name — so rewards/offers show the
+// actual menu image instead of a generic placeholder.
+const menuImageByName = new Map<string, string | undefined>(
+  menuCategories.flatMap((c) => c.items.map((i) => [i.name, i.image] as const)),
+);
+export const imageForProduct = (name: string): string | undefined =>
+  menuImageByName.get(name);
+
 // ---- Rewards (point-redeemable, never expire) -----------------------------
 // kind "item"  → redeeming opens the relevant product detail page
 // kind "order" → redeeming opens the cart and applies an order-level discount
@@ -64,8 +72,8 @@ export const rewardCatalog: Reward[] = [
     value: 3.29,
     kind: "item",
     desc: "Any fountain drink or bottled beverage, on us.",
-    image: "/images/bowl-grilled.png",
-    productName: "Chicken Bowl",
+    image: imageForProduct("Fountain Beverage"),
+    productName: "Fountain Beverage",
   },
   {
     id: "free-side",
@@ -74,8 +82,8 @@ export const rewardCatalog: Reward[] = [
     value: 3.99,
     kind: "item",
     desc: "Add a side of your choice at no charge.",
-    image: "/images/offer-protein.png",
-    productName: "Steak Bowl",
+    image: imageForProduct("Side Salad"),
+    productName: "Side Salad",
   },
   {
     id: "five-off",
@@ -84,7 +92,7 @@ export const rewardCatalog: Reward[] = [
     value: 5,
     kind: "order",
     desc: "Take $5 off any order — applied in your cart.",
-    image: "/images/offer-protein.png",
+    image: imageForProduct("Dual Protein Bowl"),
   },
   {
     id: "free-bowl",
@@ -93,7 +101,7 @@ export const rewardCatalog: Reward[] = [
     value: 10.19,
     kind: "item",
     desc: "Any signature bowl — the top reward. Chicken, steak, tofu or veggie.",
-    image: "/images/bowl-chicken.png",
+    image: imageForProduct("Chicken Bowl"),
     productName: "Chicken Bowl",
   },
 ];
@@ -107,8 +115,8 @@ export const memberRewards: Reward[] = [
     value: 3.29,
     kind: "item",
     desc: "Thanks for joining! Redeem on any order.",
-    image: "/images/bowl-grilled.png",
-    productName: "Chicken Bowl",
+    image: imageForProduct("Fountain Beverage"),
+    productName: "Fountain Beverage",
   },
   {
     id: "birthday-bowl",
@@ -117,7 +125,7 @@ export const memberRewards: Reward[] = [
     value: 10.19,
     kind: "item",
     desc: "A free signature bowl during your birthday month.",
-    image: "/images/bowl-chicken.png",
+    image: imageForProduct("Chicken Bowl"),
     productName: "Chicken Bowl",
     eligibility: "Birthday month only",
   },
@@ -128,7 +136,7 @@ export const memberRewards: Reward[] = [
     value: 5,
     kind: "order",
     desc: "Redeemed from your points — applied at checkout.",
-    image: "/images/offer-protein.png",
+    image: imageForProduct("Steak Bowl"),
   },
 ];
 
@@ -153,7 +161,7 @@ export const offers: Offer[] = [
     cta: "Shop dumplings",
     ctaTarget: "menu",
     category: "dumplings",
-    image: "/images/offer-protein.png",
+    image: imageForProduct("Dumplings (5)"),
   },
   {
     id: "double-points",
@@ -168,7 +176,7 @@ export const offers: Offer[] = [
     ctaTarget: "menu",
     multiplier: 2,
     category: "bowls",
-    image: "/images/bowl-steak.png",
+    image: imageForProduct("Steak Bowl"),
   },
   {
     id: "bowl-drink",
@@ -182,7 +190,7 @@ export const offers: Offer[] = [
     cta: "Apply in cart",
     ctaTarget: "cart",
     value: 3.29,
-    image: "/images/bowl-grilled.png",
+    image: imageForProduct("Fountain Beverage"),
   },
   {
     id: "new-sweet-spicy",
@@ -196,7 +204,7 @@ export const offers: Offer[] = [
     cta: "View item",
     ctaTarget: "pdp",
     productName: "Sweet & Spicy Bowl",
-    image: "/images/bowl-chicken-steak.png",
+    image: imageForProduct("Sweet & Spicy Bowl"),
   },
 ];
 

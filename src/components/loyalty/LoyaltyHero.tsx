@@ -1,46 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
 import { asset } from "@/lib/asset";
 import { distressStyle } from "@/lib/distress";
 import { useLoyalty } from "./LoyaltyProvider";
 import { POINTS_PER_DOLLAR } from "./loyalty-data";
 import { AuthPanel } from "./AuthPanel";
-
-/** Demo-only control to preview the page as a guest or a signed-in member. */
-function PreviewToggle() {
-  const { enrolled, setEnrolled } = useLoyalty();
-  return (
-    <div className="inline-flex items-center gap-1 rounded-full bg-black/20 p-1 text-xs font-bold uppercase tracking-wide backdrop-blur">
-      <button
-        type="button"
-        onClick={() => setEnrolled(false)}
-        aria-pressed={!enrolled}
-        className={`rounded-full px-3 py-1.5 transition-colors ${
-          !enrolled ? "bg-white text-ink" : "text-white/80 hover:text-white"
-        }`}
-      >
-        Guest
-      </button>
-      <button
-        type="button"
-        onClick={() => setEnrolled(true)}
-        aria-pressed={enrolled}
-        className={`rounded-full px-3 py-1.5 transition-colors ${
-          enrolled ? "bg-white text-ink" : "text-white/80 hover:text-white"
-        }`}
-      >
-        Member
-      </button>
-    </div>
-  );
-}
+import { PreviewToggle } from "./PreviewToggle";
 
 export function LoyaltyHero() {
-  const { enrolled, memberName, points } = useLoyalty();
+  const { enrolled, activeChallenge } = useLoyalty();
   const [showRegister, setShowRegister] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
+
+  // Members go straight to the Loyalty Hub — no hero for them.
+  if (enrolled) return null;
 
   return (
     <section id="header" className="relative overflow-hidden bg-ink text-white">
@@ -67,7 +41,7 @@ export function LoyaltyHero() {
         <div className="lg:flex lg:items-center lg:gap-12">
           <div className="lg:w-1/2">
             <p className="font-script text-[34px] leading-none text-brand lg:text-[44px]">
-              {enrolled ? `Welcome back, ${memberName}` : "Eat well, earn more"}
+              Eat well, earn more
             </p>
             <h1
               className="mt-1 font-display text-[52px] uppercase leading-[0.9] lg:text-[80px]"
@@ -82,82 +56,39 @@ export function LoyaltyHero() {
               bowls, drinks and sides and stack offers and challenges. No card
               to carry — it&apos;s all in your account.
             </p>
-
-            {enrolled ? (
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button href="#rewards-display" className="py-4 sm:px-9">
-                  View my rewards
-                </Button>
-                <Button href="#offers" variant="outline" className="py-4 sm:px-9">
-                  Browse offers
-                </Button>
-              </div>
-            ) : (
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signup");
-                    setShowRegister(true);
-                  }}
-                  aria-expanded={showRegister}
-                  className="inline-flex items-center justify-center rounded-full bg-brand-button px-9 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-brand active:translate-y-0 active:scale-[0.97]"
-                >
-                  Register Now
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("login");
-                    setShowRegister(true);
-                  }}
-                  className="inline-flex items-center justify-center rounded-full bg-white px-9 py-4 text-sm font-bold uppercase tracking-wide text-ink shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-bone active:translate-y-0 active:scale-[0.97]"
-                >
-                  Log in
-                </button>
-              </div>
-            )}
           </div>
 
-          {/* Members see their balance snapshot; guests get a photo-forward
-              hero (no card) per the design. */}
-          {enrolled && (
-            <div className="mt-10 lg:mt-0 lg:w-1/2">
-              <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
-                    Your balance
-                  </span>
-                  <span className="rounded-full bg-brand/10 px-2.5 py-1 text-xs font-bold text-brand-accent">
-                    ★ Rewards
-                  </span>
-                </div>
-                <p className="mt-2 font-display text-[56px] leading-none text-ink">
-                  {points.toLocaleString()}
-                  <span className="ml-2 text-[20px] text-ink/50">pts</span>
-                </p>
-                <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-                  {[
-                    { k: "Free drink", v: "150" },
-                    { k: "Free side", v: "200" },
-                    { k: "Free bowl", v: "350" },
-                  ].map((r) => (
-                    <div key={r.k} className="rounded-xl bg-bone px-2 py-3">
-                      <p className="font-display text-[20px] leading-none text-ink">
-                        {r.v}
-                      </p>
-                      <p className="mt-1 text-[11px] font-medium text-ink/60">
-                        {r.k}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-4 text-center text-xs text-ink/60">
-                  Keep ordering to unlock your next reward.
-                </p>
+          {/* Guests get the active challenge as the hook with a join CTA. */}
+          <div className="mt-10 lg:mt-0 lg:w-1/2">
+            <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
+                  Active challenge
+                </span>
+                <span className="text-xs font-bold uppercase tracking-wide text-brand-accent">
+                  {activeChallenge.rewardText}
+                </span>
               </div>
+              <p className="mt-3 font-display text-[28px] uppercase leading-none text-ink">
+                {activeChallenge.title}
+              </p>
+              <p className="mt-1 text-sm text-ink/70">{activeChallenge.goal}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode("signup");
+                  setShowRegister(true);
+                }}
+                aria-expanded={showRegister}
+                className="mt-5 w-full rounded-full bg-brand-button px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand active:scale-[0.98]"
+              >
+                Join the challenge
+              </button>
+              <p className="mt-3 text-center text-xs text-ink/60">
+                Join free and start making progress on your next order.
+              </p>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Inline auth panel — social + email login / signup */}

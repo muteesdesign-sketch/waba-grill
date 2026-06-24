@@ -30,6 +30,10 @@ export type LinkStatus = "idle" | "linking" | "linked" | "error";
 type LoyaltyContextValue = {
   enrolled: boolean;
   setEnrolled: (v: boolean) => void;
+  /** Create a brand-new account (0 points, challenges reset). */
+  signUp: (name?: string) => void;
+  /** Restore the established demo member (returning customer). */
+  previewMember: () => void;
   memberName: string;
   points: number;
   /** Cheapest reward the member can't quite afford yet, and the gap. */
@@ -41,7 +45,11 @@ type LoyaltyContextValue = {
   activeChallenge: Challenge;
   /** Advance the active challenge by one order; awards bonus points on finish.
    *  Returns the result so the UI can celebrate completion. */
-  recordOrder: () => { challenge: Challenge; completed: boolean; awarded: number };
+  recordOrder: (earned?: number) => {
+    challenge: Challenge;
+    completed: boolean;
+    awarded: number;
+  };
   /** Count of new rewards/offers/challenge updates → nav notification badge. */
   notifications: number;
   /** A reward the member is using on their next order (item or order-level). */
@@ -67,6 +75,7 @@ export const useLoyalty = () => {
 export function LoyaltyProvider({ children }: { children: ReactNode }) {
   const [enrolled, setEnrolled] = useState(false);
   const [points, setPoints] = useState(SAMPLE_MEMBER.points);
+  const [memberName, setMemberName] = useState(SAMPLE_MEMBER.name);
   // Per-challenge progress overlay on top of the base data (id → progress).
   const [progressById, setProgressById] = useState<Record<string, number>>({});
   const [selectedReward, setSelectedReward] = useState<Reward | null>(null);
@@ -87,6 +96,8 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       if (p) setPoints(Number(p));
       const cp = localStorage.getItem("waba_challengeProgress_v2");
       if (cp) setProgressById(JSON.parse(cp) as Record<string, number>);
+      const nm = localStorage.getItem("waba_memberName");
+      if (nm) setMemberName(nm);
     } catch {
       /* ignore */
     }
@@ -109,6 +120,13 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
       /* ignore */
     }
   }, [enrolled]);
+  useEffect(() => {
+    try {
+      localStorage.setItem("waba_memberName", memberName);
+    } catch {
+      /* ignore */
+    }
+  }, [memberName]);
   useEffect(() => {
     try {
       if (selectedReward)
@@ -153,21 +171,45 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
   );
   const activeChallenge = challenges[0];
 
-  // Placing an order advances the active challenge; completing it awards points.
-  const recordOrder = useCallback(() => {
-    const base = baseChallenges[0];
-    const prev = Math.min(base.target, progressById[base.id] ?? base.progress);
-    const next = Math.min(base.target, prev + 1);
-    const justCompleted = prev < base.target && next >= base.target;
-    const awarded = justCompleted ? bonusPoints(base.rewardText) : 0;
-    setProgressById((m) => ({ ...m, [base.id]: next }));
-    if (awarded) setPoints((p) => p + awarded);
-    return {
-      challenge: { ...base, progress: next },
-      completed: next >= base.target,
-      awarded,
-    };
-  }, [progressById]);
+  // Placing an order credits the points earned on the order, advances the
+  // active challenge, and awards bonus points when the challenge completes.
+  const recordOrder = useCallback(
+    (earned = 0) => {
+      const base = baseChallenges[0];
+      const prev = Math.min(base.target, progressById[base.id] ?? base.progress);
+      const next = Math.min(base.target, prev + 1);
+      const justCompleted = prev < base.target && next >= base.target;
+      const awarded = justCompleted ? bonusPoints(base.rewardText) : 0;
+      setProgressById((m) => ({ ...m, [base.id]: next }));
+      const credited = earned + awarded;
+      if (credited) setPoints((p) => p + credited);
+      return {
+        challenge: { ...base, progress: next },
+        completed: next >= base.target,
+        awarded,
+      };
+    },
+    [progressById],
+  );
+
+  // A fresh sign-up starts a brand-new account: no points yet and every
+  // challenge at zero, so the first order genuinely kicks things off.
+  const signUp = useCallback((name?: string) => {
+    if (name && name.trim()) setMemberName(name.trim());
+    setPoints(0);
+    setProgressById(
+      Object.fromEntries(baseChallenges.map((c) => [c.id, 0] as const)),
+    );
+    setEnrolled(true);
+  }, []);
+
+  // Preview the established demo member (returning customer with history).
+  const previewMember = useCallback(() => {
+    setMemberName(SAMPLE_MEMBER.name);
+    setPoints(SAMPLE_MEMBER.points);
+    setProgressById({});
+    setEnrolled(true);
+  }, []);
 
   const linkAccount = useCallback((p: LinkProvider, email: string) => {
     setLinkStatus((s) => ({ ...s, [p]: "linking" }));
@@ -186,7 +228,9 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
   const value: LoyaltyContextValue = {
     enrolled,
     setEnrolled,
-    memberName: SAMPLE_MEMBER.name,
+    signUp,
+    previewMember,
+    memberName,
     points,
     nextReward,
     pointsToNextReward,

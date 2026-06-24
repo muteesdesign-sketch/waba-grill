@@ -371,7 +371,7 @@ export default function CheckoutPage() {
 
               <button
                 onClick={() => {
-                  const res = recordOrder();
+                  const res = recordOrder(earnedPoints);
                   setOrderResult({
                     challengeTitle: res.challenge.title,
                     completed: res.completed,
