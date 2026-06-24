@@ -4,13 +4,6 @@
 // repeat ordering.
 import { menuCategories } from "@/app/menu/menu-data";
 
-export type Tier = {
-  name: string;
-  threshold: number;
-  blurb: string;
-  perks: string[];
-};
-
 // ---- Rewards (point-redeemable, never expire) -----------------------------
 // kind "item"  → redeeming opens the relevant product detail page
 // kind "order" → redeeming opens the cart and applies an order-level discount
@@ -61,39 +54,6 @@ export type Challenge = {
 };
 
 export const POINTS_PER_DOLLAR = 10;
-
-export const tiers: Tier[] = [
-  {
-    name: "Grill Starter",
-    threshold: 0, // annual points
-    blurb: "Welcome aboard — start earning from your very first bowl.",
-    perks: [
-      "10 points for every $1 spent",
-      "Free drink welcome reward",
-      "Members-only offers",
-    ],
-  },
-  {
-    name: "Grill Pro",
-    threshold: 250,
-    blurb: "You're a regular now. Bigger perks, faster rewards.",
-    perks: [
-      "Everything in Grill Starter",
-      "Free birthday bowl",
-      "Early access to limited-time drops",
-    ],
-  },
-  {
-    name: "Grill Master",
-    threshold: 600,
-    blurb: "Top tier. The grill bows to you.",
-    perks: [
-      "Everything in Grill Pro",
-      "Bonus double-point weekends",
-      "Surprise reward every quarter",
-    ],
-  },
-];
 
 // Catalog of point-redeemable rewards.
 export const rewardCatalog: Reward[] = [

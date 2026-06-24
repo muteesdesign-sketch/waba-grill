@@ -30,10 +30,6 @@ export function LoyaltyHub() {
   const {
     memberName,
     points,
-    tier,
-    nextTier,
-    tierProgress,
-    pointsToNextTier,
     nextReward,
     pointsToNextReward,
     challenges,
@@ -126,7 +122,7 @@ export function LoyaltyHub() {
               </div>
             )}
 
-            {/* Balance + tier + next reward */}
+            {/* Balance + next reward */}
             <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
               <div className="rounded-3xl bg-ink p-7 text-white shadow-lg">
                 <p className="text-xs font-bold uppercase tracking-wide text-white/60">
@@ -137,11 +133,11 @@ export function LoyaltyHub() {
                   <span className="ml-2 text-2xl text-white/50">pts</span>
                 </p>
                 <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wide">
-                  ★ {tier.name}
+                  ★ WaBa Rewards
                 </span>
               </div>
               <div className="flex flex-col justify-center gap-4 rounded-3xl border border-black/10 bg-white p-7 shadow-sm">
-                {nextReward && (
+                {nextReward ? (
                   <div>
                     <p className="text-sm text-ink/70">
                       You&apos;re{" "}
@@ -157,11 +153,10 @@ export function LoyaltyHub() {
                       />
                     </div>
                   </div>
-                )}
-                {nextTier && (
-                  <p className="text-xs text-ink/60">
-                    {pointsToNextTier.toLocaleString()} pts to{" "}
-                    {nextTier.name} ({Math.round(tierProgress * 100)}% there)
+                ) : (
+                  <p className="text-sm text-ink/70">
+                    You&apos;ve unlocked every reward — keep earning for the next
+                    drop.
                   </p>
                 )}
               </div>

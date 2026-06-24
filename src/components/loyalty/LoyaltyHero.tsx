@@ -76,7 +76,7 @@ export function LoyaltyHero() {
             </h1>
             <p className="mt-5 max-w-[460px] text-base leading-relaxed text-white/85 lg:text-lg">
               Earn {POINTS_PER_DOLLAR} points for every $1 you spend, unlock free
-              bowls, drinks and sides, and climb tiers for bigger perks. No card
+              bowls, drinks and sides and stack offers and challenges. No card
               to carry — it&apos;s all in your account.
             </p>
 
@@ -114,75 +114,85 @@ export function LoyaltyHero() {
                 </button>
               </div>
             )}
+          </div>
 
-            {/* Guests: active challenge teaser + join CTA */}
-            {!enrolled && (
-              <div className="mt-6 max-w-[460px] rounded-2xl bg-white/10 p-4 ring-1 ring-white/15 backdrop-blur">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-white/80">
+          {/* Snapshot card — members see their balance; guests see the
+              active challenge with a join CTA. */}
+          <div className="mt-10 lg:mt-0 lg:w-1/2">
+            {enrolled ? (
+              <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
+                    Your balance
+                  </span>
+                  <span className="rounded-full bg-brand/10 px-2.5 py-1 text-xs font-bold text-brand-accent">
+                    ★ Rewards
+                  </span>
+                </div>
+                <p className="mt-2 font-display text-[56px] leading-none text-ink">
+                  {points.toLocaleString()}
+                  <span className="ml-2 text-[20px] text-ink/50">pts</span>
+                </p>
+                <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+                  {[
+                    { k: "Free drink", v: "150" },
+                    { k: "Free side", v: "200" },
+                    { k: "Free bowl", v: "350" },
+                  ].map((r) => (
+                    <div key={r.k} className="rounded-xl bg-bone px-2 py-3">
+                      <p className="font-display text-[20px] leading-none text-ink">
+                        {r.v}
+                      </p>
+                      <p className="mt-1 text-[11px] font-medium text-ink/60">
+                        {r.k}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 text-center text-xs text-ink/60">
+                  Keep ordering to unlock your next reward.
+                </p>
+              </div>
+            ) : (
+              <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-ink/60">
                     <span aria-hidden>🔥</span> Active challenge
                   </span>
-                  <span className="rounded-full bg-gold px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-ink">
+                  <span className="rounded-full bg-gold/20 px-2.5 py-1 text-xs font-bold text-ink">
                     {activeChallenge.rewardText}
                   </span>
                 </div>
-                <p className="mt-2 font-display text-xl uppercase text-white">
+                <h3 className="mt-3 font-display text-3xl uppercase leading-none text-ink">
                   {activeChallenge.title}
+                </h3>
+                <p className="mt-1 text-sm text-ink/70">
+                  {activeChallenge.goal}
                 </p>
-                <p className="mt-0.5 text-sm text-white/75">
-                  {activeChallenge.goal} · {activeChallenge.timeframe}
-                </p>
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs font-semibold text-ink/60">
+                    <span>0 of {activeChallenge.target}</span>
+                    <span>{activeChallenge.timeframe}</span>
+                  </div>
+                  <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-bone">
+                    <div className="h-full w-0 rounded-full bg-brand-button" />
+                  </div>
+                </div>
                 <button
                   type="button"
                   onClick={() => {
                     setAuthMode("signup");
                     setShowRegister(true);
                   }}
-                  className="mt-3 inline-flex items-center justify-center rounded-full bg-brand-button px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+                  className="mt-5 h-12 w-full rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
                 >
                   Join the challenge
                 </button>
+                <p className="mt-3 text-center text-xs text-ink/60">
+                  Join free and start making progress on your next order.
+                </p>
               </div>
             )}
-          </div>
-
-          {/* Snapshot card */}
-          <div className="mt-10 lg:mt-0 lg:w-1/2">
-            <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
-                  {enrolled ? "Your balance" : "Sample balance"}
-                </span>
-                <span className="rounded-full bg-brand/10 px-2.5 py-1 text-xs font-bold text-brand-accent">
-                  ★ Rewards
-                </span>
-              </div>
-              <p className="mt-2 font-display text-[56px] leading-none text-ink">
-                {enrolled ? points.toLocaleString() : "280"}
-                <span className="ml-2 text-[20px] text-ink/50">pts</span>
-              </p>
-              <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-                {[
-                  { k: "Free drink", v: "150" },
-                  { k: "Free side", v: "200" },
-                  { k: "Free bowl", v: "350" },
-                ].map((r) => (
-                  <div key={r.k} className="rounded-xl bg-bone px-2 py-3">
-                    <p className="font-display text-[20px] leading-none text-ink">
-                      {r.v}
-                    </p>
-                    <p className="mt-1 text-[11px] font-medium text-ink/60">
-                      {r.k}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-center text-xs text-ink/60">
-                {enrolled
-                  ? "Keep ordering to unlock your next reward."
-                  : "Register to start earning on your very first order."}
-              </p>
-            </div>
           </div>
         </div>
 

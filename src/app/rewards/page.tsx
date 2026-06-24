@@ -11,7 +11,7 @@ import { DownloadApp } from "@/components/loyalty/DownloadApp";
 export const metadata: Metadata = {
   title: "Rewards — WaBa Grill",
   description:
-    "Join WaBa Rewards: earn points on every order, unlock free bowls, drinks and sides, climb tiers and redeem rewards at checkout.",
+    "Join WaBa Rewards: earn points on every order, unlock free bowls, drinks and sides and redeem rewards at checkout.",
 };
 
 export default function RewardsPage() {

@@ -11,7 +11,6 @@ import {
   POINTS_PER_DOLLAR,
   REWARDS_GOAL,
   rewardCatalog,
-  tiers,
   offers,
   challenges,
 } from "@/components/loyalty/loyalty-data";
@@ -19,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "How WaBa Rewards Works — WaBa Grill",
   description:
-    "A complete guide to WaBa Rewards: earn points on every order, redeem free food, unlock offers, climb tiers and complete challenges.",
+    "A complete guide to WaBa Rewards: earn points on every order, redeem free food, unlock offers and complete challenges.",
 };
 
 const earnWays = [
@@ -162,56 +161,8 @@ export default function HowRewardsWorkPage() {
           </div>
         </section>
 
-        {/* 3. Tiers */}
+        {/* 3. Offers */}
         <section className="bg-white px-6 py-14 lg:px-10 lg:py-20">
-          <div className="mx-auto max-w-[1100px]">
-            <SectionHeading eyebrow="Level up" title="Tiers" />
-            <p className="mx-auto mt-4 max-w-[620px] text-center text-sm leading-relaxed text-ink/70">
-              The more you order through the year, the higher your tier — and the
-              bigger the perks you keep.
-            </p>
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              {tiers.map((t, i) => (
-                <div
-                  key={t.name}
-                  className={`flex flex-col rounded-2xl border p-6 ${
-                    i === 1
-                      ? "border-brand-button shadow-xl lg:-translate-y-2"
-                      : "border-black/10 shadow-sm"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-2xl uppercase text-ink">
-                      {t.name}
-                    </span>
-                    <span className="rounded-full bg-bone px-3 py-1 text-xs font-bold text-ink/70">
-                      {t.threshold === 0
-                        ? "Start here"
-                        : `${t.threshold}+ pts / yr`}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-ink/70">{t.blurb}</p>
-                  <ul className="mt-4 space-y-2">
-                    {t.perks.map((p) => (
-                      <li key={p} className="flex items-start gap-2 text-sm text-ink">
-                        <span
-                          aria-hidden
-                          className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-button text-[10px] font-bold text-white"
-                        >
-                          ✓
-                        </span>
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Offers */}
-        <section className="bg-bone px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
             <SectionHeading eyebrow="Limited time" title="Offers" />
             <p className="mx-auto mt-4 max-w-[640px] text-center text-sm leading-relaxed text-ink/70">
@@ -246,7 +197,7 @@ export default function HowRewardsWorkPage() {
         </section>
 
         {/* 5. Challenges */}
-        <section className="bg-white px-6 py-14 lg:px-10 lg:py-20">
+        <section className="bg-bone px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
             <SectionHeading eyebrow="Play & earn" title="Challenges" />
             <p className="mx-auto mt-4 max-w-[640px] text-center text-sm leading-relaxed text-ink/70">
@@ -283,7 +234,7 @@ export default function HowRewardsWorkPage() {
         </section>
 
         {/* 6. Redeeming */}
-        <section className="bg-bone px-6 py-14 lg:px-10 lg:py-20">
+        <section className="bg-white px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
             <SectionHeading eyebrow="At checkout" title="How to redeem" />
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -334,7 +285,7 @@ export default function HowRewardsWorkPage() {
         </section>
 
         {/* 7. Where you'll see it */}
-        <section className="bg-white px-6 py-14 lg:px-10 lg:py-20">
+        <section className="bg-bone px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[820px]">
             <SectionHeading eyebrow="Always within reach" title="Where you'll see it" />
             <div className="mt-10 divide-y divide-black/10 overflow-hidden rounded-2xl border border-black/10">

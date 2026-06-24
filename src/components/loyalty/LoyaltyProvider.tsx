@@ -11,13 +11,11 @@ import {
 } from "react";
 import {
   SAMPLE_MEMBER,
-  tiers,
   rewardCatalog,
   challenges as baseChallenges,
   type Challenge,
   type Offer,
   type Reward,
-  type Tier,
 } from "./loyalty-data";
 
 /** Pull a points value out of a challenge reward string ("+300 bonus points"). */
@@ -34,10 +32,6 @@ type LoyaltyContextValue = {
   setEnrolled: (v: boolean) => void;
   memberName: string;
   points: number;
-  tier: Tier;
-  nextTier: Tier | null;
-  tierProgress: number;
-  pointsToNextTier: number;
   /** Cheapest reward the member can't quite afford yet, and the gap. */
   nextReward: Reward | null;
   pointsToNextReward: number;
@@ -69,14 +63,6 @@ export const useLoyalty = () => {
   if (!ctx) throw new Error("useLoyalty must be used within LoyaltyProvider");
   return ctx;
 };
-
-function tierFor(points: number) {
-  let current = tiers[0];
-  for (const t of tiers) if (points >= t.threshold) current = t;
-  const idx = tiers.indexOf(current);
-  const next = idx < tiers.length - 1 ? tiers[idx + 1] : null;
-  return { current, next };
-}
 
 export function LoyaltyProvider({ children }: { children: ReactNode }) {
   const [enrolled, setEnrolled] = useState(false);
@@ -145,21 +131,6 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
     }
   }, [selectedOffer]);
 
-  const { current: tier, next: nextTier } = useMemo(
-    () => tierFor(points),
-    [points],
-  );
-
-  const { tierProgress, pointsToNextTier } = useMemo(() => {
-    if (!nextTier) return { tierProgress: 1, pointsToNextTier: 0 };
-    const span = nextTier.threshold - tier.threshold;
-    const into = points - tier.threshold;
-    return {
-      tierProgress: Math.min(1, Math.max(0, into / span)),
-      pointsToNextTier: Math.max(0, nextTier.threshold - points),
-    };
-  }, [points, tier, nextTier]);
-
   const { nextReward, pointsToNextReward } = useMemo(() => {
     const upcoming = [...rewardCatalog]
       .filter((r) => r.points > points)
@@ -217,10 +188,6 @@ export function LoyaltyProvider({ children }: { children: ReactNode }) {
     setEnrolled,
     memberName: SAMPLE_MEMBER.name,
     points,
-    tier,
-    nextTier,
-    tierProgress,
-    pointsToNextTier,
     nextReward,
     pointsToNextReward,
     challenges,
