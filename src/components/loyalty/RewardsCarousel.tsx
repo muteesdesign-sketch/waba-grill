@@ -27,6 +27,20 @@ export function RewardsCarousel() {
 
   const slides = [
     {
+      type: "Challenges",
+      title: "Play & earn bonuses",
+      desc: "Hit goals like an order streak to earn bonus points. The more you come back, the more you unlock.",
+      image: "/images/bowl-steak.png",
+      badge: activeChallenge.rewardText.replace("bonus points", "pts"),
+      offerLabel: activeChallenge.goal,
+      memberCta: "View challenge",
+      memberAction: () => {
+        document
+          .getElementById("loyalty-hub")
+          ?.scrollIntoView({ behavior: "smooth" });
+      },
+    },
+    {
       type: "Rewards",
       title: "Free food, on your points",
       desc: "Earn 10 points for every $1 you spend and cash them in for free drinks, sides and bowls.",
@@ -50,20 +64,6 @@ export function RewardsCarousel() {
       memberAction: () => {
         if (bogo) selectOffer(bogo);
         cart.open();
-      },
-    },
-    {
-      type: "Challenges",
-      title: "Play & earn bonuses",
-      desc: "Hit goals like an order streak to earn bonus points. The more you come back, the more you unlock.",
-      image: "/images/bowl-steak.png",
-      badge: activeChallenge.rewardText.replace("bonus points", "pts"),
-      offerLabel: activeChallenge.goal,
-      memberCta: "View challenge",
-      memberAction: () => {
-        document
-          .getElementById("loyalty-hub")
-          ?.scrollIntoView({ behavior: "smooth" });
       },
     },
   ];
