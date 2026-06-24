@@ -38,7 +38,7 @@ function PreviewToggle() {
 }
 
 export function LoyaltyHero() {
-  const { enrolled, memberName, points } = useLoyalty();
+  const { enrolled, memberName, points, activeChallenge } = useLoyalty();
   const [showRegister, setShowRegister] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
 
@@ -111,6 +111,36 @@ export function LoyaltyHero() {
                   className="inline-flex items-center justify-center rounded-full bg-white px-9 py-4 text-sm font-bold uppercase tracking-wide text-ink shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-bone active:translate-y-0 active:scale-[0.97]"
                 >
                   Log in
+                </button>
+              </div>
+            )}
+
+            {/* Guests: active challenge teaser + join CTA */}
+            {!enrolled && (
+              <div className="mt-6 max-w-[460px] rounded-2xl bg-white/10 p-4 ring-1 ring-white/15 backdrop-blur">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-white/80">
+                    <span aria-hidden>🔥</span> Active challenge
+                  </span>
+                  <span className="rounded-full bg-gold px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-ink">
+                    {activeChallenge.rewardText}
+                  </span>
+                </div>
+                <p className="mt-2 font-display text-xl uppercase text-white">
+                  {activeChallenge.title}
+                </p>
+                <p className="mt-0.5 text-sm text-white/75">
+                  {activeChallenge.goal} · {activeChallenge.timeframe}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode("signup");
+                    setShowRegister(true);
+                  }}
+                  className="mt-3 inline-flex items-center justify-center rounded-full bg-brand-button px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
+                >
+                  Join the challenge
                 </button>
               </div>
             )}
