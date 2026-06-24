@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { asset } from "@/lib/asset";
 import { distressStyle } from "@/lib/distress";
 import { useLoyalty } from "./LoyaltyProvider";
 import { POINTS_PER_DOLLAR } from "./loyalty-data";
@@ -38,20 +38,23 @@ function PreviewToggle() {
 }
 
 export function LoyaltyHero() {
-  const { enrolled, memberName, points, activeChallenge } = useLoyalty();
+  const { enrolled, memberName, points } = useLoyalty();
   const [showRegister, setShowRegister] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
 
   return (
     <section id="header" className="relative overflow-hidden bg-ink text-white">
-      <Image
-        src="/images/offer-bg.png"
-        alt=""
-        fill
-        aria-hidden
-        className="pointer-events-none object-cover opacity-40"
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-brand/85 via-black/70 to-black/85" />
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster={asset("/images/hero-bg.jpg")}
+      >
+        <source src={asset("/hero.mp4")} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/55 lg:bg-gradient-to-r lg:from-black/85 lg:via-black/60 lg:to-black/25" />
 
       <div className="relative mx-auto max-w-[1280px] px-6 py-12 lg:px-10 lg:py-20">
         <div className="mb-6 flex items-center justify-between gap-4">
@@ -63,16 +66,16 @@ export function LoyaltyHero() {
 
         <div className="lg:flex lg:items-center lg:gap-12">
           <div className="lg:w-1/2">
-            <p className="font-script text-[34px] leading-none text-white lg:text-[44px]">
+            <p className="font-script text-[34px] leading-none text-brand lg:text-[44px]">
               {enrolled ? `Welcome back, ${memberName}` : "Eat well, earn more"}
             </p>
             <h1
               className="mt-1 font-display text-[52px] uppercase leading-[0.9] lg:text-[80px]"
               style={distressStyle}
             >
-              Free food, just
+              Free food, <span className="text-brand">just</span>
               <br />
-              for eating good.
+              <span className="text-brand">for eating</span> good.
             </h1>
             <p className="mt-5 max-w-[460px] text-base leading-relaxed text-white/85 lg:text-lg">
               Earn {POINTS_PER_DOLLAR} points for every $1 you spend, unlock free
@@ -116,10 +119,10 @@ export function LoyaltyHero() {
             )}
           </div>
 
-          {/* Snapshot card — members see their balance; guests see the
-              active challenge with a join CTA. */}
-          <div className="mt-10 lg:mt-0 lg:w-1/2">
-            {enrolled ? (
+          {/* Members see their balance snapshot; guests get a photo-forward
+              hero (no card) per the design. */}
+          {enrolled && (
+            <div className="mt-10 lg:mt-0 lg:w-1/2">
               <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wide text-ink/60">
@@ -153,47 +156,8 @@ export function LoyaltyHero() {
                   Keep ordering to unlock your next reward.
                 </p>
               </div>
-            ) : (
-              <div className="mx-auto max-w-[420px] rounded-3xl bg-white p-6 text-ink shadow-2xl">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-ink/60">
-                    <span aria-hidden>🔥</span> Active challenge
-                  </span>
-                  <span className="rounded-full bg-gold/20 px-2.5 py-1 text-xs font-bold text-ink">
-                    {activeChallenge.rewardText}
-                  </span>
-                </div>
-                <h3 className="mt-3 font-display text-3xl uppercase leading-none text-ink">
-                  {activeChallenge.title}
-                </h3>
-                <p className="mt-1 text-sm text-ink/70">
-                  {activeChallenge.goal}
-                </p>
-                <div className="mt-4">
-                  <div className="flex justify-between text-xs font-semibold text-ink/60">
-                    <span>0 of {activeChallenge.target}</span>
-                    <span>{activeChallenge.timeframe}</span>
-                  </div>
-                  <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-bone">
-                    <div className="h-full w-0 rounded-full bg-brand-button" />
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signup");
-                    setShowRegister(true);
-                  }}
-                  className="mt-5 h-12 w-full rounded-full bg-brand-button text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand"
-                >
-                  Join the challenge
-                </button>
-                <p className="mt-3 text-center text-xs text-ink/60">
-                  Join free and start making progress on your next order.
-                </p>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Inline auth panel — social + email login / signup */}

@@ -14,8 +14,8 @@ const steps = [
   },
   {
     n: "3",
-    title: "Take on challenges",
-    body: "Complete challenges and catch offers to earn bonus points faster.",
+    title: "Complete challenges",
+    body: "Completing challenges gives you the opportunity to earn greater reward perks.",
   },
 ];
 
