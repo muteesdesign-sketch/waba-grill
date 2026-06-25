@@ -45,6 +45,7 @@ export type Offer = {
   category?: string; // menu category id the offer applies to
   productName?: string; // specific product the offer applies to
   image?: string;
+  badgeImage?: string; // brand-approved graphic badge (overrides the text badge)
   members?: boolean;
 };
 
@@ -151,17 +152,18 @@ export const redeemedRewards: { name: string; date: string; value: number }[] = 
 export const offers: Offer[] = [
   {
     id: "dumplings-50",
-    badge: "50% OFF",
-    title: "50% Off Dumplings",
-    desc: "Half off any order of dumplings — the perfect add-on.",
+    badge: "BOGO",
+    title: "BOGO Free Dumplings",
+    desc: "Buy one order of dumplings, get one free.",
     kind: "item",
     expires: "Jun 30, 2026",
     auto: false,
-    eligibility: "Dumplings only · one per order",
+    eligibility: "Dumplings only · one free per order",
     cta: "Shop dumplings",
     ctaTarget: "menu",
     category: "dumplings",
     image: imageForProduct("Dumplings (5)"),
+    badgeImage: "/images/badges/bogo-free.svg",
   },
   {
     id: "double-points",
@@ -177,20 +179,22 @@ export const offers: Offer[] = [
     multiplier: 2,
     category: "bowls",
     image: imageForProduct("Steak Bowl"),
+    badgeImage: "/images/badges/2x.svg",
   },
   {
-    id: "bowl-drink",
-    badge: "BOGO",
-    title: "Buy a Bowl, Get a Free Drink",
-    desc: "Add any bowl and a drink — the drink's on us.",
-    kind: "cart",
+    id: "bogo-seafood",
+    badge: "BOGO 50%",
+    title: "BOGO 50% Off Seafood",
+    desc: "Buy one seafood bowl, get the second 50% off.",
+    kind: "item",
     expires: "Jul 4, 2026",
     auto: false,
-    eligibility: "Add 1 bowl + 1 drink · auto-discount in cart",
+    eligibility: "Salmon & Shrimp bowls · discount in cart",
     cta: "Apply in cart",
     ctaTarget: "cart",
-    value: 3.29,
-    image: imageForProduct("Fountain Beverage"),
+    value: 6.1,
+    image: imageForProduct("Salmon Bowl"),
+    badgeImage: "/images/badges/bogo50.svg",
   },
   {
     id: "new-sweet-spicy",

@@ -338,9 +338,19 @@ function OfferCard({ offer, onAct }: { offer: Offer; onAct: () => void }) {
     <article className="flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
       <div className="relative aspect-[16/10] w-full bg-bone">
         {offer.image && <Image src={offer.image} alt={offer.title} fill className="object-cover" />}
-        <span className="absolute left-3 top-3 rounded-full bg-brand-button px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-          {offer.badge}
-        </span>
+        {offer.badgeImage ? (
+          <Image
+            src={offer.badgeImage}
+            alt={offer.badge}
+            width={72}
+            height={72}
+            className="absolute left-3 top-3 h-16 w-auto drop-shadow-md"
+          />
+        ) : (
+          <span className="absolute left-3 top-3 rounded-full bg-brand-button px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+            {offer.badge}
+          </span>
+        )}
         <span className="absolute right-3 top-3 rounded-full bg-ink/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
           {offer.auto ? "Auto-applied" : "Select to use"}
         </span>
