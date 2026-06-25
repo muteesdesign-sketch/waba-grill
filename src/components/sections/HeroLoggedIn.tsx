@@ -23,9 +23,9 @@ export function HeroLoggedIn() {
   const pct = Math.min(100, Math.round((points / REWARDS_GOAL) * 100));
 
   return (
-    <section className="lg:grid lg:grid-cols-2">
-      {/* LEFT — personalized greeting + rewards progress */}
-      <div className="relative overflow-hidden bg-ink px-6 py-8 text-white lg:px-12 lg:py-9">
+    <section className="relative overflow-hidden bg-[#eceef1]">
+      {/* Full-bleed video: fills the left half on desktop, sits behind on mobile */}
+      <div className="absolute inset-y-0 left-0 right-0 overflow-hidden bg-ink lg:right-1/2">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
@@ -37,8 +37,14 @@ export function HeroLoggedIn() {
           <source src={asset("/hero.mp4")} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/65 to-brand/40" />
+      </div>
 
-        <div className="relative flex h-full flex-col justify-center">
+      {/* Content constrained to the centered 12-col container; the hero stays
+          compact so the next section peeks under the fold on desktop. */}
+      <div className="relative mx-auto max-w-[1280px] lg:grid lg:grid-cols-2">
+        {/* LEFT — personalized greeting + rewards progress */}
+        <div className="px-6 py-8 text-white lg:px-10 lg:py-6">
+          <div className="flex h-full flex-col justify-center">
           <p className="font-script text-[26px] leading-none text-brand lg:text-[32px]">
             Afternoon craving,
           </p>
@@ -103,9 +109,9 @@ export function HeroLoggedIn() {
       </div>
 
       {/* RIGHT — your favorite bowl (quick reorder) */}
-      <div className="relative flex flex-col items-center justify-center bg-[#eceef1] px-6 py-8 text-center lg:px-12 lg:py-9">
+      <div className="relative flex flex-col items-center justify-center bg-[#eceef1] px-6 py-8 text-center lg:bg-transparent lg:px-10 lg:py-6">
         {/* Stage: bowl with hand-drawn callouts */}
-        <div className="relative w-full max-w-[300px] lg:max-w-[340px]">
+        <div className="relative w-full max-w-[260px] lg:max-w-[300px]">
           <div className="relative aspect-square w-full">
             {fav && (
               <Image
@@ -169,6 +175,7 @@ export function HeroLoggedIn() {
         >
           Reorder
         </button>
+      </div>
       </div>
     </section>
   );

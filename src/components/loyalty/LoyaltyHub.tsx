@@ -87,8 +87,8 @@ export function LoyaltyHub() {
         </div>
         <SectionHeading eyebrow={`Welcome back, ${memberName}`} title="Your loyalty hub" />
 
-        {/* Tabs */}
-        <div className="mt-9 flex justify-center">
+        {/* Tabs — spaced below the title; stick under the shrunk (70px) nav. */}
+        <div className="sticky top-[70px] z-40 mt-8 flex justify-center bg-bone/95 py-3 backdrop-blur">
           <div className="inline-flex rounded-full bg-white p-1 shadow-sm">
             {(["rewards", "offers", "challenges"] as Tab[]).map((t) => (
               <button

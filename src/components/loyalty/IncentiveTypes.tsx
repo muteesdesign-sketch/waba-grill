@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "./SectionHeading";
 
@@ -6,19 +7,19 @@ const types = [
     tag: "Rewards",
     title: "Earn points, eat free",
     body: "Every $1 earns 10 points. Cash them in for free drinks, sides, bowls and plates. Points never expire.",
-    icon: "★",
+    icon: "/images/icons/bowls.svg",
   },
   {
     tag: "Offers",
     title: "Limited-time deals",
     body: "Members unlock rotating offers — 2X point weekends, BOGO bowls, % off and more. Always with a clear expiry.",
-    icon: "%",
+    icon: "/images/icons/drinks.svg",
   },
   {
     tag: "Challenges",
     title: "Play & earn bonuses",
     body: "Order streaks and goals that pay out bonus points. The more you come back, the more you unlock.",
-    icon: "✓",
+    icon: "/images/icons/intuitive.svg",
   },
 ];
 
@@ -34,9 +35,14 @@ export function IncentiveTypes() {
               key={t.tag}
               className="flex flex-col rounded-2xl border border-black/10 bg-white p-7 shadow-sm"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-button text-2xl text-white">
-                {t.icon}
-              </span>
+              <Image
+                src={t.icon}
+                alt=""
+                aria-hidden
+                width={52}
+                height={83}
+                className="h-[72px] w-auto"
+              />
               <span className="mt-4 text-xs font-bold uppercase tracking-wide text-brand-accent">
                 {t.tag}
               </span>

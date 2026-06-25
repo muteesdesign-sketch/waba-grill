@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
 import { useLoyalty } from "@/components/loyalty/LoyaltyProvider";
 
@@ -32,15 +32,28 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const cart = useCart();
   const loyalty = useLoyalty();
   const pathname = usePathname();
   const isActive = (href: string) =>
     href.startsWith("/") && pathname.startsWith(href);
 
+  // Shrink the nav ~20% once the page is scrolled to free up screen space.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex h-[88px] max-w-[1280px] items-center justify-between px-5 lg:px-10">
+      <nav
+        className={`mx-auto flex max-w-[1280px] items-center justify-between px-5 transition-[height] duration-300 lg:px-10 ${
+          scrolled ? "h-[70px]" : "h-[88px]"
+        }`}
+      >
         <div className="flex min-w-0 items-center gap-3 lg:gap-8">
           <button
             aria-label="Open menu"
